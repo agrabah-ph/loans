@@ -15,8 +15,12 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
+<<<<<<< HEAD
         "spatie/laravel-permission": "^4.0"
 
+=======
+        "spatie/laravel-medialibrary": "^7.19"
+>>>>>>> feature/MediaLibraryInstallation
     },
     "require-dev": {
         "facade/ignition": "^2.5",
