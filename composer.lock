@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fc2bc6ebc03923b6a522a375c638e4d",
+
+    "content-hash": "ddbcca1afabbe09b1eab7bb32bcaed26",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2872,12 +2873,45 @@
                 "laravel": {
                     "providers": [
                         "Spatie\\MediaLibrary\\MediaLibraryServiceProvider"
+
+            "name": "rap2hpoutre/laravel-log-viewer",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
+                "reference": "27392d29234b6ff38a456454558f4bcc40cc837a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/27392d29234b6ff38a456454558f4bcc40cc837a",
+                "reference": "27392d29234b6ff38a456454558f4bcc40cc837a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.2.*|5.*|^6.0|^7.0|^8.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.7.*",
+                "phpunit/phpunit": "^7"
+            },
+            "type": "laravel-package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Spatie\\MediaLibrary\\": "src"
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Rap2hpoutre\\LaravelLogViewer\\": "src/"
+
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2886,39 +2920,24 @@
             ],
             "authors": [
                 {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://murze.be",
-                    "role": "Developer"
+                    "name": "rap2hpoutre",
+                    "email": "raphaelht@gmail.com"
                 }
             ],
-            "description": "Associate files with Eloquent models",
-            "homepage": "https://github.com/spatie/laravel-medialibrary",
+            "description": "A Laravel log reader",
             "keywords": [
-                "cms",
-                "conversion",
-                "downloads",
-                "images",
                 "laravel",
-                "laravel-medialibrary",
-                "media",
-                "spatie"
+                "log",
+                "log-reader",
+                "log-viewer",
+                "logging",
+                "lumen"
             ],
             "support": {
-                "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/7.19.5"
+                "issues": "https://github.com/rap2hpoutre/laravel-log-viewer/issues",
+                "source": "https://github.com/rap2hpoutre/laravel-log-viewer/tree/master"
             },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-04T21:08:45+00:00"
+            "time": "2020-09-08T12:21:27+00:00"
         },
         {
             "name": "spatie/laravel-permission",
