@@ -15,7 +15,15 @@ class CreateLoanTypesTable extends Migration
     {
         Schema::create('loan_types', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('loan_provider_id')->nullable();
+            $table->string('name');
+            $table->integer('default_interest');
+            $table->tinyInteger('default_terms');
             $table->timestamps();
+
+            $table->foreign('loan_provider_id')
+                ->references('id')
+                ->on('loan_providers')->nullOnDelete();
         });
     }
 
