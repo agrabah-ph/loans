@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Services\ActivityLogService;
+use App\Services\BorrowerService;
+use App\Services\LoanProviderService;
+use App\Services\LoanService;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +16,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
+    public function register() {
+        Schema::defaultStringLength(191);
     }
 
     /**
@@ -21,8 +25,21 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
+    public function boot() {
+        $this->app->bind(BorrowerService::class, function($app) {
+           return new BorrowerService();
+        });
+
+        $this->app->bind(LoanProviderService::class, function($app) {
+           return new LoanProviderService();
+        });
+
+        $this->app->bind(LoanService::class, function($app) {
+            return new LoanService();
+        });
+
+        $this->app->bind(ActivityLogService::class, function($app) {
+           return new ActivityLogService();
+        });
     }
 }

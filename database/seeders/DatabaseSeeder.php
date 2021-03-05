@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -45,8 +49,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => \Carbon\Carbon::now()->toDateString(),
         ]);
 
-
-
         $user1 = User::find(1);
         $user1->assignRole($super);
 
@@ -55,8 +57,6 @@ class DatabaseSeeder extends Seeder
 
         $user3 = User::find(3);
         $user3->assignRole($borrower);
-
-
 
     }
 }

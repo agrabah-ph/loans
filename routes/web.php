@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Services\BorrowerService;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,4 +33,11 @@ use Illuminate\Support\Facades\Route;
 //
 //    });
 //});
+
+
+Route::get('/', function () {
+    $srvc = new BorrowerService;
+    $welcome_message = $srvc->setMessage('World');
+    return view('welcome', compact('welcome_message'));
+});
 
