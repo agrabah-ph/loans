@@ -13,24 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::group(['middleware' => ['role:super_admin','auth']],function(){
-//    /*route prefix can be user for nav activation*/
-//    Route:prefix('super_admin')->as('super_admin.')->group(function(){
-//        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-//    });
-//});
-//
-//Route::group(['middleware' => ['role:loan_provider','auth']],function(){
-//    /*route prefix can be user for nav activation*/
-//    Route:prefix('loan_provider')->as('loan_provider.')->group(function(){
-//
-//    });
-//});
-//
-//Route::group(['middleware' => ['role:borrower','auth']],function(){
-//    /*route prefix can be user for nav activation*/
-//    Route:prefix('borrower')->as('borrower.')->group(function(){
-//
-//    });
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
