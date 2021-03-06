@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Services\BorrowerService;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/', function () {
-    $srvc = new BorrowerService;
-    $welcome_message = $srvc->setMessage('World');
-    return view('welcome', compact('welcome_message'));
-});
-
+require __DIR__.'/auth.php';
