@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\LoanProvider;
+use App\Models\LoanProviderUser;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -44,8 +47,30 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]));
 
-        event(new Registered($user));
+        if($user){
+            $loan_provider_role = Role::where('name','loan_provider')->first();
+            if($loan_provider_role){
+                $user->assignRole($loan_provider_role);
+                $loan_provider = new LoanProvider();
+                $loan_provider->company_name = $request->company_name;
+                $loan_provider->region = $request->company_name;
+                $loan_provider->province = $request->province;
+                $loan_provider->city = $request->city;
+                $loan_provider->address_line = $request->address_line;
+                if($loan_provider->save()){
+                    $loan_provider_user = new LoanProviderUser();
+                    $loan_provider->user_id = $user->id;
+                    if($loan_provider->save()){
+                        event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+                        return redirect(RouteServiceProvider::HOME);
+                    }
+                }
+            }
+
+        }
+
+
+
     }
 }
