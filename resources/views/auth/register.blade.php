@@ -18,17 +18,32 @@
                 <x-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" :value="old('company_name')" required autofocus />
             </div>
 
-            <!-- Company name -->
+            <!-- AddressLine -->
             <div>
                 <x-label for="address_line" :value="__('Address Line')" />
                 <x-input id="address_line" class="block mt-1 w-full" type="text" name="address_line" :value="old('address_line')" required />
             </div>
 
-            <!-- Name -->
+
+            <!--First Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required />
+                <x-label for="fname" :value="__('First Name')" />
+                <x-input id="fname" class="block mt-1 w-full" type="text" name="fname" :value="old('fname')" required />
             </div>
+
+            <!--Middle Name -->
+            <div>
+                <x-label for="mname" :value="__('Middle Name')" />
+                <x-input id="mname" class="block mt-1 w-full" type="text" name="mname" :value="old('mname')" required />
+            </div>
+
+
+            <!--Last Name -->
+            <div>
+                <x-label for="lname" :value="__('Last Name')" />
+                <x-input id="lname" class="block mt-1 w-full" type="text" name="lname" :value="old('lname')" required />
+            </div>
+
 
             <!-- Email Address -->
             <div class="mt-4">
