@@ -16,13 +16,14 @@ class CreateLoanProvidersTable extends Migration
         Schema::create('loan_providers', function (Blueprint $table) {
             $table->id();
             $table->string('company_name');
-            $table->string('facebook_url');
-            $table->string('contact_person');
-            $table->string('contact_number');
-            $table->string('address');
-            $table->string('city');
-            $table->string('province');
-            $table->string('region');
+            $table->string('facebook_url')->nullable();
+            $table->string('contact_person')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('alt_contact_number')->nullable();
+            $table->string('address_line')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
+            $table->string('region')->nullable();
             $table->timestamps();
         });
     }
