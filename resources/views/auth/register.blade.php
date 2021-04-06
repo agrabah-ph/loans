@@ -1,3 +1,65 @@
+@extends('layouts.master-client')
+
+@section('title')
+    Register | Agrabah
+@endsection
+
+@include('client.partials.stacks')
+
+@section('content')
+    <main class="page-forms">
+        <div class="row no-gutters sign-in">
+            <div class="col-12 col-lg-4 left">
+                @stack('left-pane')
+                <a href="/login" class="link">Back to homepage</a>
+            </div>
+            <div class="col-12 col-lg-8 right">
+                <div class="content">
+                    <h1 class="title">Register</h1>
+                    <div class="validator-container">
+                        <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    </div>
+
+                    <form method="POST" action="{{route('register')}}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" name="email" placeholder="yourname@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Password</label>
+                            <input type="password" name="password" placeholder="*****">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Password Confirmation</label>
+                            <input type="password" name="password_confirmation" placeholder="*****">
+                        </div>
+                        <button type="submit" class="btn-submit">Register</button>
+                        <a href="/forgot-password" class="link d-flex justify-content-center">Forgot password?</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection
+
+@section('styles')
+    <style>
+        .validator-container {
+            margin-top: 30px;
+        }
+    </style>
+@endsection
+
+@section('scripts')
+    <script>
+    </script>
+@endsection
+
+{{--
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -78,3 +140,4 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+--}}

@@ -1,3 +1,57 @@
+@extends('layouts.master-client')
+
+@section('title')
+    Register | Agrabah
+@endsection
+
+@include('client.partials.stacks')
+
+@section('content')
+    <main class="page-forms">
+        <div class="row no-gutters sign-in">
+            <div class="col-12 col-lg-4 left">
+                @stack('left-pane')
+                <a href="/login" class="link">Return to login</a>
+            </div>
+            <div class="col-12 col-lg-8 right">
+                <div class="content">
+                    <h1 class="title">Forgot Password</h1>
+                    <div class="validator-container">
+                        <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    </div>
+
+                    <form method="POST" action="{{route('register')}}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" name="email" placeholder="yourname@domain.com">
+                        </div>
+
+                        <button type="submit" class="btn-submit">Email password reset link</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection
+
+@section('styles')
+    <style>
+        .validator-container {
+            margin-top: 30px;
+        }
+    </style>
+@endsection
+
+@section('scripts')
+    <script>
+    </script>
+@endsection
+
+{{--
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
@@ -34,3 +88,4 @@
         </form>
     </x-auth-card>
 </x-guest-layout>
+--}}

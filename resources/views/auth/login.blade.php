@@ -1,4 +1,75 @@
-<x-guest-layout>
+@extends('layouts.master-client')
+
+@section('title')
+    Login | Agrabah
+@endsection
+
+@include('client.partials.stacks')
+
+@section('content')
+    <main class="page-forms">
+        <div class="row no-gutters sign-in">
+            <div class="col-12 col-lg-4 left">
+                @stack('left-pane')
+                <a href="" class="link">Back to homepage</a>
+            </div>
+            <div class="col-12 col-lg-8 right">
+                <div class="content">
+                    <h1 class="title">Login</h1>
+                    <small>Log on using your login and password or use social media login to enter</small>
+                    <div class="validator-container">
+                        <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    </div>
+
+                    <form method="POST" action="{{route('login')}}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">Please type your email address</label>
+                            <input type="email" name="email" placeholder="yourname@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="">and your password</label>
+                            <input type="password" name="password" placeholder="*****">
+                        </div>
+
+                        <div class="line"><small>or</small></div>
+
+                        <small class="d-flex justify-content-center">Log in with</small>
+
+                        <div class="social-container">
+                            <a href=""><img src="{{asset('images/icon-google.png')}}" alt="icon-google"></a>
+                            <a href=""><img src="{{asset('images/icon-facebook.png')}}" alt="icon-facebook"></a>
+                            <a href=""><img src="{{asset('images/icon-twitter.png')}}" alt="icon-twitter"></a>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Login</button>
+
+                        <a href="/forgot-password" class="link d-flex justify-content-center">Forgot password?</a>
+
+                        <div class="register-text text-center">Not registered yet? <a href="/register">Sign up</a> now!</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection
+
+@section('styles')
+    <style>
+        .validator-container {
+            margin-top: 30px;
+        }
+    </style>
+@endsection
+
+@section('scripts')
+    <script>
+    </script>
+@endsection
+{{--<x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
@@ -53,4 +124,4 @@
             </div>
         </form>
     </x-auth-card>
-</x-guest-layout>
+</x-guest-layout>--}}

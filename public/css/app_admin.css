@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #444;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
+}
+
+.Work-Sans {
+  font-family: "Work Sans";
+}
+
+.page-forms a.link {
+  text-align: center;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  color: #3F3F3F;
+}
+.page-forms h2, .page-forms h1 {
+  font-weight: bold;
+  padding-bottom: 1rem;
+}
+.page-forms h1.title {
+  font-weight: bold;
+  border-bottom: 1px solid #3F3F3F;
+  font-family: "Work Sans";
+}
+.page-forms form {
+  margin-top: 3rem;
+}
+.page-forms form .form-group {
+  margin-bottom: 1rem;
+  /* Change Autocomplete styles in Chrome*/
+}
+.page-forms form .form-group label {
+  display: block;
+  font-size: 1.1rem;
+}
+.page-forms form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #dadada !important;
+  outline: none;
+  /*font-size: 1.3rem;*/
+}
+.page-forms form .form-group input::placeholder {
+  color: #dadada;
+}
+.page-forms form .form-group input:-webkit-autofill,
+.page-forms form .form-group input:-webkit-autofill:hover,
+.page-forms form .form-group input:-webkit-autofill:focus,
+.page-forms form .form-group textarea:-webkit-autofill,
+.page-forms form .form-group textarea:-webkit-autofill:hover,
+.page-forms form .form-group textarea:-webkit-autofill:focus,
+.page-forms form .form-group select:-webkit-autofill,
+.page-forms form .form-group select:-webkit-autofill:hover,
+.page-forms form .form-group select:-webkit-autofill:focus {
+  border: 1px solid transparent;
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-transition: background-color 5000s ease-in-out 0s;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.page-forms form .line {
+  position: relative;
+  text-align: center;
+  margin: 1rem 0;
+}
+.page-forms form .line:before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: #3F3F3F;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+.page-forms form .line small {
+  padding: 10px 1.5rem;
+  /*background-color: #fff;*/
+}
+.page-forms form .btn-submit {
+  background-color: #99CE5B;
+  width: 40%;
+  display: block;
+  margin: auto;
+  color: #fff;
+  outline: none;
+  border: 0;
+  font-size: 1.1rem;
+  padding: 0.8rem;
+  border-radius: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 768px) {
+  .page-forms form .btn-submit {
+    width: 100%;
+  }
+}
+.page-forms form .btn-submit:hover {
+  opacity: 0.9;
+}
+.page-forms .social-container {
+  background-color: #eee;
+  min-height: 100px;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-forms .social-container a {
+  margin: 0 10px;
+}
+.page-forms .register-text {
+  margin-top: 3rem;
+}
+.page-forms .sign-in .left, .page-forms .sign-in .right {
+  min-height: 100vh;
+}
+.page-forms .sign-in .left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 7rem 8%;
+  background-color: #084d91;
+  color: #fff;
+}
+@media (max-width: 1650px) {
+  .page-forms .sign-in .left {
+    padding: 3rem 5%;
+  }
+}
+@media (max-width: 1440px) {
+  .page-forms .sign-in .left {
+    padding: 3rem 5%;
+  }
+}
+.page-forms .sign-in .left .logo {
+  margin-bottom: 5rem;
+}
+.page-forms .sign-in .left ul {
+  padding: 0;
+  list-style: none;
+}
+.page-forms .sign-in .left a.link {
+  color: #fff;
+}
+.page-forms .sign-in .right {
+  padding: 7rem 15%;
+}
+@media (max-width: 1650px) {
+  .page-forms .sign-in .right {
+    padding: 2rem 5%;
+  }
+}
+@media (max-width: 1440px) {
+  .page-forms .sign-in .right {
+    padding: 1rem 5%;
+  }
+}
