@@ -16,6 +16,9 @@
             <div class="col-12 col-lg-8 right">
                 <div class="content">
                     <h1 class="title">Forgot Password</h1>
+                    <small>
+                        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                    </small>
                     <div class="validator-container">
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -23,7 +26,7 @@
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     </div>
 
-                    <form method="POST" action="{{route('register')}}">
+                    <form method="POST" action="{{route('password.email')}}">
                         @csrf
                         <div class="form-group">
                             <label for="">Email</label>
@@ -42,6 +45,10 @@
     <style>
         .validator-container {
             margin-top: 30px;
+        }
+
+        form {
+            margin-top: 0;
         }
     </style>
 @endsection

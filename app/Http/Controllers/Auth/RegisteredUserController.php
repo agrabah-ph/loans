@@ -20,8 +20,7 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
-    {
+    public function create() {
         return view('auth.register');
     }
 
@@ -36,19 +35,28 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
+            /*'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',*/
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
         Auth::login($user = User::create([
-            'fname' => $request->fname,
+            /*'fname' => $request->fname,
             'mname' => $request->mname,
-            'lname' => $request->lname,
+            'lname' => $request->lname,*/
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));
+
+        if (auth()->user()) {
+            try {
+                event(new Registered($user));
+                return redirect(RouteServiceProvider::HOME);
+            } catch (Exception $e) {
+                return $e;
+            }
+        }
 
         if($user){
             $loan_provider_role = Role::where('name','loan_provider')->first();
@@ -65,15 +73,10 @@ class RegisteredUserController extends Controller
                     $loan_provider_user->user_id = $user->id;
                     if($loan_provider_user->save()){
                         event(new Registered($user));
-
                         return redirect(RouteServiceProvider::HOME);
                     }
                 }
             }
-
         }
-
-
-
     }
 }
