@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\borrower\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,8 +17,14 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::name('borrower.')->group(function() {
+        Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    });
+});
+
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
