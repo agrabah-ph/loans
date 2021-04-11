@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('/try', 'TryController');
+
+Route::get('register-borrower','Borrower\\BorrowersController@register_borrower')->name('register_borrower');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
