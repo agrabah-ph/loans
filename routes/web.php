@@ -17,14 +17,12 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::middleware(['auth', 'verified'])->group(function() {
-    Route::name('borrower.')->group(function() {
-        Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    });
-});
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('/try', 'TryController');
 
-require __DIR__.'/auth.php';
+Route::get('register-borrower','Borrower\\BorrowersController@register_borrower')->name('register_borrower');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
