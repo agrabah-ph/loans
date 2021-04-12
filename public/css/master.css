@@ -45,7 +45,15 @@ a:focus {
     border-bottom: 1px dashed #ddd;
     margin: 40px 0;
 }
-
+.nav-profile-img{
+    height: 35px;
+    width: 35px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 2px solid #dfdfdf;
+}
 i,
 span {
     display: inline-block;
@@ -144,21 +152,42 @@ span {
 }
 
 #sidebar ul li.active>a,
-a[aria-expanded="true"] {
+#sidebar a[aria-expanded="true"] {
     color: #fff;
-    background: #084D96;
+    background: #104677;
 }
-
 a[data-toggle="collapse"] {
     position: relative;
 }
-
-.dropdown-toggle::after {
+nav .notifications .dropdown-toggle::after{
+    display: none;
+}
+.
+nav .notification-dropdown{
+    background: gainsboro;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    padding: 6px;
+}
+.notification-dropdown{
+    padding: 7px;
+    text-align: center;
+}
+.notifications .dropdown-menu{
+    right: 0px;
+    left: unset;
+}
+.notifications{}
+#sidebar .dropdown-toggle::after {
     display: block;
     position: absolute;
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+
 }
 
 ul ul a {

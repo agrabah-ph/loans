@@ -13,7 +13,7 @@ class TryController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return view('loan_provider.loans.index');
     }
 
     /**
