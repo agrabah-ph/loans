@@ -282,3 +282,13 @@ a.article:hover {
         display: none;
     }
 }
+
+/*buttons*/
+.btn.ag-primary{
+    background: #084D96;
+    color: #fff;
+}
+.btn.ag-success{
+    background: #9FD45B;
+    color: #fff;
+}

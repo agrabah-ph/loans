@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajaxQ/libs/slick-carousel/1.9.0/slick-theme.min.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ asset('css/app_admin.css') }}">
@@ -31,9 +31,9 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @if (auth()->user() && auth()->user()->email_verified_at != null)
+            {{--@if (auth()->user() && auth()->user()->email_verified_at != null)--}}
                 @include('layouts.navigation')
-            @endif
+            {{--@endif--}}
             @yield('content')
 
             @yield('styles')
