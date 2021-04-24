@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\borrower\HomeController;
+use App\Http\Controllers\Borrower\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +17,25 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/logout', function() {
+    \Illuminate\Support\Facades\Auth::logout();
+   return redirect('/login');
+});
 
-Route::resource('/try', 'TryController');
-
+// REGISTRATION FORMS
 Route::get('register-borrower','Borrower\\BorrowersController@register_borrower')->name('register_borrower');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['middlewareGroups' => ['auth', 'verified', 'role:borrower']], function() {
+    Route::prefix('')->name('borrower.')->group(function() {
+        // BORROWER ROUTES
+    });
+});
 
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::prefix('')->name('loan_provider.')->group(function() {
+        Route::get('dashboard', 'LoanProvider\\DashboardController@index')->name('dashboard');
+    });
+});
+
+Route::resource('/try', 'TryController');
+require __DIR__.'/auth.php';

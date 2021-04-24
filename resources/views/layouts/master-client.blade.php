@@ -31,9 +31,9 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            {{--@if (auth()->user() && auth()->user()->email_verified_at != null)--}}
+            @if (auth()->user() && auth()->user()->email_verified_at != null)
                 @include('layouts.navigation')
-            {{--@endif--}}
+            @endif
             @yield('content')
 
             @yield('styles')
