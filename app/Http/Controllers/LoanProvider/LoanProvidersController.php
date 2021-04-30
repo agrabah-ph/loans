@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\LoanProvider;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LoanProvidersController extends Controller
@@ -80,5 +81,9 @@ class LoanProvidersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function account_setup() {
+        return view('loan_provider.account_setup.index');
     }
 }

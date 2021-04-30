@@ -34,6 +34,7 @@ Route::group(['middlewareGroups' => ['auth', 'verified', 'role:borrower']], func
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::prefix('')->name('loan_provider.')->group(function() {
         Route::get('dashboard', 'LoanProvider\\DashboardController@index')->name('dashboard');
+        Route::get('account_setup', 'LoanProvider\\LoanProvidersController@account_setup')->name('account_setup');
     });
 });
 

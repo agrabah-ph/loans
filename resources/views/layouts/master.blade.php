@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>AGRABAH | @yield('title')</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -45,10 +45,13 @@
 </head>
 <body class="font-sans antialiased">
 <div class="wrapper">
-
-    @include('layouts.sidebar')
+    @if (\Illuminate\Support\Facades\Route::currentRouteName() != 'loan_provider.account_setup')
+        @include('layouts.sidebar')
+    @endif
     <div id="content">
-        @include('layouts.navbar')
+        @if (\Illuminate\Support\Facades\Route::currentRouteName() != 'loan_provider.account_setup')
+            @include('layouts.navbar')
+        @endif
         @yield('content')
     </div>
 </div>
