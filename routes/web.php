@@ -7,11 +7,15 @@ use App\Http\Controllers\Borrower\HomeController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register web routes for your a\pplication. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*socialite*/
+Route::get('oauth/{driver}', 'SocialiteController@redirectToProvider')->name('social.oauth');
+Route::get('oauth/{driver}/callback', 'SocialiteController@handleProviderCallback')->name('social.callback');
+
 
 Route::get('/', function () {
     return redirect('/login');

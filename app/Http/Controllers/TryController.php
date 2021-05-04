@@ -13,7 +13,8 @@ class TryController extends Controller
      */
     public function index()
     {
-        return view('borrower.loans.index');
+
+        return view('borrower.profile.index');
     }
 
     /**

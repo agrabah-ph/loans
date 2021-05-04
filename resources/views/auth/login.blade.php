@@ -41,7 +41,7 @@
 
                         <div class="social-container">
                             <a href=""><img src="{{asset('images/icon-google.png')}}" alt="icon-google"></a>
-                            <a href=""><img src="{{asset('images/icon-facebook.png')}}" alt="icon-facebook"></a>
+                            <a href="{{ route('social.oauth', 'facebook') }}"><img src="{{asset('images/icon-facebook.png')}}" alt="icon-facebook"></a>
                             <a href=""><img src="{{asset('images/icon-twitter.png')}}" alt="icon-twitter"></a>
                         </div>
 
