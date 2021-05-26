@@ -21,6 +21,9 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::resource('/try', 'TryController');
+require __DIR__.'/auth.php';
+
 Route::get('/logout', function() {
     \Illuminate\Support\Facades\Auth::logout();
    return redirect('/login');
@@ -39,8 +42,9 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::prefix('')->name('loan_provider.')->group(function() {
         Route::get('dashboard', 'LoanProvider\\DashboardController@index')->name('dashboard');
         Route::get('account_setup', 'LoanProvider\\LoanProvidersController@account_setup')->name('account_setup');
+        Route::get('profile', 'LoanProvider\\BankProfileController@index')->name('profile');
+
+        Route::resource('loan_provider', 'LoanProvider\\LoanProvidersController');
+        Route::post('register_loan_provider', 'LoanProvider\\LoanProvidersController@register_loan_provider')->name('register_loan_provider');
     });
 });
-
-Route::resource('/try', 'TryController');
-require __DIR__.'/auth.php';

@@ -14,7 +14,7 @@ class TryController extends Controller
     public function index()
     {
 
-        return view('borrower.profile.index');
+        return view('dashboard');
     }
 
     /**

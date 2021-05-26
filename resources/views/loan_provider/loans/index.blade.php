@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-loan-provider')
 
 @section('content')
     <div class="container-fluid">

@@ -21,11 +21,12 @@
                 <li class="nav-item ">
                     <div class="nav-profile-img" style="background-image: url('{{asset('images/logo.png')}}')" alt=""></div>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown d-down">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        James Bond
+                        {{ auth()->user()->fname}} {{auth()->user()->lname }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/profile">Profile</a>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
                 </li>

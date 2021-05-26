@@ -1,7 +1,7 @@
 <nav id="sidebar">
     <div class="sidebar-header">
-        <h3>Agrabah</h3>
-        <strong>BS</strong>
+        <img src="{{asset('images/agrabah-white-logo.png')}}" width="100%" alt="">
+        <strong>AG</strong>
     </div>
     <ul class="list-unstyled components">
         <li class="active">
@@ -22,6 +22,25 @@
             </ul>
         </li>
         <li>
+            <a href="#">
+                <i class="fas fa-briefcase"></i>
+                Loan Types
+            </a>
+            <a href="#loansSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fas fa-copy"></i>
+                Loans
+            </a>
+            <ul class="collapse list-unstyled" id="loansSubmenu">
+                <li>
+                    <a href="#">Pending Loans</a>
+                </li>
+                <li>
+                    <a href="#">Unsettled Loans</a>
+                </li>
+                <li>
+                    <a href="#">Settled Loans</a>
+                </li>
+            </ul>
             <a href="#">
                 <i class="fas fa-briefcase"></i>
                 About

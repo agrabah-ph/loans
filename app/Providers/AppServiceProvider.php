@@ -6,6 +6,7 @@ use App\Services\ActivityLogService;
 use App\Services\BorrowerService;
 use App\Services\LoanProviderService;
 use App\Services\LoanService;
+use App\Services\UnitTestService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -40,6 +41,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(ActivityLogService::class, function($app) {
            return new ActivityLogService();
+        });
+
+        $this->app->bind(UnitTestService::class, function($app) {
+           return new UnitTestService();
         });
     }
 }

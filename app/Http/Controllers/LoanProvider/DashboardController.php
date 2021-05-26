@@ -11,7 +11,7 @@ class DashboardController extends Controller {
         if ($user && $user->fname == null && $user->lname == null) {
             return redirect()->route('loan_provider.account_setup');
         } else {
-            return view('dashboard');
-        }
+            return view('loan_provider.dashboard.index');
+         }
     }
 }

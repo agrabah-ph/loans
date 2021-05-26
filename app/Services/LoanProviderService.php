@@ -8,51 +8,53 @@
 
 namespace App\Services;
 
-
 use App\Models\LoanProvider;
 use App\Models\LoanProviderUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class LoanProviderService {
-    public function createUser(User $user, $request) {
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-            'lname' => 'required|string|max:255',
-        ]);
-
+    public function createUser(Request $request, $user_data) {
         try {
-            DB::beginTransaction();
+             DB::beginTransaction();
 
-            if($user){
-                $loan_provider_role = Role::where('name','loan_provider')->first();
-                if($loan_provider_role){
-                    $user->assignRole($loan_provider_role);
-                    $loan_provider = new LoanProvider();
-                    $loan_provider->company_name = $request->company_name;
-                    $loan_provider->region = $request->company_name;
-                    $loan_provider->province = $request->province;
-                    $loan_provider->city = $request->city;
-                    $loan_provider->address_line = $request->address_line;
-                    if($loan_provider->save()){
-                        $loan_provider_user = new LoanProviderUser();
-                        $loan_provider_user->loan_provider_id = $loan_provider->id;
-                        $loan_provider_user->user_id = $user->id;
-                        if($loan_provider_user->save()){
-                            event(new Registered($user));
+            $user = $user_data;
+            if($user) {
+                $user->fname = $request->fname;
+                $user->mname = $request->mname;
+                $user->lname = $request->lname;
+                if ($user->save()) {
+                    $loan_provider_role = Role::where('name','loan_provider')->first();
+                    if($loan_provider_role){
+                        $user->assignRole($loan_provider_role);
+                        $loan_provider = new LoanProvider();
+                        $loan_provider->bank_name = $request->bank_name;
+                        $loan_provider->branch_name = $request->branch_name;
+                        $loan_provider->address_line = $request->address_line;
+                        $loan_provider->account_name = $request->account_name;
+                        $loan_provider->account_number = $request->account_number;
+                        $loan_provider->tin = $request->tin;
+                        $loan_provider->contact_person = $request->contact_person;
+                        $loan_provider->contact_number = $request->contact_number;
+                        $loan_provider->designation = $request->designation;
+
+                        if($loan_provider->save()){
+                            $loan_provider_user = new LoanProviderUser();
+                            $loan_provider_user->loan_provider_id = $loan_provider->id;
+                            $loan_provider_user->user_id = $user->id;
                         }
                     }
                 }
             }
-            DB::commit();
-            return redirect(RouteServiceProvider::HOME);
+             DB::commit();
+            return true;
         } catch(\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Oops. Something went wrong.');
+             DB::rollBack();
+            return false;
         }
     }
 }

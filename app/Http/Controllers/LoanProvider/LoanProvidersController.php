@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\LoanProvider;
 
 use App\Http\Controllers\Controller;
+use App\Services\LoanProviderService;
 use Illuminate\Http\Request;
 
 class LoanProvidersController extends Controller
@@ -31,11 +32,13 @@ class LoanProvidersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Services\LoanProviderService;
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request, LoanProviderService $loan_provider) {
+        if ($loan_provider->createUser($request)) {
+            return redirect()->route('loan_provider.dashboard');
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master-loan-provider')
 
 @section('title')
     Account Setup
@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="form-wizard">
-                        <form action="" method="post" role="form">
+                        <form action="{{route('loan_provider.loan_provider.store')}}" method="POST" role="form">
                             <div class="form-wizard-header">
                                 <p>Fill all form field to go next step</p>
                                 <ul class="list-unstyled form-wizard-steps clearfix">
@@ -26,19 +26,20 @@
                                 </ul>
                             </div>
                             <fieldset class="wizard-fieldset show">
+                                @csrf
                                 <h5>Personal Information</h5>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="fname">
+                                    <input name="fname" type="text" class="form-control wizard-required" id="fname">
                                     <label for="fname" class="wizard-form-text-label">First Name*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="mname">
+                                    <input name="mname" type="text" class="form-control wizard-required" id="mname">
                                     <label for="mname" class="wizard-form-text-label">Middle Name*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="lname">
+                                    <input name="lname" type="text" class="form-control wizard-required" id="lname">
                                     <label for="lname" class="wizard-form-text-label">Last Name*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
@@ -49,32 +50,32 @@
                             <fieldset class="wizard-fieldset">
                                 <h5>Bank Information</h5>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="bname">
+                                    <input name="bank_name" type="text" class="form-control wizard-required" id="bname">
                                     <label for="bname" class="wizard-form-text-label">Bank Name*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="brname">
+                                    <input name="branch_name" type="text" class="form-control wizard-required" id="brname">
                                     <label for="brname" class="wizard-form-text-label">Branch Name*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control wizard-required" id="email">
-                                    <label for="email" class="wizard-form-text-label">Address Line</label>
+                                    <input name="address_line" type="text" class="form-control wizard-required" id="address_line">
+                                    <label for="address_line" class="wizard-form-text-label">Address Line</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="acname">
+                                    <input name="account_name" type="text" class="form-control wizard-required" id="acname">
                                     <label for="acname" class="wizard-form-text-label">Account Name*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="acon">
+                                    <input name="account_number" type="text" class="form-control wizard-required" id="acon">
                                     <label for="acon" class="wizard-form-text-label">Account Number*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control wizard-required" id="tin">
+                                    <input name="tin" type="text" class="form-control wizard-required" id="tin">
                                     <label for="tin" class="wizard-form-text-label">TIN*</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
@@ -86,18 +87,18 @@
                             <fieldset class="wizard-fieldset">
                                 <h5>Additional Information</h5>
                                 <div class="form-group">
-                                    <input type="email" class="form-control wizard-required" id="email">
-                                    <label for="email" class="wizard-form-text-label">Contact Person</label>
+                                    <input name="contact_person" type="text" class="form-control wizard-required" id="contact_person">
+                                    <label for="contact_person" class="wizard-form-text-label">Contact Person</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control wizard-required" id="email">
-                                    <label for="email" class="wizard-form-text-label">Contact Number</label>
+                                    <input name="contact_number" type="text" class="form-control wizard-required" id="contact_number">
+                                    <label for="contact_number" class="wizard-form-text-label">Contact Number</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control wizard-required" id="email">
-                                    <label for="email" class="wizard-form-text-label">Designation</label>
+                                    <input name="designation" type="text" class="form-control wizard-required" id="designation">
+                                    <label for="designation" class="wizard-form-text-label">Designation</label>
                                     <div class="wizard-form-error"></div>
                                 </div>
                                 <div class="form-group clearfix">
@@ -109,13 +110,13 @@
                                 <h5>Payment Information</h5>
                                 <div class="form-group clearfix">
                                     <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                    <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
+                                    <button type="submit" class="form-wizard-submit float-right">Submit</button>
                                 </div>
                             </fieldset>
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>w
         </section>
     </div>
 @endsection
