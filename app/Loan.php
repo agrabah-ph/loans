@@ -15,7 +15,8 @@ class Loan extends Model
     {
         $paymentScheds = LoanPaymentSchedule::where('loan_id', $this->attributes['id'])->get();
         $now = Carbon::now();
-        $notifyStart = $now->copy()->addDays(3);
+//        $notifyStart = $now->copy()->addDays(3);
+        $notifyStart = null;
         $dueDate = null;
         $payableAmount = 0;
         $paidAmount = 0;
@@ -24,6 +25,7 @@ class Loan extends Model
         foreach ($paymentScheds as $sched){
             if( ($sched->status === 'unpaid') && ($sched->due_date > $now) ){
                 $dueDate = $sched->due_date;
+                $notifyStart = Carbon::parse($dueDate)->subDay();
                 $payableAmount += $sched->payable_amount;
                 $paidAmount += $sched->paid_amount;
                 if ( $dueDate <= $notifyStart ) {
@@ -33,13 +35,11 @@ class Loan extends Model
             }
         }
         $totalAmount = $payableAmount - $paidAmount;
-        $notifyIn = Carbon::parse($dueDate);
         $data = [
-            'date' => $dueDate,
+            'date' => Carbon::parse($dueDate)->toFormattedDateString(),
             'date_diff' => Carbon::parse($dueDate)->diffForHumans(),
             'amount' => number_format($totalAmount, 2),
-            'notify_start' => $notifyStart->toDateTimeString(),
-            'notify_in' => $notifyIn->toDateTimeString(),
+            'notify_start' => $notifyStart,
             'notify' => $notify
         ];
         return $data;

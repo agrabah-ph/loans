@@ -197,9 +197,9 @@
                                         '</td>' +
                                         '<td>'+ data[a].amount +'</td>' +
                                         '<td>'+ data[a].duration +' '+ data[a].timing +'/s</td>' +
-                                        '<td>'+ data[a].created_at +'</td>' +
+                                        '<td>'+ moment(data[a].created_at).format('MMM DD, YYYY') +'</td>' +
                                         '<td>' +
-                                            '<span>'+ data[a].due_info.date_diff +'</span><br>' +
+                                            '<span>'+ data[a].due_info.date +'</span><br>' +
                                             '<small>'+ data[a].due_info.date_diff +'</small>' +
                                         '</td>' +
                                         '<td class="text-right">' +
