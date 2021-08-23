@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\NotifyLoanDuePayments;
+use App\Console\Commands\SpotMarketBidMakeWinner;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        SpotMarketBidMakeWinner::class,
+        NotifyLoanDuePayments::class
     ];
 
     /**
@@ -24,7 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+         $schedule->command('spotmarket:award_winners')->everyMinute();
+//         $schedule->command('notify:loan_due')->dailyAt('07:00');
+         $schedule->command('notify:loan_due')->everyMinute();
     }
 
     /**
