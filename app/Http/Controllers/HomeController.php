@@ -51,8 +51,26 @@ class HomeController extends Controller
                 ->get();
 
 //            return $loanType;
-
-            return view('loan.loan-provider.dashboard', compact('loanType'));
+            $now = Carbon::now();
+            $counts = array();
+            $newLoan = Loan::where('accept', 1)->where('status', 'Active')
+                ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->count();
+            $declined = Loan::where('accept', 1)->where('status', 'Declined')
+                ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->count();
+            $loansWeek = Loan::where('accept', 1)
+                ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->where('status', 'Active')->whereBetween('created_at', [
+                    $now->copy()->startOfWeek()->toDateTimeString(),
+                    $now->copy()->endOfWeek()->toDateTimeString()
+                ])
+                ->count();
+            array_push($counts, $newLoan);
+            array_push($counts, $loansWeek);
+            array_push($counts, $declined);
+//            return $counts;
+            return view('loan.loan-provider.dashboard', compact('loanType', 'counts'));
         }
 
         if(auth()->user()->hasRole('farmer')){

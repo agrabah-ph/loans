@@ -65,7 +65,7 @@ class LoanProductController extends Controller
     {
         $loanProduct = LoanProduct::find($id);
         $types = LoanType::pluck('display_name','id');
-        return response()->view(subDomainPath('product.edit'), compact( 'loanProduct', 'types'));
+        return response()->view('loan.product.edit', compact( 'loanProduct', 'types'));
     }
 
     /**

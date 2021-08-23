@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Farmer;
 use App\Loan;
 use App\Trace;
 use Carbon\Carbon;
@@ -206,5 +207,26 @@ class ReportController extends Controller
             ->get();
 
         return response()->json($data);
+    }
+
+    public function getLoanInfo(Request $request)
+    {
+        $url = route('loan-info', array('id' => $request->input('id')));
+        return response()->json($url);
+    }
+
+    public function loanInfo($id)
+    {
+        $data = Loan::with(
+    'borrower',
+//            'details',
+            'product',
+            'payment_schedules',
+            'payments')
+            ->find($id);
+//        return $data;
+        $borrower = Farmer::withCount('loans')->find($data->borrower->id);
+//        return $borrower;
+        return view('loan.loan-provider.report.loan-info', compact('data', 'borrower'));
     }
 }

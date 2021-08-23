@@ -1,4 +1,4 @@
-@extends(subdomain_name().'.master')
+@extends('loan.master')
 @section('title', 'Profile')
 
 @section('content')
