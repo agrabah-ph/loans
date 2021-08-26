@@ -17,7 +17,8 @@
     <a href="{!! route('loan-applicant') !!}"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Loan Application</span></a>
 </li>
 
-<li class="{{ (request()->is('reports/loan')) ? 'active' : '' }}">
+{{--<li class="{{ (request()->is('reports/loan')) ? 'active' : '' }}">--}}
+<li class="{{ if_uri_pattern(array('reports/loan', 'loan/info*')) == 1 ? 'active' : '' }}">
     <a href="{!! route('loan-report') !!}"><i class="fa fa-list"></i> <span class="nav-label">Reports</span></a>
 </li>
 

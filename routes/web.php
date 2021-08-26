@@ -124,6 +124,9 @@ Route::middleware(['auth', 'verified', 'has_profile'])->group(function () {
     Route::get('reports/loan', 'ReportController@loanReportIndex')->name('loan-report');
     Route::get('get-loan-report', 'ReportController@loanReportList')->name('get-loan-report');
 
+    Route::get('get-loan-info', 'ReportController@getLoanInfo')->name('get-loan-info');
+    Route::get('loan/info/{id}', 'ReportController@loanInfo')->name('loan-info');
+
 });
 
 

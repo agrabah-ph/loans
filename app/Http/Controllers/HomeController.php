@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Farmer;
 use App\Inventory;
 use App\Loan;
+use App\LoanPayment;
 use App\LoanProvider;
 use App\LoanType;
 use App\Trace;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -51,16 +53,47 @@ class HomeController extends Controller
                 ->get();
 
 //            return $loanType;
+            $now = Carbon::now();
+            $counts = array();
+            $newLoan = Loan::where('accept', 1)->where('status', 'Active')
+                ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->count();
+            $declined = Loan::where('accept', 1)->where('status', 'Declined')
+                ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->count();
+            $loansWeek = Loan::where('accept', 1)
+                ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->where('status', 'Active')->whereBetween('created_at', [
+                    $now->copy()->startOfWeek()->toDateTimeString(),
+                    $now->copy()->endOfWeek()->toDateTimeString()
+                ])
+                ->count();
 
-            return view('loan.loan-provider.dashboard', compact('loanType'));
+            array_push($counts, $newLoan);
+            array_push($counts, $loansWeek);
+            array_push($counts, $declined);
+//            return $counts;
+            return view('loan.loan-provider.dashboard', compact('loanType', 'counts'));
         }
 
         if( (auth()->user()->hasRole('farmer')) || (auth()->user()->hasRole('community-leader')) ){
             $farmer = Farmer::find(Auth::user()->farmer->id);
             $loans = $farmer->loans;
 
-//            return $loans;
-            return view('loan.farmer.dashboard', compact('loans'));
+            $loanId = array();
+            foreach ($loans as $loan){
+                array_push($loanId, $loan->id);
+            }
+
+            $payments = LoanPayment::whereIn('loan_id', $loanId)
+                ->get()
+                ->groupBy(function($date) {
+                    return Carbon::parse($date->created_at)->diffForHumans(); // grouping by years
+                });
+
+//            return $loans->where('status', 'Active')->count();
+
+            return view('loan.farmer.dashboard', compact('loans', 'payments'));
         }
 
     }

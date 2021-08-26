@@ -8,47 +8,47 @@
     <div class="wrapper wrapper-content">
         <div class="page-dashboard">
             <div class="row list-count space-1">
-                <div class="col-12 col-lg-3 col-md-6 space-1">
-                    <a href="">
-                        <div class="box">
-                            <div class="item counter-label">
-                                <div class="counter-label">Loan Amount</div>
-                                <div class="counter">0</div>
-                            </div>
-                            <div class="item">
-                                <div class="counter-icon">
-                                    {{--<img src="https://img.icons8.com/plasticine/100/000000/money.png" class="img-fluid"/>--}}
-                                    <img src="{{ asset('img/icons/ico-loan-amount.png') }}" class="img-fluid"/>
-                                </div>
-                            </div>
-                            <div class="box-link">View <img src="https://img.icons8.com/ios/20/948b96/long-arrow-right.png" class="img-fluid"/></div>
-                        </div>
-                    </a>
+{{--                <div class="col-12 col-lg-3 col-md-6 space-1">--}}
+{{--                    <a href="">--}}
+{{--                        <div class="box">--}}
+{{--                            <div class="item counter-label">--}}
+{{--                                <div class="counter-label">Loan Amount</div>--}}
+{{--                                <div class="counter">0</div>--}}
+{{--                            </div>--}}
+{{--                            <div class="item">--}}
+{{--                                <div class="counter-icon">--}}
+{{--                                    --}}{{--<img src="https://img.icons8.com/plasticine/100/000000/money.png" class="img-fluid"/>--}}
+{{--                                    <img src="{{ asset('img/icons/ico-loan-amount.png') }}" class="img-fluid"/>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="box-link">View <img src="https://img.icons8.com/ios/20/948b96/long-arrow-right.png" class="img-fluid"/></div>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
 
-                </div>
+{{--                </div>--}}
+{{--                <div class="col-12 col-lg-3 col-md-6 space-1">--}}
+{{--                    <a href="">--}}
+{{--                        <div class="box">--}}
+{{--                            <div class="item counter-label">--}}
+{{--                                <div class="counter-label">Loan Tenure</div>--}}
+{{--                                <div class="counter">0</div>--}}
+{{--                            </div>--}}
+{{--                            <div class="item">--}}
+{{--                                <div class="counter-icon">--}}
+{{--                                    --}}{{--<img src="https://img.icons8.com/plasticine/100/000000/money-bag.png" class="img-fluid"/>--}}
+{{--                                    <img src="{{ asset('img/icons/ico-loan-tenue.png') }}" class="img-fluid"/>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="box-link">View <img src="https://img.icons8.com/ios/20/948b96/long-arrow-right.png" class="img-fluid"/></div>--}}
+{{--                        </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
                 <div class="col-12 col-lg-3 col-md-6 space-1">
-                    <a href="">
-                        <div class="box">
-                            <div class="item counter-label">
-                                <div class="counter-label">Loan Tenure</div>
-                                <div class="counter">0</div>
-                            </div>
-                            <div class="item">
-                                <div class="counter-icon">
-                                    {{--<img src="https://img.icons8.com/plasticine/100/000000/money-bag.png" class="img-fluid"/>--}}
-                                    <img src="{{ asset('img/icons/ico-loan-tenue.png') }}" class="img-fluid"/>
-                                </div>
-                            </div>
-                            <div class="box-link">View <img src="https://img.icons8.com/ios/20/948b96/long-arrow-right.png" class="img-fluid"/></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-12 col-lg-3 col-md-6 space-1">
-                    <a href="">
+                    <a href="{!! route('loan-report') !!}">
                         <div class="box" id="new-loan-application">
                             <div class="item counter-label">
                                 <div class="counter-label">New Loan Application</div>
-                                <div class="counter">0</div>
+                                <div class="counter">{{ $counts[0] }}</div>
                             </div>
                             <div class="item">
                                 <div class="counter-icon">
@@ -61,11 +61,11 @@
                     </a>
                 </div>
                 <div class="col-12 col-lg-3 col-md-6 space-1">
-                    <a href="">
+                    <a href="{!! route('loan-report') !!}">
                         <div class="box" id="approve-loans">
                             <div class="item counter-label">
                                 <div class="counter-label">Approved Loans This Week</div>
-                                <div class="counter">0</div>
+                                <div class="counter">{{ $counts[1] }}</div>
                             </div>
                             <div class="item">
                                 <div class="counter-icon">
@@ -78,11 +78,11 @@
                     </a>
                 </div>
                 <div class="col-12 col-lg-3 col-md-6">
-                    <a href="">
+                    <a href="{!! route('loan-report') !!}">
                         <div class="box">
                             <div class="item counter-label">
                                 <div class="counter-label">Declined Loans</div>
-                                <div class="counter">0</div>
+                                <div class="counter">{{ $counts[2] }}</div>
                             </div>
                             <div class="item">
                                 <div class="counter-icon">
@@ -227,8 +227,8 @@
         $(document).ready(function(){
             $.get('{!! route('loan-provider-dashboard') !!}', function(data){
                 console.log(data);
-                $('#new-loan-application').find('.counter').text(data[1]);
-                $('#approve-loans').find('.counter').text(data[0]);
+                // $('#new-loan-application').find('.counter').text(data[1]);
+                // $('#approve-loans').find('.counter').text(data[0]);
 
                 var doughnutData = {
                     labels: ["Pending Loans", "Active Loans", "Completed Loans", "Declined Loans", "Cancelled Loans" ],

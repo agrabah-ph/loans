@@ -29,9 +29,9 @@
             <div class="col-sm-3 order-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        <div class="form-group">
-                            <input type="text" class="form-control m-b-xs" id="filter" placeholder="Search in table">
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <input type="text" class="form-control m-b-xs" id="filter" placeholder="Search in table">--}}
+{{--                        </div>--}}
                         <div class="form-group">
                             <select name="loan-status-select" id="loan-status-select" class="form-control">
                                 <option value="">Loan Status</option>
@@ -166,6 +166,16 @@
             $(document).on('change', '#loan-status-select', function(){
                 getList();
             });
+
+            $(document).on('click', '.loan-info-btn', function(){
+                var id = $(this).data('id');
+                $.get('{!! route('get-loan-info') !!}', {
+                    id: id
+                }, function(data){
+                    window.location.replace(data);
+                });
+            });
+
             function getList(){
                 var status = $('#loan-status-select').val();
                 var list = new Array();
@@ -184,6 +194,18 @@
                         switch(status){
                             case 'Active':
                                 for(let a = 0; a < data.length; a++){
+                                    var timing = null;
+                                    switch (data[a].timing) {
+                                        case 'monthly':
+                                            timing = 'month';
+                                            break;
+                                        case 'week':
+                                            timing = 'week';
+                                            break;
+                                        case 'day':
+                                            timing = 'day';
+                                            break;
+                                    }
                                     var borrower = (data[a].borrower.community_leader === 0)? 'Farmer':'Community Leader';
                                     list.push('' +
                                         '<tr>' +
@@ -196,7 +218,7 @@
                                             '<small>'+ data[a].product.type.display_name +'</small>' +
                                         '</td>' +
                                         '<td>'+ data[a].amount +'</td>' +
-                                        '<td>'+ data[a].duration +' '+ data[a].timing +'/s</td>' +
+                                        '<td>'+ data[a].duration +' '+ timing +'/s</td>' +
                                         '<td>'+ moment(data[a].created_at).format('MMM DD, YYYY') +'</td>' +
                                         '<td>' +
                                             '<span>'+ data[a].due_info.date +'</span><br>' +
@@ -204,55 +226,85 @@
                                         '</td>' +
                                         '<td class="text-right">' +
                                         '<div class="btn-group text-right">' +
-                                        // '<a href="" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> Show</a>' +
+                                        '<button type="button" class="loan-info-btn btn-white btn btn-xs" data-id="'+ data[a].id +'"><i class="fa fa-search text-success"></i> Show</button>' +
                                         '</div>' +
                                         '</td>' +
                                         '</tr>' +
-                                        '');
+                                    '');
                                 }
                                 break;
                             case 'Completed':
                                 for(let a = 0; a < data.length; a++){
+                                    var timing = null;
+                                    switch (data[a].timing) {
+                                        case 'monthly':
+                                            timing = 'month';
+                                            break;
+                                        case 'week':
+                                            timing = 'week';
+                                            break;
+                                        case 'day':
+                                            timing = 'day';
+                                            break;
+                                    }
+                                    var borrower = (data[a].borrower.community_leader === 0)? 'Farmer':'Community Leader';
                                     list.push('' +
                                         '<tr>' +
-                                        '<td>' +
-                                        '<span>Product 1 '+ a +'</span><br>' +
-                                        '<small>Short Loan</small>' +
-                                        '</td>' +
-                                        '<td>100000</td>' +
-                                        '<td>5 months</td>' +
-                                        '<td>5 dsys ago</td>' +
-                                        '<td>1 hr ago</td>' +
-                                        '<td>jasper garcera</td>' +
-                                        '<td class="text-right">' +
-                                        '<div class="btn-group text-right">' +
-                                        '<a href="" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> Show</a>' +
-                                        '</div>' +
-                                        '</td>' +
+                                            '<td>' +
+                                                '<span>'+ data[a].borrower.profile.first_name +' '+ data[a].borrower.profile.last_name +'</span><br>' +
+                                                '<small>'+ borrower +'</small>' +
+                                            '</td>' +
+                                            '<td>' +
+                                                '<span>'+ data[a].product.name +'</span><br>' +
+                                                '<small>'+ data[a].product.type.display_name +'</small>' +
+                                            '</td>' +
+                                            '<td>'+ data[a].amount +'</td>' +
+                                            '<td>'+ data[a].duration +' '+ timing +'/s</td>' +
+                                            '<td>'+ moment(data[a].updated_at).format('MMM DD, YYYY') +'</td>' +
+                                            '<td class="text-right">' +
+                                                '<div class="btn-group text-right">' +
+                                                    '<button type="button" class="loan-info-btn btn-white btn btn-xs" data-id="'+ data[a].id +'"><i class="fa fa-search text-success"></i> Show</button>' +
+                                                '</div>' +
+                                            '</td>' +
                                         '</tr>' +
-                                        '');
+                                    '');
                                 }
                                 break;
                             default:
                                 for(let a = 0; a < data.length; a++){
+                                    var timing = null;
+                                    switch (data[a].timing) {
+                                        case 'monthly':
+                                            timing = 'month';
+                                            break;
+                                        case 'week':
+                                            timing = 'week';
+                                            break;
+                                        case 'day':
+                                            timing = 'day';
+                                            break;
+                                    }
+                                    var borrower = (data[a].borrower.community_leader === 0)? 'Farmer':'Community Leader';
                                     list.push('' +
                                         '<tr>' +
                                         '<td>' +
-                                        '<span>Product 1 '+ a +'</span><br>' +
-                                        '<small>Short Loan</small>' +
+                                            '<span>'+ data[a].borrower.profile.first_name +' '+ data[a].borrower.profile.last_name +'</span><br>' +
+                                            '<small>'+ borrower +'</small>' +
                                         '</td>' +
-                                        '<td>100000</td>' +
-                                        '<td>5 months</td>' +
-                                        '<td>5 dsys ago</td>' +
-                                        '<td>1 hr ago</td>' +
-                                        '<td>jasper garcera</td>' +
-                                        '<td class="text-right">' +
-                                        '<div class="btn-group text-right">' +
-                                        '<a href="" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> Show</a>' +
-                                        '</div>' +
+                                        '<td>' +
+                                            '<span>'+ data[a].product.name +'</span><br>' +
+                                            '<small>'+ data[a].product.type.display_name +'</small>' +
                                         '</td>' +
+                                        '<td>'+ data[a].amount +'</td>' +
+                                        '<td>'+ data[a].duration +' '+ timing +'/s</td>' +
+                                        '<td>'+ moment(data[a].created_at).format('MMM DD, YYYY') +'</td>' +
+                                        // '<td class="text-right">' +
+                                        //     '<div class="btn-group text-right">' +
+                                        //     // '<a href="" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> Show</a>' +
+                                        //     '</div>' +
+                                        // '</td>' +
                                         '</tr>' +
-                                        '');
+                                    '');
                                 }
                         }
 
@@ -277,7 +329,7 @@
                                 '<thead>' +
                                     '<tr>' +
                                     '<th>Borrower</th>' +
-                                    '<th>Info</th>' +
+                                    '<th>Loan Info</th>' +
                                     '<th>Amount</th>' +
                                     '<th>Duration/Tenure</th>' +
                                     '<th>Created</th>' +
@@ -303,11 +355,10 @@
                                 '<thead>' +
                                     '<tr>' +
                                     '<th>Borrower</th>' +
-                                    '<th>Info</th>' +
+                                    '<th>Loan Info</th>' +
                                     '<th>Amount</th>' +
                                     '<th>Duration/Tenure</th>' +
-                                    '<th>Created</th>' +
-                                    '<th>Last Payment</th>' +
+                                    '<th>Completed at</th>' +
                                     '<th class="text-right" data-sort-ignore="true"><i class="fa fa-cogs text-success"></i></th>' +
                                     '</tr>' +
                                 '</thead>' +
@@ -329,11 +380,11 @@
                                 '<thead>' +
                                     '<tr>' +
                                     '<th>Borrower</th>' +
-                                    '<th>Info</th>' +
+                                    '<th>Loan Info</th>' +
                                     '<th>Amount</th>' +
                                     '<th>Duration/Tenure</th>' +
                                     '<th>Created</th>' +
-                                    '<th class="text-right" data-sort-ignore="true"><i class="fa fa-cogs text-success"></i></th>' +
+                                    // '<th class="text-right" data-sort-ignore="true"><i class="fa fa-cogs text-success"></i></th>' +
                                     '</tr>' +
                                 '</thead>' +
                                 '<tbody>'+ list +'</tbody>' +

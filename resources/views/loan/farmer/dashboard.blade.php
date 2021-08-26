@@ -9,11 +9,11 @@
         <div class="page-dashboard">
             <div class="row list-count space-1">
                 <div class="col-12 col-lg-3 col-md-6">
-                    <a href="">
+                    <a href="{!! route('my-loans') !!}">
                         <div class="box" id="">
                             <div class="item counter-label">
                                 <div class="counter-label">Active Loans</div>
-                                <div class="counter">0</div>
+                                <div class="counter">{!! $loans->where('status', 'Active')->count() !!}</div>
                             </div>
                             <div class="item">
                                 <div class="counter-icon">
@@ -25,11 +25,11 @@
                     </a>
                 </div>
                 <div class="col-12 col-lg-3 col-md-6">
-                    <a href="">
+                    <a href="#">
                         <div class="box" id="">
                             <div class="item counter-label">
                                 <div class="counter-label">Paid Loans</div>
-                                <div class="counter">0</div>
+                                <div class="counter">{!! $loans->where('status', 'Completed')->count() !!}</div>
                             </div>
                             <div class="item">
                                 <div class="counter-icon">
@@ -58,56 +58,68 @@
 
 
                         <div class="repeat-container">
+
+                            @foreach($payments as $created => $payment)
                             <div class="repeat-item">
-                                <div class="date">TODAY</div>
+                                <div class="date">{{ $created }}</div>
                                 <ul>
+                                    @foreach($payment as $pay)
                                     <li>
                                         <div class="row">
                                             <div class="col-6 col-lg-6">
-                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 1</div>
+                                                <div class="text payment-label">
+                                                    <img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/>
+                                                    {{ ucfirst($pay->payment_method) }} &nbsp;<small> [ {{ $pay->reference_number }} ]</small>
+                                                </div>
+                                                <small>{{ $pay->loan_detail->product->name }}</small>
                                             </div>
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 2</div>
-                                            </div>
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>
+                                            <div class="col-6 col-lg-6 text-right">
+                                                <div class="text text-right">+ {{ number_format($pay->paid_amount, 2) }} <b>PHP</b></div>
+                                                <small>{{ \Carbon\Carbon::parse($pay->paid_date)->toFormattedDateString() }}</small>
                                             </div>
                                         </div>
                                     </li>
+                                    @endforeach
+
+{{--                                    <li>--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-6 col-lg-6">--}}
+{{--                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 2</div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-6 col-lg-6">--}}
+{{--                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
                                 </ul>
                             </div>
-                            <div class="repeat-item">
-                                <div class="date">August 18, 2021</div>
-                                <ul>
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 3</div>
-                                            </div>
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 4</div>
-                                            </div>
-                                            <div class="col-6 col-lg-6">
-                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            @endforeach
+
+{{--                            <div class="repeat-item">--}}
+{{--                                <div class="date">August 18, 2021</div>--}}
+{{--                                <ul>--}}
+{{--                                    <li>--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-6 col-lg-6">--}}
+{{--                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 3</div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-6 col-lg-6">--}}
+{{--                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-6 col-lg-6">--}}
+{{--                                                <div class="text payment-label"><img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/> Payment 4</div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="col-6 col-lg-6">--}}
+{{--                                                <div class="text text-right">+ 1,000.00 <b>PHP</b></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
                         </div>
 
 
