@@ -32,12 +32,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('community-leader')){
-            $inventory = Inventory::where('leader_id', Auth::user()->leader->account_id)->count();
-            $trace = Trace::where('user_id', Auth::user()->id)->count();
-            $farmer = Inventory::where('leader_id', Auth::user()->leader->account_id)->distinct('farmer_id')->count('farmer_id');
-            return view('loan.dashboard', compact( 'inventory', 'trace', 'farmer'));
-        }
+//        if(auth()->user()->hasRole('community-leader')){
+//            $inventory = Inventory::where('leader_id', Auth::user()->leader->account_id)->count();
+//            $trace = Trace::where('user_id', Auth::user()->id)->count();
+//            $farmer = Inventory::where('leader_id', Auth::user()->leader->account_id)->distinct('farmer_id')->count('farmer_id');
+//            return view('loan.dashboard', compact( 'inventory', 'trace', 'farmer'));
+//        }
 
         if(auth()->user()->hasRole('loan-provider')){
 
@@ -55,7 +55,7 @@ class HomeController extends Controller
             return view('loan.loan-provider.dashboard', compact('loanType'));
         }
 
-        if(auth()->user()->hasRole('farmer')){
+        if( (auth()->user()->hasRole('farmer')) || (auth()->user()->hasRole('community-leader')) ){
             $farmer = Farmer::find(Auth::user()->farmer->id);
             $loans = $farmer->loans;
 
