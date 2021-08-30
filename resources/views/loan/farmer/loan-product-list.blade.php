@@ -160,7 +160,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="modal-save-btn">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="modal-save-btn">Apply</button>
                 </div>
             </div>
         </div>
@@ -290,7 +290,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button  class="btn btn-primary" disabled id="submit_app_loan">Submit</button>
+                    <button  class="btn btn-primary" disabled id="submit_app_loan">Apply</button>
                 </div>
                 </form>
             </div>
