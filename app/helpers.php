@@ -104,7 +104,7 @@ if (!function_exists('smsNotifMessage')) {
                 $message = 'Agrabah Loan: new loan application created by, '.$arr[0];
                 break;
             case 'new-loan-application-borrower':
-                $message = 'Agrabah Loan: Congratulations! your loan application is now granted. Expect call or text from your lona provider';
+                $message = 'Agrabah Loan: Congratulations! your loan application is now granted. Expect call or text from your loan provider';
                 break;
             case 'loan-payment-posted':
                 $message = 'Agrabah Loan: loan payment posted, PHP '.$arr[0].' made on '.$arr[1];
