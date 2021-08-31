@@ -1,12 +1,18 @@
 <?php
 
+use App\LoanPayment;
+use App\LoanProvider;
 use App\LoanType;
 use App\Profile;
 use App\Loan;
+use App\Settings;
 use App\User;
 use App\Farmer;
 use App\Inventory;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use CreatvStudio\Itexmo\Facades\Itexmo;
 
@@ -18,44 +24,125 @@ if (!function_exists('emailNotification')) {
 }
 
 if (!function_exists('smsNotification')) {
+    /**
+     * @param $type
+     * @param $id
+     */
     function smsNotification($type, $id)
     {
         switch ($type){
             case 'loan-due':
                 $arr = array();
+                $recipients = array();
                 $data = Loan::find($id);
-                array_push($arr, '09152451835');
                 array_push($arr, $data->due_info['amount']);
                 array_push($arr, $data->due_info['date']);
-                smsNotifMessage('due-date', $arr);
+                smsNotifMessage($type, $arr, $recipients);
                 break;
-            case 'zxv':
+            case 'new-loan-application-admin':
+                $arr = array();
+                $recipients = array();
+                $data = Loan::find($id);
+                $borrower = $data->borrower->profile->first_name.' '.$data->borrower->profile->last_name;
+                $url = route('loan-applicant');
+                array_push($arr, $borrower);
+//                array_push($arr, $url);
+                array_push($recipients, mobileNumber('agrabah', null));
+                smsNotifMessage('new-loan-application', $arr, $recipients);
                 break;
-            case 'as':
+            case 'new-loan-application-provider':
+                $arr = array();
+                $recipients = array();
+                $data = Loan::find($id);
+                $borrower = $data->borrower->profile->first_name.' '.$data->borrower->profile->last_name;
+                $url = route('loan-applicant');
+                array_push($arr, $borrower);
+//                array_push($arr, $url);
+                array_push($recipients, mobileNumber('provider', $data->loan_provider_id));
+                smsNotifMessage('new-loan-application', $arr, $recipients);
                 break;
-            case 'wer':
+            case 'new-loan-application-borrower':
+                $arr = array();
+                $recipients = array();
+                $data = Loan::find($id);
+                $borrower = $data->borrower->profile->first_name.' '.$data->borrower->profile->last_name;
+                $url = route('loan-applicant');
+                array_push($arr, $borrower);
+//                array_push($arr, $url);
+                array_push($recipients, $data->borrower->profile->mobile);
+                smsNotifMessage($type, $arr, $recipients);
+                break;
+            case 'loan-payment-posted':
+                $arr = array();
+                $recipients = array();
+                $data = LoanPayment::find($id);
+                $loanInfo = Loan::find($data->loan_id);
+                $url = route('loan-applicant');
+                array_push($arr, number_format($data->paid_amount, 2));
+                array_push($arr, Carbon::parse($data->paid_date)->toFormattedDateString());
+//                array_push($arr, $url);
+
+                array_push($recipients, mobileNumber('provider', $loanInfo->loan_provider_id));
+                array_push($recipients, mobileNumber('agrabah', null));
+                smsNotifMessage($type, $arr, $recipients);
                 break;
         }
     }
 }
 
 if (!function_exists('smsNotifMessage')) {
-    function smsNotifMessage($type, $data)
+    function smsNotifMessage($type, $arr, $recipients)
     {
+        $message = null;
         switch ($type){
-            case 'due-date':
-                $message = 'Agrabah PH reminder:
-                Please pay Php '.$data[1].' on or before '.$data[2].'.
+            case 'loan-due':
+                $message = 'Agrabah Loan reminder:
+                Please pay Php '.$arr[0].' on or before '.$arr[1].'.
                 Thank you';
-                Itexmo::to($data[0])->content($message)->send();
                 break;
-            case 'zxv':
+            case 'new-loan-application':
+                $message = 'Agrabah Loan: new loan application created by, '.$arr[0];
                 break;
-            case 'as':
+            case 'new-loan-application-borrower':
+                $message = 'Agrabah Loan: Congratulations! your loan application is now granted. Expect call or text from your lona provider';
                 break;
-            case 'wer':
+            case 'loan-payment-posted':
+                $message = 'Agrabah Loan: loan payment posted, PHP '.$arr[0].' made on '.$arr[1];
                 break;
         }
+
+        $smsSet = Settings::where('name', 'sms')->first();
+        foreach ($recipients as $recipient) {
+            Log::channel('sms_log')->info(
+                'Type: ['.$type.']; 
+                Recipient: '.$recipient.'; 
+                Message: '. $message.';'
+            );
+            if($smsSet->is_active === 1){
+                Itexmo::to($recipient)->content($message)->send();
+            }
+        }
+    }
+}
+
+if (!function_exists('mobileNumber')) {
+    function mobileNumber($recipient, $id)
+    {
+        $number = null;
+        switch ($recipient){
+            case 'agrabah':
+                $data = Settings::where('name', 'agrabah-mobile-number')->first();
+                $number = $data->value;
+                break;
+            case 'provider':
+                $data = LoanProvider::find($id);
+                $number = $data->profile->mobile;
+                break;
+            case 'borrower':
+
+                break;
+        }
+        return $number;
     }
 }
 
@@ -267,7 +354,7 @@ if (!function_exists('currency_format')) {
 if (!function_exists('settings')) {
     function settings($setting)
     {
-        $settingQuery =  \Illuminate\Support\Facades\DB::table('settings')->where('name', $setting)->first();
+        $settingQuery =  DB::table('settings')->where('name', $setting)->first();
         if($settingQuery){
             return $settingQuery->value;
         }

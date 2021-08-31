@@ -195,6 +195,8 @@ class LoanProviderController extends Controller
                 $endDate = null;
                 if($data->save()){
 //                    $products = $data->product;
+
+                    smsNotification('new-loan-application-borrower', $data->id);
                     if($data->timing == 'custom'){
                         $paymentSchedules = $request->input('schedules');
                         $amortization = computeAmortization($data->amount, $data->duration, $data->interest_rate);

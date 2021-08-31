@@ -903,7 +903,8 @@
                         // modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
                         // modal.modal({backdrop: 'static', keyboard: false});
                         // return false;
-
+                        modal.find('#modal-save-btn').removeClass('d-none');
+                        modal.find('#modal-save-btn').text('Submit Application');
                         modal.find('.modal-body').empty().append('' +
                             '<div class="panel panel-default" id="loan-details">' +
                                 '<div class="panel-body">' +
