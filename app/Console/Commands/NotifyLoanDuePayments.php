@@ -42,13 +42,14 @@ class NotifyLoanDuePayments extends Command
     public function handle()
     {
 //        return 0;
+        Log::channel('sms_log')->info('Type: [loan due notification]');
         $loans = Loan::where('status', 'active')->get();
         foreach ($loans as $loan){
             if($loan->notify === 1){
                 smsNotification('loan-due', $loan->id);
-                Log::info('Loan payment due notification sent');
             }
         }
 
+        $this->info('Identifying Loan Due Payments');
     }
 }

@@ -110,7 +110,7 @@ class LoanDisbursementController extends Controller
         $type = getRoleName('name');
         switch ($type){
             case 'community-leader':
-                $user = CommunityLeader::find(Auth::user()->leader->id);
+                $user = Farmer::find(Auth::user()->leader->id);
                 break;
             case 'farmer':
                 $user = Farmer::find(Auth::user()->farmer->id);

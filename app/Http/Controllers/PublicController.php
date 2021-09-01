@@ -165,8 +165,8 @@ class PublicController extends Controller
                     $loanProvider->save();
                     break;
             }
-            $user->sendEmailVerificationNotification();
-//            event(new NewUserRegisteredEvent($user));
+//            $user->sendEmailVerificationNotification();
+            event(new NewUserRegisteredEvent($user));
 
             Auth::loginUsingId($user->id);
             return redirect()->route('home');
@@ -299,7 +299,7 @@ class PublicController extends Controller
 
     public function smsTest()
     {
-        Itexmo::to('09156819270')->content('Test SMS from Agrabah Loan App')->send();
+        Itexmo::to('09152451835')->content('Test SMS from Agrabah Loan App')->send();
     }
 
     public function activation()

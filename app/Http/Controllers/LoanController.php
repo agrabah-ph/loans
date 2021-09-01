@@ -59,7 +59,9 @@ class LoanController extends Controller
         $loan->paid_date = $request->paid_date;
         $loan->proof_of_payment = $url;
         $loan->reference_number = $request->reference_number;
-        $loan->save();
+        if($loan->save()){
+            smsNotification('loan-payment-posted', $loan->id);
+        }
 
         $paidAmounts = $loan->paid_amount;
         $paymentAmounts = [];
