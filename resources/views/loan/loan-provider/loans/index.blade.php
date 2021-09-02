@@ -455,7 +455,7 @@
                         modal.find('#modal-save-btn').show();
                         modal.find('#modal-save-btn').text('Approve Loan');
                         jQuery.ajaxSetup({async: false});
-                        $.get('{!! route('loan-update-status') !!}', {
+                        $.get('{{ route('loan-update-status') }}', {
                             id: id,
                             action: action
                         }, function (data) {
