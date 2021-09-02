@@ -369,6 +369,7 @@
         });
 
         $(document).ready(function () {
+            console.log('test')
             var modal = $('#modal');
             {{--$(document).on('click', '', function(){--}}
             {{--    modal.modal({backdrop: 'static', keyboard: false});--}}
