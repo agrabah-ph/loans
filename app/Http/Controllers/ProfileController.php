@@ -105,7 +105,12 @@ class ProfileController extends Controller
             ->format('png')
             ->generate($userType->url, public_path('images/'.$type.'/'.$userType->account_id.'.png'));
 
-        $profile = new Profile();
+        if(is_null(Auth::user()->farmer->profile)){
+            $profile = new Profile();
+        }else{
+            $profile = Profile::where('model_id', $userType->id)->where('model_type', 'App\Farmer')->first();
+        }
+
         $profile->first_name = $inputs[0][1][2];
         $profile->middle_name = $inputs[0][2][2];
         $profile->last_name = $inputs[0][3][2];
