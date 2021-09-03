@@ -92,13 +92,15 @@ class ProfileController extends Controller
     public function profileStore(Request $request)
     {
         $inputs = $request->input('forms');
-        $type = getRoleName('name');
-        if($type === 'farmer'){
-            $userType = Farmer::find(Auth::user()->farmer->id);
-        }
-        if($type === 'community-leader'){
-            $userType = Farmer::find(Auth::user()->leader->id);
-        }
+//        $type = getRoleName('name');
+        $type = 'farmer';
+//        if($type === 'farmer'){
+//            $userType = Farmer::find(Auth::user()->farmer->id);
+//        }
+//        if($type === 'community-leader'){
+//            $userType = Farmer::find(Auth::user()->leader->id);
+//        }
+        $userType = Farmer::find(Auth::user()->farmer->id);
         $userType->url = route($type.'.show', array($type=>$userType));
         $userType->save();
         QrCode::size(500)

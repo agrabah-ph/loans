@@ -34,7 +34,10 @@ if (!function_exists('smsNotification')) {
             case 'loan-due':
                 $arr = array();
                 $recipients = array();
-                $data = Loan::find($id);
+                $data = Loan::with('borrower', 'provider')->find($id);
+                array_push($recipients, $data->borrower->profile->mobile);
+                array_push($recipients, $data->provider->profile->mobile);
+                array_push($recipients, mobileNumber('agrabah', null));
                 array_push($arr, $data->due_info['amount']);
                 array_push($arr, $data->due_info['date']);
                 smsNotifMessage($type, $arr, $recipients);
@@ -97,7 +100,7 @@ if (!function_exists('smsNotifMessage')) {
         switch ($type){
             case 'loan-due':
                 $message = 'Agrabah Loan reminder:
-                Please pay Php '.$arr[0].' on or before '.$arr[1].'.
+                Loan due amount of Php '.$arr[0].' on or before '.$arr[1].'.
                 Thank you';
                 break;
             case 'new-loan-application':

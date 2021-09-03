@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('spotmarket:award_winners')->everyMinute();
-//         $schedule->command('notify:loan_due')->dailyAt('07:00');
-         $schedule->command('notify:loan_due')->everyMinute();
+         $schedule->command('notify:loan_due')->dailyAt('07:00');
+//         $schedule->command('notify:loan_due')->everyMinute();
     }
 
     /**
