@@ -42,6 +42,11 @@
                                 <option value="Cancelled">Cancelled</option>
                             </select>
                         </div>
+
+                        <div class="form-group text-right">
+{{--                            <button type="button" class="btn btn-success">Export Borrowers Data</button>--}}
+                            <a href="{{ route('export') }}" target="_self" type="button" class="btn btn-success">Export Borrowers Data</a>
+                        </div>
                     </div>
                 </div>
             </div>

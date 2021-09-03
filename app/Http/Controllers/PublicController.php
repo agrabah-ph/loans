@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CommunityLeader;
 use App\Events\NewUserRegisteredEvent;
+use App\Exports\BorrowersExport;
 use App\Exports\FarmersExport;
 use App\Farmer;
 use App\Inventory;
@@ -310,7 +311,7 @@ class PublicController extends Controller
 
     public function export()
     {
-        return Excel::download(new FarmersExport(), 'farmers.xlsx');
+        return Excel::download(new BorrowersExport('Status'), 'borrowers_data.html');
     }
 
     public function test()
