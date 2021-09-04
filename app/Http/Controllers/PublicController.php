@@ -311,7 +311,13 @@ class PublicController extends Controller
 
     public function export()
     {
-        return Excel::download(new BorrowersExport('Status'), 'borrowers_data.html');
+        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
+
+        $borrower = Farmer::whereIn('id', $ids)->with('profile')->get();
+
+        return $borrower;
+
+        return Excel::download(new BorrowersExport('Sample Status'), 'borrowers_data.html');
     }
 
     public function test()

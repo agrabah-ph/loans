@@ -30,18 +30,35 @@ class EnsureProviderInfo
             }
         }
         if(auth()->user()->hasRole('farmer')){
-            if( (Auth::user()->farmer->profile->secondary_info == null) || (is_null(Auth::user()->farmer->profile)) ){
+//            dd(Auth::user()->farmer->profile->secondary_info);
+            if(is_null(Auth::user()->farmer->profile)){
                 return redirect()->route('farmer-profile-create');
             }
+            elseif (Auth::user()->farmer->profile->secondary_info == null){
+                return redirect()->route('farmer-profile-create');
+            }
+
+
+//            if( (Auth::user()->farmer->profile->secondary_info == null) || (is_null(Auth::user()->farmer->profile)) ){
+//                return redirect()->route('farmer-profile-create');
+//            }
+
+
 //            if(is_null(Auth::user()->farmer->profile)){
 //                return redirect()->route('farmer-profile-create');
 //            }
         }
         if(auth()->user()->hasRole('community-leader')){
 //            dd(Auth::user()->leader->profile->secondary_info);
-            if( (Auth::user()->leader->profile->secondary_info == null) || (is_null(Auth::user()->leader->profile)) ){
+            if(is_null(Auth::user()->leader->profile)){
                 return redirect()->route('farmer-profile-create');
             }
+            elseif (Auth::user()->leader->profile->secondary_info == null){
+                return redirect()->route('farmer-profile-create');
+            }
+//            if( (Auth::user()->leader->profile->secondary_info == null) || (is_null(Auth::user()->leader->profile)) ){
+//                return redirect()->route('farmer-profile-create');
+//            }
 //            if(){
 //                return redirect()->route('community-leader-profile-create');
 //            }
