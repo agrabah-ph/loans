@@ -38,6 +38,8 @@ Route::get('qr-reader', 'PublicController@qrReader')->name('qr-reader');
 Route::get('sms-test', 'PublicController@smsTest')->name('sms-test');
 Route::get('test', 'PublicController@test')->name('test');
 Route::get('export', 'PublicController@export')->name('export');
+Route::get('export_view', 'PublicController@export_view')->name('export_view');
+Route::get('export_view_test', 'PublicController@export_view_test')->name('export_view_test');
 
 
 //Auth::routes();

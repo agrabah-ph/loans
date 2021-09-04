@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CommunityLeader;
 use App\Events\NewUserRegisteredEvent;
 use App\Exports\BorrowersExport;
+use App\Exports\BorrowersExportView;
 use App\Exports\FarmersExport;
 use App\Farmer;
 use App\Inventory;
@@ -315,9 +316,39 @@ class PublicController extends Controller
 
         $borrower = Farmer::whereIn('id', $ids)->with('profile')->get();
 
-        return $borrower;
+        return Excel::download(new BorrowersExport('Sample Status'), 'borrowers_data.xlsx');
+    }
 
-        return Excel::download(new BorrowersExport('Sample Status'), 'borrowers_data.html');
+
+    public function export_view()
+    {
+        $data = [
+            [
+                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
+                'name'=>'prime na',
+            ],
+            [
+                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
+                'name'=>'prime na',
+            ]
+        ];
+
+        return Excel::download(new BorrowersExportView($data), 'borrowers_data.xlsx');
+    }
+
+    public function export_view_test()
+    {
+        $data = [
+            [
+                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
+                'name'=>'prime na',
+            ],
+            [
+                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
+                'name'=>'prime na',
+            ]
+        ];
+        return view('loan.loan-provider.report.export', compact('data'));
     }
 
     public function test()
