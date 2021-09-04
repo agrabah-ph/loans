@@ -14,10 +14,9 @@ class BorrowersExport implements FromCollection, WithMapping, WithHeadings, With
 {
     protected $status;
 
-    public function __construct($status, $headings = [])
+    public function __construct($status)
     {
         $this->status = $status;
-        $this->headings = $headings;
     }
 
     /**
@@ -36,6 +35,7 @@ class BorrowersExport implements FromCollection, WithMapping, WithHeadings, With
     {
         $info = array();
         array_push($info, $this->status);
+        array_push($info, 'Data pix');
         array_push($info, $data->borrower->profile->first_name);
         array_push($info, $data->borrower->profile->middle_name);
         array_push($info, $data->borrower->profile->last_name);
@@ -49,7 +49,6 @@ class BorrowersExport implements FromCollection, WithMapping, WithHeadings, With
         array_push($info, $data->borrower->profile->education);
 
         foreach($data->borrower->profile->secondary_info as $sInfo){
-            array_push($this->headings, $sInfo[1]);
             array_push($info, $sInfo[2]);
         }
 
@@ -60,6 +59,7 @@ class BorrowersExport implements FromCollection, WithMapping, WithHeadings, With
     {
         $info = array();
         array_push($info, 'Status');
+        array_push($info, 'Profile Picture');
         array_push($info, 'First Name');
         array_push($info, 'Middle Name');
         array_push($info, 'Last Name');
@@ -71,11 +71,10 @@ class BorrowersExport implements FromCollection, WithMapping, WithHeadings, With
         array_push($info, 'TIN ID#');
         array_push($info, 'SSS/GSIS #');
         array_push($info, 'Educational Attainment');
-        array_push($info, $this->headings);
-//        array_push($info, 'Current Address');
-//        array_push($info, 'Years of Stay');
-//        array_push($info, 'Address Status');
-//        array_push($info, 'Dependents');
+        array_push($info, 'Current Address');
+        array_push($info, 'Years of Stay');
+        array_push($info, 'Address Status');
+        array_push($info, 'Dependents');
 
 
         return $info;
@@ -87,8 +86,8 @@ class BorrowersExport implements FromCollection, WithMapping, WithHeadings, With
         $drawing->setName('Logo');
         $drawing->setDescription('This is my logo');
         $drawing->setPath(public_path('/img/profile_small.jpg'));
-        $drawing->setHeight(90);
-        $drawing->setCoordinates('B3');
+        $drawing->setHeight(50);
+        $drawing->setCoordinates('B2');
 
         return $drawing;
     }
