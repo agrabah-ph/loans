@@ -2,17 +2,22 @@
 
 namespace App\Exports;
 
-use App\Farmer;
-use App\Loan;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class FarmersExport implements FromCollection
+class FarmersExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    protected $data;
+
+    public function __construct($data)
     {
-        return Loan::all();
+        $this->data = $data;
+    }
+
+    public function view(): View
+    {
+        return view('layouts.borrowers', [
+            'data' => $this->data
+        ]);
     }
 }

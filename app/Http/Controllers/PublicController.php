@@ -309,15 +309,25 @@ class PublicController extends Controller
         return view('layouts.account-activation');
     }
 
-    public function export()
+    public function exportGet(Request $request)
     {
-//        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
-//
-//        $borrower = Farmer::whereIn('id', $ids)->with('profile')->get();
-//
-//        return $borrower;
+        $url = route('export', array('status' => $request->input('status')));
+//        dump($url);
+        return $url;
+    }
 
-        return Excel::download(new BorrowersExport('Sample Status'), 'borrowers_data.html');
+    public function export($status)
+    {
+        $data = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)
+            ->where('status', $status)
+            ->with('borrower', 'details')
+            ->get();
+
+//        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
+//        $data = Farmer::whereIn('id', $ids)->with('profile')->get();
+
+//        return $data;
+        return Excel::download(new FarmersExport($data), 'borrowers_data.html');
     }
 
     public function test()
