@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use CreatvStudio\Itexmo\Facades\Itexmo;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('emailNotification')) {
     function emailNotification($type, $id)
@@ -441,6 +443,22 @@ if (!function_exists('getSpotMarketOrderStatuses')) {
     function getSpotMarketOrderStatuses($orderNumber)
     {
         return \App\SpotMarketOrderStatus::where('spot_market_orders', $orderNumber)->pluck('is_current', 'status')->toArray();
+    }
+}
+
+if (!function_exists('base64ImageToFile')) {
+    function base64ImageToFile($image)
+    {
+        list($type, $image) = explode(';', $image);
+        list(, $image)      = explode(',', $image);
+        $image = base64_decode($image);
+        $image_name = Str::random(30).'.'.'png';
+
+        $dir = '/temp-images/';
+        $path = '/public'.$dir.''.$image_name;
+        Storage::put($path, $image);
+
+        return public_path('storage/'.$dir.''.$image_name);
     }
 }
 

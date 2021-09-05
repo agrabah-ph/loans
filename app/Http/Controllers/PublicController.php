@@ -310,45 +310,25 @@ class PublicController extends Controller
         return view('layouts.account-activation');
     }
 
-    public function export()
+    public function exportGet(Request $request)
     {
-        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
-
-        $borrower = Farmer::whereIn('id', $ids)->with('profile')->get();
-
-        return Excel::download(new BorrowersExport('Sample Status'), 'borrowers_data.xlsx');
+        $url = route('export', array('status' => $request->input('status')));
+//        dump($url);
+        return $url;
     }
 
-
-    public function export_view()
+    public function export($status)
     {
-        $data = [
-            [
-                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
-                'name'=>'prime na',
-            ],
-            [
-                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
-                'name'=>'prime na',
-            ]
-        ];
+        $data = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)
+            ->where('status', $status)
+            ->with('borrower', 'details')
+            ->get();
 
-        return Excel::download(new BorrowersExportView($data), 'borrowers_data.xlsx');
-    }
+//        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
+//        $data = Farmer::whereIn('id', $ids)->with('profile')->get();
 
-    public function export_view_test()
-    {
-        $data = [
-            [
-                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
-                'name'=>'prime na',
-            ],
-            [
-                'photo'=>'https://dummyimage.com/600x400/000/fff&text=gwapojas',
-                'name'=>'prime na',
-            ]
-        ];
-        return view('loan.loan-provider.report.export', compact('data'));
+//        return $data;
+        return Excel::download(new FarmersExport($data), 'borrowers_data.html');
     }
 
     public function test()
