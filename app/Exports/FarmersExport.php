@@ -7,17 +7,17 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class FarmersExport implements FromView
 {
-    protected $data;
+    protected $datas;
 
-    public function __construct($data)
+    public function __construct($datas)
     {
-        $this->data = $data;
+        $this->datas = $datas;
     }
 
     public function view(): View
     {
-        return view('layouts.borrowers', [
-            'data' => $this->data
+        return view('loan.loan-provider.report.borrowers-data', [
+            'data' => $this->datas
         ]);
     }
 }
