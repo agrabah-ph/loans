@@ -327,7 +327,8 @@ class PublicController extends Controller
 //        $data = Farmer::whereIn('id', $ids)->with('profile')->get();
 
 //        return $data;
-        return Excel::download(new FarmersExport($data), 'borrowers_data.html');
+//        return Excel::download(new FarmersExport($data), 'borrowers_data.html');
+        return Excel::download(new FarmersExport($data), 'borrowers_data.xlsx');
     }
 
     public function test()
