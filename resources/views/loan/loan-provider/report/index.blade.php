@@ -42,6 +42,11 @@
                                 <option value="Cancelled">Cancelled</option>
                             </select>
                         </div>
+
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-success export-btn" style="display: none;">Export Borrowers Data</button>
+{{--                            <a href="{{ route('export') }}" target="_self" type="button" class="btn btn-success">Export Borrowers Data</a>--}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +172,15 @@
                 getList();
             });
 
+            $(document).on('click', '.export-btn', function(){
+                console.log($('#loan-status-select').val());
+                $.get('{!! route('export-get') !!}', {
+                    status: $('#loan-status-select').val()
+                }, function(data){
+                    window.location.href = data;
+                });
+            });
+
             $(document).on('click', '.loan-info-btn', function(){
                 var id = $(this).data('id');
                 $.get('{!! route('get-loan-info') !!}', {
@@ -191,6 +205,7 @@
                     console.log(data);
                     console.log(data.length)
                     if(data.length > 0){
+                        $('.export-btn').show();
                         switch(status){
                             case 'Active':
                                 for(let a = 0; a < data.length; a++){
@@ -307,19 +322,17 @@
                                     '');
                                 }
                         }
-
                     }else{
+                        $('.export-btn').hide();
                         list.push('' +
                             '<tr>' +
                             '<td class="text-center" colspan="7"><h2>No Available Data</h2></td>' +
                             '</tr>' +
                         '');
                     }
-
-
                 });
 
-                list.join('');
+                list.join(' ');
                 // console.log(list);
                 switch(status){
                     case 'Active':

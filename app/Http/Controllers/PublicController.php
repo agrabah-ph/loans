@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CommunityLeader;
 use App\Events\NewUserRegisteredEvent;
+use App\Exports\BorrowersExport;
 use App\Exports\FarmersExport;
 use App\Farmer;
 use App\Inventory;
@@ -210,21 +211,22 @@ class PublicController extends Controller
                 ->withInput();
         }
 
-        $data = new User();
-        $data->email = $request->input('email');
-        $data->password = bcrypt($request->input('password'));
-        $data->passkey = $request->input('password');
-        if($data->save()){
+        $user = new User();
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->passkey = $request->input('password');
+        if($user->save()){
 
-            $data->assignRole(stringSlug('Farmer'));
+            $user->assignRole(stringSlug('Farmer'));
             $number = Farmer::count() + 1;
             $farmer = new Farmer();
             $farmer->account_id = $number;
-            $farmer->user_id = $data->id;
+            $farmer->user_id = $user->id;
             $farmer->save();
 
-            $data->sendEmailVerificationNotification();
-            Auth::loginUsingId($data->id);
+//            $user->sendEmailVerificationNotification();
+            event(new NewUserRegisteredEvent($user));
+            Auth::loginUsingId($user->id);
             return redirect()->route('home');
         }
 
@@ -307,9 +309,25 @@ class PublicController extends Controller
         return view('layouts.account-activation');
     }
 
-    public function export()
+    public function exportGet(Request $request)
     {
-        return Excel::download(new FarmersExport(), 'farmers.xlsx');
+        $url = route('export', array('status' => $request->input('status')));
+//        dump($url);
+        return $url;
+    }
+
+    public function export($status)
+    {
+        $data = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)
+            ->where('status', $status)
+            ->with('borrower', 'details')
+            ->get();
+
+//        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
+//        $data = Farmer::whereIn('id', $ids)->with('profile')->get();
+
+//        return $data;
+        return Excel::download(new FarmersExport($data), 'borrowers_data.html');
     }
 
     public function test()
