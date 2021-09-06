@@ -570,6 +570,13 @@
     {!! Html::style('/css/template/plugins/datapicker/datepicker3.css') !!}
     {!! Html::style('/css/template/plugins/daterangepicker/daterangepicker-bs3.css') !!}
     {{--{!! Html::style('/js/template/plugins/') !!}--}}
+    <style>
+        #image-upload-input-error{
+            left: -23px;
+            top: -10px;
+            position: absolute;
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -636,6 +643,10 @@
                     // var form = $(this);
                     // form.submit();
                     submitForm();
+                },
+                onInit: function (event, currentIndex)
+                {
+                    $('#image-upload-input').prop('required',true);
                 }
             }).validate({
                 errorPlacement: function (error, element)
@@ -812,8 +823,8 @@
             });
 
             $('.dob-input').datepicker({
-                startView: 1,
-                todayBtn: "linked",
+                startView: 2,
+                todayBtn: false,
                 keyboardNavigation: false,
                 forceParse: false,
                 autoclose: true,
