@@ -317,6 +317,18 @@ class PublicController extends Controller
         return $url;
     }
 
+    public function exportTest($status)
+    {
+        $data = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)
+            ->where('status', $status)
+            ->with('borrower', 'details')
+            ->get();
+
+        return view('layouts.borrowers', [
+            'data' => $data
+        ]);
+
+    }
     public function export($status)
     {
         $data = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)
@@ -324,11 +336,7 @@ class PublicController extends Controller
             ->with('borrower', 'details')
             ->get();
 
-//        $ids = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)->groupBy('borrower_id')->pluck('borrower_id')->all();
-//        $data = Farmer::whereIn('id', $ids)->with('profile')->get();
-
-//        return $data;
-        return Excel::download(new FarmersExport($data), 'borrowers_data.html');
+        return Excel::download(new FarmersExport($data), now()->format('(Y-m-d)').' '.$status.' Loan Report.xlsx');
     }
 
     public function test()
