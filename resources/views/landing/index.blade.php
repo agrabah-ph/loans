@@ -49,7 +49,7 @@
                             <div class="num"><span>1.</span></div>
                             <div class="content">
                                 <b>Register</b>
-                                <p>Visit Agrabah Finance creation page, <a href="http://loan.agrabahapps.com/loan-registration">loan.agrabahapps.com/loan-registration</a> and fill out the required field.</p>
+                                <p>Visit Agrabah Finance creation page, <a href="{{ route('loan-registration') }}">loans.agrabah.ph/loan-registration</a> and fill out the required field.</p>
                             </div>
                         </li>
                         <li>
