@@ -141,7 +141,7 @@
 </div>
 
 <!-- Mainly scripts -->
-{!! Html::script('/js/app.js') !!}
+{!! Html::script('/js/app.js?v=' . date('YmdHis')) !!}
 {{--{!! Html::script('/js/template/jquery-3.1.1.min.js') !!}--}}
 {!! Html::script('/js/template/popper.min.js') !!}
 {!! Html::script('/js/template/bootstrap.js') !!}
