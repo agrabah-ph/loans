@@ -2,17 +2,23 @@
 
 namespace App\Exports;
 
-use App\Farmer;
-use App\Loan;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class FarmersExport implements FromCollection
+class FarmersExport implements FromView, ShouldAutoSize
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    protected $datas;
+
+    public function __construct($datas)
     {
-        return Loan::all();
+        $this->datas = $datas;
+    }
+
+    public function view(): View
+    {
+        return view('loan.loan-provider.report.borrowers-data', [
+            'data' => $this->datas
+        ]);
     }
 }

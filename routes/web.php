@@ -37,7 +37,9 @@ Route::get('/registration', 'Controller@registration');
 Route::get('qr-reader', 'PublicController@qrReader')->name('qr-reader');
 Route::get('sms-test', 'PublicController@smsTest')->name('sms-test');
 Route::get('test', 'PublicController@test')->name('test');
-Route::get('export', 'PublicController@export')->name('export');
+Route::get('export/{status}', 'PublicController@export')->name('export');
+Route::get('export-test/{status}', 'PublicController@exportTest')->name('export-test');
+Route::get('export-get', 'PublicController@exportGet')->name('export-get');
 
 
 //Auth::routes();
