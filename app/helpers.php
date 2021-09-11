@@ -330,7 +330,7 @@ if (!function_exists('computeAmortization')) {
     function computeAmortization($amount, $terms, $interest, $decimal = 2)
     {
         $interest = $amount * ($interest/100);
-        $amount = $amount + $interest;
+        $amount = $amount + $interest + loanServiceFee();
         $amor = $amount / $terms;
         $amor = preg_replace('/,/', '',number_format($amor, 2));
         $amor = floatval($amor);
@@ -342,7 +342,7 @@ if (!function_exists('computeTotalLoan')) {
     function computeTotalLoan($amount, $terms, $interest, $decimal = 2)
     {
         $interest = $amount * ($interest/100);
-        $amount = $amount + $interest;
+        $amount = $amount + $interest + loanServiceFee();
         $amount = preg_replace('/,/', '',number_format($amount, 2));
         $amount = floatval($amount);
         return $amount;
@@ -459,6 +459,18 @@ if (!function_exists('base64ImageToFile')) {
         Storage::put($path, $image);
 
         return public_path('storage/'.$dir.''.$image_name);
+    }
+}
+
+if (!function_exists('loanServiceFee')) {
+    function loanServiceFee()
+    {
+        $value = 0;
+        $data = Settings::where('name', 'finance-service-fee')->first();
+        if($data->is_active == 1){
+            $value = $data->value;
+        }
+        return $value;
     }
 }
 

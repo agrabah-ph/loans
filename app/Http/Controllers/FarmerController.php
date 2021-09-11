@@ -378,6 +378,7 @@ class FarmerController extends Controller
         $loan->amount = $loanProduct->amount;
         $loan->duration = $loanProduct->duration;
         $loan->interest_rate = $loanProduct->interest_rate;
+        $loan->service_fee = $loanProduct->service_fee;
         $loan->timing = $loanProduct->timing;
         $loan->allowance = $loanProduct->allowance;
         $loan->first_allowance = $loanProduct->first_allowance;

@@ -354,6 +354,22 @@
                     </dl>
                     <dl class="row mb-0">
                         <div class="col-sm-6 text-sm-right">
+                            <dt>Service Fee:</dt>
+                        </div>
+                        <div class="col-sm-6 text-sm-left">
+                            <dd class="mb-1 service-fee"> {{ number_format(loanServiceFee(), 2) }}</dd>
+                        </div>
+                    </dl>
+                    <dl class="row mb-0">
+                        <div class="col-sm-6 text-sm-right">
+                            <dt>Interest Rate:</dt>
+                        </div>
+                        <div class="col-sm-6 text-sm-left">
+                            <dd class="mb-1 interest-rate"> 0.00</dd>
+                        </div>
+                    </dl>
+                    <dl class="row mb-0">
+                        <div class="col-sm-6 text-sm-right">
                             <dt>Amortization Rate:</dt>
                         </div>
                         <div class="col-sm-6 text-sm-left">
@@ -579,17 +595,24 @@
                 var lvl_terms = loan_view_layout.find('.loan-terms');
                 var lvl_type = loan_view_layout.find('.loan-type');
                 var lvl_interest = loan_view_layout.find('.loan-interest');
+                var lvl_interest_rate = loan_view_layout.find('.interest-rate');
                 var lvl_amor = loan_view_layout.find('.loan-amor');
+                var service_fee = loan_view_layout.find('.service-fee').text().split(",").join("");
+                // var lvl_service_fee = loan_view_layout.find('.service-fee');
 
                 lvl_name.html(name);
                 // lvl_status.text.name);
                 lvl_provider.text(provider);
-                lvl_amount.text(amount);
+                lvl_amount.text(numberWithCommas(amount));
                 lvl_terms.text(duration);
                 lvl_type.text(type);
                 lvl_interest.text(interest_rate);
-                var loan_amor = (amount + (interest_rate/100) * amount) / duration;
+
+                console.log(parseFloat(service_fee));
+                // amount += parseFloat(service_fee);
+                var loan_amor = ((amount + (interest_rate/100) * amount) + parseFloat(service_fee)) / duration;
                 lvl_amor.text(numberWithCommas(loan_amor));
+                lvl_interest_rate.text(numberWithCommas((interest_rate/100) * amount));
                 /**
                  * amount: 30000
                  created_at: "2021-07-06T13:59:53.000000Z"

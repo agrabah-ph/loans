@@ -99,9 +99,18 @@
                                             <td class="text-right">{{now()->toFormattedDateString()}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Total Loan Amount</td>
+                                            <td>Interest</td>
+                                            <td id="total_interest_amount" class="text-right">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Service Fee</td>
+                                            <td id="service_fee" class="text-right">{{ number_format(loanServiceFee(), 2) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Payable Amount</td>
                                             <td id="total_loan_amount" class="text-right">0</td>
                                         </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -202,12 +211,13 @@
         }
 
         function populateSchedule() {
-            var duration = $('#duration').val()
-            var amount = $('#amount').val()
-            var interest_rate = $('#interest_rate').val()
-            var timing = $('#timing').val()
-            var allowance = $('#allowance').val()
-            var first_allowance = $('#first_allowance').val()
+            var duration = $('#duration').val();
+            var amount = $('#amount').val();
+            var interest_rate = $('#interest_rate').val();
+            var timing = $('#timing').val();
+            var allowance = $('#allowance').val();
+            var first_allowance = $('#first_allowance').val();
+            var service_fee = $('#service_fee').text().split(",").join("");
 
             if(duration && interest_rate && amount) {
                 $.get('{!! route('generate-schedule') !!}', {
@@ -221,6 +231,7 @@
 
                     var table = '';
                     var total = 0;
+                    var loan_amount = amount.split(",").join("");
                     for (let i = 0; i < data.length; i++) {
                         const datum = data[i];
                         table += '<tr>';
@@ -233,7 +244,9 @@
                         table += '</tr>';
                         total += datum.amount;
                     }
+                    var interest = total - loan_amount - service_fee;
                     $('#total_loan_amount').html(numberWithCommas(total));
+                    $('#total_interest_amount').html(numberWithCommas(interest));
                     $('#payment_schedule_review').empty().append(table);
                     $('#payment_schedule_input').val(JSON.stringify(data))
                 });
