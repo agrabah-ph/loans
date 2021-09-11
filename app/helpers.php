@@ -454,8 +454,8 @@ if (!function_exists('base64ImageToFile')) {
         $image = base64_decode($image);
         $image_name = Str::random(30).'.'.'png';
 
-        $dir = '/temp-images/';
-        $path = '/public'.$dir.''.$image_name;
+        $dir = 'temp-images/';
+        $path = '/public/'.$dir.''.$image_name;
         Storage::put($path, $image);
 
         return public_path('storage/'.$dir.''.$image_name);
