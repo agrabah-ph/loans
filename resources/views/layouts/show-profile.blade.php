@@ -16,27 +16,14 @@
             </ol>
         </div>
         <div class="col-sm-8">
-{{--            <div class="title-action">--}}
-{{--                <a href="#" class="btn btn-primary">This is action area</a>--}}
-{{--            </div>--}}
+            <div class="title-action">
+            </div>
         </div>
     </div>
 
-    <div id="app" class="wrapper wrapper-content animated fadeInRight">
+    <div id="profile-box" class="wrapper wrapper-content animated fadeInRight">
 
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-
-                    <div class="ibox-content" id="profile-info-box">
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
     </div>
@@ -105,9 +92,52 @@
             function loadProfile(){
                 $.get('{!! route('get-my-profile') !!}', function(data){
                     console.log(data);
-                    $('#profile-info-box').empty().append(displayLoanApplicationDetails(data.profile, null));
+                    var box = $('#profile-box');
+                    switch (data[0]) {
+                        case 'farmer':
+                            box.empty().append('' +
+                                '<div class="row">' +
+                                    '<div class="col-sm-12">' +
+                                        '<div class="ibox float-e-margins">' +
+                                            '<div class="ibox-content">' + displayLoanApplicationDetails(data[1].profile, null) + '</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '');
+                            // $('#app').empty().append(displayLoanApplicationDetails(data[1].profile, null));
+                            break;
+                        case 'community-leader':
+                            box.empty().append('' +
+                                '<div class="row">' +
+                                    '<div class="col-sm-12">' +
+                                        '<div class="ibox float-e-margins">' +
+                                            '<div class="ibox-content">' + displayLoanApplicationDetails(data[1].profile, null) + '</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '');
+                            break;
+                        case 'loan-provider':
+                            $('.title-action').append('<button type="button" class="btn btn-primary btn-action" data-action="loan-provider-edit-profile">Edit Profile</button>')
+                            box.empty().append(displayLoanProviderDetails(data[1]));
+                            break;
+                    }
                 });
             }
+
+            $(document).on('click', '.btn-action', function(){
+                switch($(this).data('action')){
+                    case 'loan-provider-edit-profile':
+                        $.get('{!! route('profile-edit-url') !!}', function(data){
+                            window.location.replace(data);
+                        });
+                        break;
+                    case 'farmer-edit-profile':
+                        break;
+                    case 'community-leader-edit-profile':
+                        break;
+                }
+            });
 
         });
     </script>

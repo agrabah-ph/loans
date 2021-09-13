@@ -958,5 +958,61 @@ $(document).ready(function(){
 
         return content;
     }
+
+    window.displayLoanProviderDetails = function (data){
+        let content, image;
+        image = (data.profile.image === null) ? '<img alt="image" class="img-fluid" src="/img/blank-profile.jpg">': '<img alt="image" class="img-fluid" src="'+ data.profile.image +'">';
+            content = '' +
+                '<div class="row animated fadeInRight">' +
+                    '<div class="col-md-4">' +
+                        '<div class="ibox">' +
+                            '<div class="ibox-title">' +
+                                '<h5>Bank Detail</h5>' +
+                            '</div>' +
+                            '<div>' +
+                                '<div class="ibox-content no-padding border-left-right">' +
+                                    image +
+                                '</div>' +
+                                '<div class="ibox-content profile-content">' +
+                                    '<h2 class="text-success"><strong>'+ data.profile.bank_name +'</strong></h2>' +
+                                    '<h4><strong>'+ data.profile.branch_name +'</strong> [ '+ data.profile.branch_code +' ]</h4>' +
+                                    '<p><i class="fa fa-map-marker"></i> '+ data.profile.branch_address +'</p>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-md-8">' +
+                        '<div class="ibox ">' +
+                            '<div class="ibox-title">' +
+                                '<h5>Contacts Detail</h5>' +
+                            '</div>' +
+                            '<div class="ibox-content">' +
+                                '<div class="row">' +
+                                    '<div class="col-lg-6">' +
+                                        '<h2 class="mb-3 text-info"><strong>Primary contact</strong></h2>' +
+                                        '<h3 class="mb-1"><strong>'+ data.profile.first_name +' '+ data.profile.last_name +'</strong></h3>' +
+                                        '<div class="m-t-xs font-bold">'+ data.profile.designation +'</div>' +
+                                        '<address class="mt-2">' +
+                                            '<div><i class="fa fa-phone"></i> '+ data.profile.landline +'</div>' +
+                                            '<div><i class="fa fa-mobile"></i> '+ data.profile.mobile +'</div>' +
+                                        '</address>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6">' +
+                                        '<h2 class="mb-3 text-info"><strong>Secondary contact</strong></h2>' +
+                                        '<h3 class="mb-1"><strong>'+ data.profile.contact_person +'</strong></h3>' +
+                                        '<div class="m-t-xs font-bold">'+ data.profile.contact_designation +'</div>' +
+                                        '<address class="mt-2">' +
+                                            '<div><i class="fa fa-phone"></i> '+ data.profile.contact_number +'</div>' +
+                                        '</address>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '';
+
+        return content;
+    }
 });
 

@@ -20,7 +20,7 @@
                         @csrf
                         <h1>Profile</h1>
                         <fieldset>
-                            <h2>Personal Information</h2>
+                            <h2>Contact Information</h2>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
