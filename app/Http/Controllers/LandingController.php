@@ -34,7 +34,7 @@ class LandingController extends Controller
 //        return $request;
 
         try {
-            Mail::to('anbelen.official@gmail.com')->send(new LandingMail($request) );
+            Mail::to('agrabah@aim.edu')->bcc('anbelen.official@gmail.com')->send(new LandingMail($request) );
 
             Log::info("Email Template sent: {}");
 
