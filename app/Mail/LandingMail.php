@@ -31,7 +31,7 @@ class LandingMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Message Thru Contact Form")->from('noreply@agrabahadventures.com')->view('emails.message')
+        return $this->subject("Message Thru Finance Contact Form")->from('noreply@agrabahadventures.com')->view('emails.message')
             ->with('details', $this->details);
     }
 }
