@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CommunityLeader;
 use App\Farmer;
+use App\LoanProvider;
 use App\Profile;
 use App\User;
 use Carbon\Carbon;
@@ -153,6 +154,9 @@ class ProfileController extends Controller
         if($type === 'community-leader'){
             $profile = Auth::user()->leader->profile;
         }
+        if($type === 'loan-provider'){
+            $profile = Auth::user()->loan_provider->profile;
+        }
 
 //        return $profile;
         return view('layouts.show-profile', compact('profile'));
@@ -176,7 +180,85 @@ class ProfileController extends Controller
         if($type === 'community-leader'){
             $data = Farmer::with('profile')->find(Auth::user()->leader->id);
         }
+        if($type === 'loan-provider'){
+            $data = LoanProvider::with('profile')->find(Auth::user()->loan_provider->id);
+        }
+
+        return response()->json(array($type, $data));
+    }
+
+    public function editMyProfileUrl(Request $request)
+    {
+        $type = getRoleName('name');
+        $data = null;
+        if($type === 'farmer'){
+//            $data = Farmer::with('profile')->find(Auth::user()->farmer->id);
+        }
+        if($type === 'community-leader'){
+//            $data = Farmer::with('profile')->find(Auth::user()->leader->id);
+        }
+        if($type === 'loan-provider'){
+            $data = route('profile-edit', array('id' => Auth::user()->loan_provider->account_id));
+        }
 
         return response()->json($data);
+    }
+
+    public function editMyProfile(Request $request)
+    {
+        $type = getRoleName('name');
+        $data = null;
+        if($type === 'farmer'){
+//            $data = Farmer::with('profile')->find(Auth::user()->farmer->id);
+        }
+        if($type === 'community-leader'){
+//            $data = Farmer::with('profile')->find(Auth::user()->leader->id);
+        }
+        if($type === 'loan-provider'){
+            $data = LoanProvider::with('profile')->find(Auth::user()->loan_provider->id);
+        }
+
+        return view('loan.loan-provider.profile.edit', compact('data'));
+    }
+
+    public function updateMyProfile(Request $request)
+    {
+        $type = getRoleName('name');
+        $data = null;
+        $forms = $request->input('forms');
+        if($type === 'farmer'){
+//            $data = Farmer::with('profile')->find(Auth::user()->farmer->id);
+        }
+        if($type === 'community-leader'){
+//            $data = Farmer::with('profile')->find(Auth::user()->leader->id);
+        }
+        if($type === 'loan-provider'){
+            $data = LoanProvider::with('profile')->find(Auth::user()->loan_provider->id);
+            $profile = Profile::find($data->profile->id);
+            $profile->first_name = $forms[4];
+            $profile->middle_name = $forms[5];
+            $profile->last_name = $forms[6];
+            $profile->designation = $forms[7];
+            $profile->mobile = $forms[8];
+            $profile->landline = $forms[9];
+            $profile->bank_name = $forms[0];
+            $profile->branch_name = $forms[1];
+            $profile->branch_code = $forms[2];
+            $profile->branch_address = $forms[3];
+            $profile->contact_person = $forms[10];
+            $profile->contact_designation = $forms[11];
+            $profile->contact_number = $forms[12];
+            $profile->image = $forms[13];
+            if($profile->save()){
+                $user = User::find($data->user_id);
+                $user->name = $profile->first_name.' '.$profile->last_name;
+                $user->save();
+            }
+
+        }
+
+        $url = route('my-profile');
+
+        return response()->json($url);
     }
 }

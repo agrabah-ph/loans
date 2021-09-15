@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label>Product Description</label>
-                            <textarea name="description" id="" cols="30" rows="5" class="form-control"
+                            <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize"
                                       style="resize: none"></textarea>
                         </div>
                         <div class="form-group">
@@ -108,7 +108,15 @@
                                         <td class="text-right">{{now()->toFormattedDateString()}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Total Loan Amount</td>
+                                        <td>Interest</td>
+                                        <td id="total_interest_amount" class="text-right">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Service Fee</td>
+                                        <td id="service_fee" class="text-right money">{{ loanServiceFee() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Payable Amount</td>
                                         <td id="total_loan_amount" class="text-right">0</td>
                                     </tr>
                                     </tbody>
@@ -134,13 +142,14 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Disclosure</label>
-                                    <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control">Naiintindihan ng humihiram na eto ay market testing sa pakikipag ugnayan ng Agrabah at CARD BDSFI na kung saan:
+                                    <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control">LOAN APPLICATION AGREEMENT
 
-1. Eto ay pilot testing/market testing na kung saan maaring one time lang ang pag hiram at ang mga susunod na pag hiram ay sa CARD BANK or ibang insitutition na ng CARD MRI pwedeng gawin
-
-2. Ang hinihiram ay babayaran sa loob ng tatlong (3) buwan na may voluntary contribution na 2.5% ng prinsipal kada buwan, Kaugnay nito kung may pambayad na ang humihiram bago sumapit ang ikatlong buwan, maari nila itong bayaran ng buo or "partial"
-
-3. Pumapayag at naiintindihan ng humihiram na ang disbursement at collection ay via Agrabah collection or GCASH. Ang ACCOUNT Number na kung saan maari itong bayaran ay ibibigay sa humhiram matapos "madisburse" and pera."</textarea>
+The borrower understand that this loan product is specifically made for seaweed farmers.
+Whereas :
+1. (Loan Provider) will lend twenty thousand pesos (P20,000).
+2. The loan will be used in growing the seaweed production.
+3. The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.
+4. Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer, Cebuana Lhuillier, GCash or through Agrabah account.</textarea>
                                 </div>
                             </div>
                         </div>
@@ -225,6 +234,7 @@
             var timing = $('#timing').val();
             var allowance = $('#allowance').val();
             var first_allowance = $('#first_allowance').val();
+            var service_fee = $('#service_fee').text().split(",").join("");
 
             if(duration && interest_rate && amount){
                 $.get('{!! route('generate-schedule') !!}', {
@@ -235,9 +245,10 @@
                     allowance:allowance,
                     first_allowance:first_allowance,
                 }, function(data){
-
+                    console.log(data);
                     var table = '';
                     var total = 0;
+                    var loan_amount = amount.split(",").join("");
                     for (let i = 0; i < data.length; i++) {
                         const datum = data[i];
                         table +='<tr>';
@@ -250,7 +261,9 @@
                         table +='</tr>';
                         total += datum.amount;
                     }
+                    var interest = total - loan_amount - service_fee;
                     $('#total_loan_amount').html(numberWithCommas(total));
+                    $('#total_interest_amount').html(numberWithCommas(interest));
                     $('#payment_schedule_review').empty().append(table);
                     $('#payment_schedule_input').val(JSON.stringify(data))
                 });

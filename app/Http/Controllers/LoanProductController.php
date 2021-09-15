@@ -43,6 +43,7 @@ class LoanProductController extends Controller
     {
         //
         $loanProviderId = auth()->user()->loan_provider->id;
+        $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
         $array['loan_provider_id'] = $loanProviderId;
         $array['loan_type_id'] = $array['type'];
@@ -88,7 +89,7 @@ class LoanProductController extends Controller
     public function update(Request $request, $id)
     {
         $loanProduct = LoanProduct::find($id);
-
+        $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
         $array['loan_type_id'] = $array['type'];
         $array['amount'] = floatval(preg_replace('/,/','', $array['amount']));

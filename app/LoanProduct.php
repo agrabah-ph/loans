@@ -19,6 +19,7 @@ class LoanProduct extends Model
         "allowance",
         "first_allowance",
         "disclosure",
+        "service_fee",
     ];
 
     public function provider()

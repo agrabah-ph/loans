@@ -112,6 +112,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified', 'has_profile'])->group(function () {
 
+    Route::get('profile-edit-url', 'ProfileController@editMyProfileUrl')->name('profile-edit-url');
+    Route::get('profile/edit/{id}', 'ProfileController@editMyProfile')->name('profile-edit');
+    Route::post('profile-update', 'ProfileController@updateMyProfile')->name('profile-update');
+
     Route::get('loan-provider-dashboard', 'HomeController@loanProviderDashboard')->name('loan-provider-dashboard');
     Route::get('verify-disbursement', 'LoanController@verifyDisbursement')->name('verify-disbursement');
 
