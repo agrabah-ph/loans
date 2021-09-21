@@ -110,6 +110,8 @@ class LoanProductController extends Controller
     {
         $loanProduct = LoanProduct::find($id);
         $loanProduct->delete();
+
+        Loan::where('loan_product_id', $id)->delete();
         return redirect()->route('products.index')->with('success','Successfully Deleted!');
     }
 }
