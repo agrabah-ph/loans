@@ -25,6 +25,7 @@
 
     <div id="app" class="wrapper wrapper-content">
 
+        @include('alerts.validation')
         <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
@@ -56,7 +57,6 @@
                                     <td class="text-right">
                                         <div class="btn-group text-right">
                                             <a href="{!! route('products.show',  $data->id) !!}" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> View/Edit</a>
-{{--                                            <a href="{!! route('inv-listing', array('account' => $data->account_id)) !!}" class="action btn-white btn btn-xs" target="blank_"><i class="fa fa-plus text-success"></i> Inv</a>--}}
                                         </div>
                                     </td>
                                 </tr>

@@ -106,8 +106,10 @@ class LoanProductController extends Controller
      * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Loan $loan)
+    public function destroy($id)
     {
-        //
+        $loanProduct = LoanProduct::find($id);
+        $loanProduct->delete();
+        return redirect()->route('products.index')->with('success','Successfully Deleted!');
     }
 }

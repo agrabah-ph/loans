@@ -21,7 +21,10 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
+            {{ Form::open(['route'=>['products.destroy', $loanProduct->id],'id'=>'delete_form','method'=>'delete']) }}
+                <button type="button" class="btn btn-danger btn-action" data-action="delete">Delete</button>
                 <button type="button" class="btn btn-primary btn-action" data-action="store">Update</button>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -275,10 +278,28 @@
 
 
             $(document).on('click', '.btn-action', function(){
+                var modal = $('#modal');
                 switch ($(this).data('action')) {
                     case 'store':
                         $('#form').submit();
 
+                        // console.log($('input[name=four_ps]').val());
+                        // console.log($('input[name=pwd]').val());
+                        // console.log($('input[name=indigenous]').val());
+                        // console.log($('input[name=livelihood]').val());
+                        break;
+                    case 'delete':
+
+                        modal.find('.modal-title').text('');
+                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-dialog-centered modal-sm');
+                        modal.find('.modal-body').empty().append('Are you sure you want to delete this product?');
+                        modal.find('.modal-footer #modal-save-btn').removeClass('btn-primary').addClass('btn-danger').text('Confirm');
+
+                        $('#modal-save-btn').click(function(){
+                            $('#delete_form').submit();
+                        });
+
+                        modal.modal({backdrop: 'static', keyboard: false});
                         // console.log($('input[name=four_ps]').val());
                         // console.log($('input[name=pwd]').val());
                         // console.log($('input[name=indigenous]').val());
