@@ -20,7 +20,7 @@
                         <div class="ibox-content">
                             <div class="form-group">
                                 <label>Proof of Payment</label>
-                                <input name="proof_of_payment" id="myFileInput" class="form-control" type="file" accept="image/*;capture=camera">
+                                <input name="proof_of_payment" id="myFileInput" class="form-control" type="file" accept="image/*;capture=camera" required>
                             </div>
                             <div class="form-group">
                                 <label>Mode of Payment</label>
@@ -36,15 +36,15 @@
                                     <button type="button" class="btn btn-danger verify_amount_fast_btn verify_amount_fast_max" data-amount="">Max</button>
                                 </div>
                                 <label>Paid Amount</label>
-                                <input name="paid_amount" id="verify_amount" type="text" class="form-control money" autocomplete="off">
+                                <input name="paid_amount" id="verify_amount" type="text" class="form-control money" autocomplete="off" required>
                             </div>
                             <div class="form-group">
                                 <label>Payment Date</label>
-                                <input name="paid_date" type="text" class="form-control datepicker" autocomplete="off">
+                                <input name="paid_date" type="text" class="form-control datepicker" autocomplete="off" required>
                             </div>
                             <div class="form-group">
                                 <label>Reference/Receipt No.</label>
-                                <input name="reference_number" type="text" class="form-control" autocomplete="off">
+                                <input name="reference_number" type="text" class="form-control" autocomplete="off" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-green w-100" id="verify_payment_submit">Verify</button>
