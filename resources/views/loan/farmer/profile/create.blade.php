@@ -34,7 +34,7 @@
                         <fieldset>
                             <h2>Personal Information</h2>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <div class="file-manager text-center profile_info" data-title="Profile Picture" data-name="image">
                                             <div id="image-upload" data-submit="" class="portrait-img-sm img-cropper-sm"></div>
@@ -43,61 +43,96 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <input name="first_name" type="text" data-title="First name" class="profile_info form-control required" id="first_name">
-                                        <label for="first_name">First name *</label>
+                                <div class="col-lg-9">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <input name="first_name" type="text" data-title="First name" class="profile_info form-control required" id="first_name">
+                                                <label for="first_name">First name *</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input name="middle_name" type="text" data-title="Middle name" class="profile_info form-control required" id="middle_name">
+                                                <label for="middle_name">Middle name *</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input name="last_name" type="text" data-title="Last name" class="profile_info form-control required" id="last_name">
+                                                <label for="last_name">Last name *</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="form-group">
+                                                        <input name="dob" type="text" data-title="Date of Birth" class="profile_info dob-input form-control required" id="dob">
+                                                        <label for="dob">Date of Birth *</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <input name="age" type="text" class="form-control" id="age" readonly>
+                                                        <label for="age">Age</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <select name="civil_status" data-title="Civil Status" class="profile_info form-control required" id="civil_status">
+                                                            <option value="" readonly></option>
+                                                            <option value="Single">Single</option>
+                                                            <option value="Married">Married</option>
+                                                            <option value="Widow/er">Widower</option>
+                                                            <option value="Separated">Separated</option>
+                                                        </select>
+                                                        <label for="civil_status">Civil Status *</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <select name="gender" data-title="Gender" class="profile_info form-control required" id="gender">
+                                                            <option value="" readonly></option>
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                        </select>
+                                                        <label for="gender">Gender *</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <select name="education" data-title="Education" class="profile_info form-control required" id="education">
+                                                    <option value="" readonly></option>
+                                                    <option value="High School">High School</option>
+                                                    <option value="College">College</option>
+                                                    <option value="Post Graduate">Post Graduate</option>
+                                                    <option value="Under Graduate">Under Graduate</option>
+                                                    <option value="Vocational">Vocational</option>
+                                                </select>
+                                                <label for="education">Education *</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input name="middle_name" type="text" data-title="Middle name" class="profile_info form-control required" id="middle_name">
-                                        <label for="middle_name">Middle name *</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="last_name" type="text" data-title="Last name" class="profile_info form-control required" id="last_name">
-                                        <label for="last_name">Last name *</label>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
+
                                     <div class="row">
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="dob" type="text" data-title="Date of Birth" class="profile_info dob-input form-control required" id="dob">
-                                                <label for="dob">Date of Birth *</label>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <input name="age" type="text" class="form-control" id="age" readonly>
-                                                <label for="age">Age</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <select name="civil_status" data-title="Civil Status" class="profile_info form-control required" id="civil_status">
-                                                    <option value="" readonly></option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Widow/er">Widower</option>
-                                                    <option value="Separated">Separated</option>
-                                                </select>
-                                                <label for="civil_status">Civil Status *</label>
+                                                <input name="tin" type="text" data-title="Tin No." class="profile_info form-control" id="tin">
+                                                <label for="tin">Tin No.</label>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <select name="gender" data-title="Gender" class="profile_info form-control required" id="gender">
-                                                    <option value="" readonly></option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select>
-                                                <label for="gender">Gender *</label>
+                                                <input name="sss_gsis" type="text" data-title="SSS / GSIS No." class="profile_info form-control" id="sss_gsis">
+                                                <label for="sss_gsis">SSS / GSIS No.</label>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-6">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -113,36 +148,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input name="tin" type="text" data-title="Tin No." class="profile_info form-control" id="tin">
-                                                <label for="tin">Tin No.</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input name="sss_gsis" type="text" data-title="SSS / GSIS No." class="profile_info form-control" id="sss_gsis">
-                                                <label for="sss_gsis">SSS / GSIS No.</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select name="education" data-title="Education" class="profile_info form-control required" id="education">
-                                            <option value="" readonly></option>
-                                            <option value="High School">High School</option>
-                                            <option value="College">College</option>
-                                            <option value="Post Graduate">Post Graduate</option>
-                                            <option value="Under Graduate">Under Graduate</option>
-                                            <option value="Vocational">Vocational</option>
-                                        </select>
-                                        <label for="education">Education *</label>
-                                    </div>
-                                </div>
                             </div>
 
+
+                        </fieldset>
+
+                        <h1>More Info</h1>
+                        <fieldset>
                             <h2>Secondary Information</h2>
                             <div class="row">
                                 <div class="col-lg-6 div-box">
@@ -188,155 +200,6 @@
                                             <a href="javascript:;" class="btn-add btn-action" data-action="remove-dependent">
                                                 <img src="https://img.icons8.com/ios-glyphs/30/38c172/minus-math.png"/>
                                             </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <h1>More Info</h1>
-                        <fieldset>
-                            <h2>Spouse/Co-maker Info</h2>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <input name="spouse_first_name" data-title="First name" type="text" class="spouse_comaker_info form-control required" id="spouse_first_name">
-                                        <label for="spouse_first_name">First name</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="spouse_middle_name" data-title="Middle name" type="text" class="spouse_comaker_info form-control required" id="spouse_middle_name">
-                                        <label for="spouse_middle_name">Middle name</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input name="spouse_last_name" data-title="Last name" type="text" class="spouse_comaker_info form-control required" id="spouse_last_name">
-                                        <label for="spouse_last_name">Last name</label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="form-group">
-                                                <input name="spouse_date_of_birth" data-title="Date of Birth" type="text" class="spouse_comaker_info dob-input form-control required" id="spouse_date_of_birth">
-                                                <label for="spouse_date_of_birth">Date of Birth</label>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <input name="spouse_age" data-title="Age" type="text" class="form-control" id="spouse_age" readonly>
-                                                <label for="spouse_age">Age</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <select name="spouse_civil_status" data-title="Civil Status" class="spouse_comaker_info form-control required" id="spouse_civil_status">
-                                                    <option value="" readonly></option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Widow/er">Widow/er</option>
-                                                    <option value="Separated">Separated</option>
-                                                </select>
-                                                <label for="spouse_civil_status">Civil Status *</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <select name="spouse_gender" data-title="Gender" class="spouse_comaker_info form-control required" id="spouse_gender">
-                                                    <option value="" readonly></option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select>
-                                                <label for="spouse_gender">Gender</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input name="spouse_land_line" data-title="Land Line" type="text" class="spouse_comaker_info form-control" id="spouse_land-line">
-                                                <label for="spouse_land_line">Land Line</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input name="spouse_mobile" data-title="Mobile" type="text" class="spouse_comaker_info form-control" id="spouse_mobile">
-                                                <label for="spouse_mobile">Mobile</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input name="spouse_tin" data-title="Tin No." type="text" class="spouse_comaker_info form-control" id="spouse_tin">
-                                                <label for="spouse_tin">Tin No.</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input name="spouse_sss_gsis" data-title="SSS / GSIS No." type="text" class="spouse_comaker_info form-control" id="spouse_sss_gsis">
-                                                <label for="spouse_sss_gsis">SSS / GSIS No.</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select name="spouse_education" data-title="Education" class="spouse_comaker_info form-control required" id="spouse_education">
-                                            <option value="" readonly></option>
-                                            <option value="High School">High School</option>
-                                            <option value="College">College</option>
-                                            <option value="Post Graduate">Post Graduate</option>
-                                            <option value="Under Graduate">Under Graduate</option>
-                                            <option value="Vocational">Vocational</option>
-                                        </select>
-                                        <label for="spouse_education">Education</label>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <h2>Farming Info</h2>
-                                    <div class="form-group">
-                                        <textarea name="farming_description" data-title="Farming Description" class="farming_info form-control required" id="farming_description"></textarea>
-                                        <label for="farming_description">Farming Description *</label>
-                                    </div>
-{{--                                    <div class="form-group">--}}
-{{--                                        <input name="farm_lot" type="text" data-title="Farm Lot" class="farming_info form-control required" id="farm_lot">--}}
-{{--                                        <label for="farm_lot">Farm Lot *</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <input name="farming_since" type="text" data-title="Farming since" class="farming_info form-control required" id="farming_since">--}}
-{{--                                        <label for="farming_since">Farming since *</label>--}}
-{{--                                    </div>--}}
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <h2>Membership / Group</h2>
-                                    <div class="form-group">
-                                        <input name="organization" type="text" data-title="Organization" class="farming_info form-control" id="organization">
-                                        <label for="organization">Organization</label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <div class="i-checks">
-                                                    <label class="check-labels">{{ Form::checkbox('four_ps', 1, false, array('class'=>'farming_info', 'data-title'=>'4P\'s')) }}<i></i> 4P's</label>
-                                                </div>
-                                                <div class="i-checks">
-                                                    <label class="check-labels">{{ Form::checkbox('pwd', 1, false, array('class'=>'farming_info', 'data-title'=>'PWD')) }}<i></i> PWD</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <div class="i-checks">
-                                                    <label class="check-labels">{{ Form::checkbox('indigenous', 1, false, array('class'=>'farming_info', 'data-title'=>'Indigenous')) }}<i></i> Indigenous</label>
-                                                </div>
-                                                <div class="i-checks">
-                                                    <label class="check-labels">{{ Form::checkbox('livelihood', 1, false, array('class'=>'farming_info', 'data-title'=>'Livelihood')) }}<i></i> Livelihood</label>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -488,83 +351,6 @@
                 computeMonthlyTable();
             });
 
-            $('input[name=employment]').on('ifClicked', function () {
-                console.log("You clicked " + $(this).val());
-                var box = $('#employment-select-box');
-                if($(this).val() === 'Employed'){
-                    box.empty().append('' +
-                        '<div class="form-group">' +
-                            '<select name="employment_employed" data-title="Type" id="employment_employed" class="form-control required">' +
-                            '<option value="" readonly></option>' +
-                            '<option value="Private">Private</option>' +
-                            '<option value="Government">Government</option>' +
-                            '</select>' +
-                            '<label for="employment_employed">Type *</label>' +
-                        '</div>' +
-                        '<div class="row">' +
-                            '<div class="col-lg-7">' +
-                                '<div class="form-group">' +
-                                    '<select name="employed_position" data-title="Position" id="employed_position" class="form-control required">' +
-                                        '<option value="" readonly></option>' +
-                                        '<option value="Staff">Staff</option>' +
-                                        '<option value="Professional">Professional</option>' +
-                                        '<option value="Office/Manager">Office/Manager</option>' +
-                                        '<option value="OFW">OFW</option>' +
-                                        '<option value="Trading/Merchandising">Trading/Merchandising</option>' +
-                                        '<option value="Others">Others</option>' +
-                                    '</select>' +
-                                    '<label for="employee_position">Position *</label>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-5">' +
-                                '<div class="form-group">' +
-                                    '<input name="employer_contact_number" data-title="Tel No." type="text" class="form-control" id="employed_employer_contact_number">' +
-                                    '<label for="employer_contact_number">Tel No.</label>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                            '<textarea name="employer_business_address" data-title="Employer/Business Address" class="form-control no-resize" required id="employer_business_address"></textarea>' +
-                            '<label for="employer_business_address">Employer/Business Address *</label>' +
-                        '</div>' +
-                    '');
-                }
-                if($(this).val() === 'Self Employed'){
-                    box.empty().append('' +
-                        '<div class="form-group">' +
-                            '<select name="self_employed_type" data-title="Type" id="self_employed_type" class="form-control required">' +
-                                '<option value="" readonly></option>' +
-                                '<option value="Service">Service</option>' +
-                                '<option value="Agricultural">Agricultural</option>' +
-                                '<option value="Transportation">Transportation</option>' +
-                                '<option value="Manufacturing/Processing">Manufacturing/Processing</option>' +
-                                '<option value="Trading/Merchandising">Trading/Merchandising</option>' +
-                                '<option value="Others">Others</option>' +
-                            '</select>' +
-                            '<label for="self_employed_type">Type *</label>' +
-                        '</div>' +
-                        '<div class="row">' +
-                            '<div class="col-lg-7">' +
-                                '<div class="form-group">' +
-                                    '<input name="self_employed_business_name" data-title="Business Name" type="text" class="form-control required" id="self_employed_business_name">' +
-                                    '<label for="self_employed_business_name">Business Name *</label>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-5">' +
-                                '<div class="form-group">' +
-                                    '<input name="self_employed_business_number" data-title="Tel No." type="text" class="form-control" id="self_employed_business_number">' +
-                                    '<label for="self_employed_business_number">Tel No.</label>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                            '<textarea name="self_employed_business_address" data-title="Business Address" class="form-control no-resize required" id="self_employed_business_address"></textarea>' +
-                            '<label for="self_employed_business_address">Business Address *</label>' +
-                        '</div>' +
-                    '');
-                }
-            });
-
             $(document).on('change', '#address_status', function(){
                 if($(this).val() === 'Rented'){
                     if($('#landlord-box').length){
@@ -623,26 +409,6 @@
                     case 'remove-dependent':
                         dependentBox.find('.repeater-item').last().remove();
                         break;
-                    case 'add-asset':
-                        assetsBox.append('' +
-                            '<div class="repeater-item">' +
-                                '<div class="row">' +
-                                    '<div class="col-12 col-lg-4">' +
-                                        '<input type="text" name="asset_name" class="form-control required" data-title="Other assets aside from collateral" placeholder="Other assets aside from collateral">' +
-                                    '</div>' +
-                                    '<div class="col-12 col-lg-4">' +
-                                        '<input type="text" name="asset_location" class="form-control required" data-title="Location/Description" placeholder="Location/Description">' +
-                                    '</div>' +
-                                    '<div class="col-12 col-lg-4">' +
-                                        '<input type="text" name="asset_size" class="form-control required" data-title="Size(sq.m.) Estimated Value" placeholder="Size(sq.m.) Estimated Value">' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>' +
-                        '');
-                        break;
-                    case 'remove-asset':
-                        assetsBox.find('.repeater-item').last().remove();
-                        break;
                 }
             });
 
@@ -654,70 +420,6 @@
                 autoclose: true,
                 format: "mm/dd/yyyy"
             });
-
-            $(document).on('change', '#spouse_date_of_birth', function(){
-                var dob = moment($(this).val());
-                $('input[name=spouse_age]').val(moment().diff(dob, 'years')).trigger('focus');
-                $(this).trigger('focus');
-            });
-
-            function computeMonthlyTable() {
-                var rowAAIncome = parseInt($('#rowa-a-income').val() || 0);
-                var rowABIncome = parseInt($('#rowa-b-income').val() || 0);
-                var rowATotal = $('#rowa-total');
-
-                var rowBAIncome = parseInt($('#rowb-a-income').val() || 0);
-                var rowBBIncome = parseInt($('#rowb-b-income').val() || 0);
-                var rowBTotal = $('#rowb-total');
-
-                var rowCIncome = parseInt($('#rowc-income').val() || 0);
-                var rowDIncome = parseInt($('#rowd-income').val() || 0);
-
-                var rowABCDTotal = $('#rowabcd-total');
-
-                var rowEExpense = parseInt($('#rowe-expense').val() || 0);
-                var rowFExpense = parseInt($('#rowf-expense').val() || 0);
-                var rowEFTotal = $('#rowef-total');
-
-                var totalIncome = $('#total-income');
-                var rowASum = 0;
-                var rowBSum = 0;
-                var rowABCDSum = 0;
-                var rowEFSum = 0;
-                var totalIncomeSum = 0;
-
-                rowASum += rowAAIncome;
-                rowASum += rowABIncome;
-                rowATotal.val(rowASum);
-                // rowATotal.val(numeral(rowASum).format('0,0'));
-
-                rowBSum += rowBAIncome;
-                rowBSum += rowBBIncome;
-                rowBTotal.val(rowBSum);
-                // rowBTotal.val(numeral(rowBSum).format('0,0.00'));
-
-                rowABCDSum += rowAAIncome;
-                rowABCDSum += rowABIncome;
-                rowABCDSum += rowBAIncome;
-                rowABCDSum += rowBBIncome;
-                rowABCDSum += rowCIncome;
-                rowABCDSum += rowDIncome;
-
-                rowABCDTotal.val(rowABCDSum);
-                // rowABCTotal.val(numeral(rowABCSum).format('0,0.00'));
-
-                rowEFSum += rowEExpense;
-                rowEFSum += rowFExpense;
-
-                rowEFTotal.val(rowEExpense + rowFExpense);
-                // rowDETotal.val(numeral(rowDExpense + rowEExpense).format('0,0.00'));
-
-                totalIncomeSum += rowABCDSum;
-                totalIncomeSum -= rowEFSum;
-
-                totalIncome.val(totalIncomeSum);
-                // totalIncome.val(numeral(totalIncomeSum).format('0,0.00'));
-            }
 
             function submitForm(){
                 var forms = new Array();
@@ -781,96 +483,6 @@
                     secondary_info.push(values);
                 });
                 forms.push(secondary_info);
-
-                var spouse_comaker_info = new Array();
-                $('.spouse_comaker_info').each(function(){
-                    var name = $(this).attr('name');
-                    var title = $(this).data('title');
-                    var value = ($(this).val().length < 1) ? 'N/A': $(this).val();
-                    var values = new Array();
-                    values.push(name);
-                    values.push(title);
-                    values.push(value);
-
-                    spouse_comaker_info.push(values);
-                });
-                forms.push(spouse_comaker_info);
-
-                var farming_info = new Array();
-                $('.farming_info').each(function(){
-                    var name = $(this).attr('name');
-                    var title = $(this).data('title');
-                    var value = ($(this).val().length < 1) ? 'N/A': $(this).val();
-                    var values = new Array();
-                    if($(this).is('input[type=checkbox]')){
-                        value = ($(this).is(':checked')) ? 1 : 0;
-                    }
-                    values.push(name);
-                    values.push(title);
-                    values.push(value);
-
-                    farming_info.push(values);
-                });
-                forms.push(farming_info);
-
-                var employment_info = new Array();
-                $('.employment_info').each(function(){
-                    var name = $(this).attr('name');
-                    var title = $(this).data('title');
-                    var value = ($(this).val().length < 1) ? 'N/A': $(this).val();
-                    var values = new Array();
-
-                    if($(this).is('input[type=radio]')){
-                        if($(this).is(":not(:checked)")){
-                            return true;
-                        }else{
-                            var employment = new Array();
-                            employment.push($('input[name='+ name +']:checked').val());
-                            $('#employment-select-box').find('.form-control').each(function(){
-                                var item = new Array();
-                                item.push($(this).attr('name'));
-                                item.push($(this).data('title'));
-                                item.push($(this).val());
-                                employment.push(item);
-                            });
-                            value = employment;
-                        }
-                    }
-
-                    values.push(name);
-                    values.push(title);
-                    values.push(value);
-
-                    employment_info.push(values);
-                });
-                forms.push(employment_info);
-
-                var income_asset_info = new Array();
-                $('.income_asset_info').each(function(){
-                    var name = $(this).attr('name');
-                    var title = $(this).data('title');
-                    var value = $(this).val();
-                    var values = new Array();
-
-                    if(title === 'Assets'){
-                        if($(this).children().length > 0){
-                            var assets = new Array();
-                            $(this).find('.repeater-item').each(function(){
-                                var item = new Array();
-                                item.push($(this).find('input[name=asset_name]').val());
-                                item.push($(this).find('input[name=asset_location]').val());
-                                item.push($(this).find('input[name=asset_size]').val());
-                                assets.push(item);
-                            });
-                            value = assets;
-                        }
-                    }
-                    values.push(name);
-                    values.push(title);
-                    values.push(value);
-                    income_asset_info.push(values);
-                });
-                forms.push(income_asset_info);
 
                 console.log(forms);
 

@@ -91,7 +91,7 @@
             loadProfile();
             function loadProfile(){
                 $.get('{!! route('get-my-profile') !!}', function(data){
-                    console.log(data);
+                    // console.log(data);
                     var box = $('#profile-box');
                     switch (data[0]) {
                         case 'farmer':
@@ -99,7 +99,7 @@
                                 '<div class="row">' +
                                     '<div class="col-sm-12">' +
                                         '<div class="ibox float-e-margins">' +
-                                            '<div class="ibox-content">' + displayLoanApplicationDetails(data[1].profile, null) + '</div>' +
+                                            '<div class="ibox-content">' + viewProfile(data[1].profile, null) + '</div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +

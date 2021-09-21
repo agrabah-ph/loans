@@ -329,6 +329,7 @@ class PublicController extends Controller
         ]);
 
     }
+
     public function export($status)
     {
         $data = Loan::where('loan_provider_id', Auth::user()->loan_provider->id)

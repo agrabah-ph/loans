@@ -119,8 +119,8 @@ if (!function_exists('smsNotifMessage')) {
         $smsSet = Settings::where('name', 'sms')->first();
         foreach ($recipients as $recipient) {
             Log::channel('sms_log')->info(
-                'Type: ['.$type.']; 
-                Recipient: '.$recipient.'; 
+                'Type: ['.$type.'];
+                Recipient: '.$recipient.';
                 Message: '. $message.';'
             );
             if($smsSet->is_active === 1){
@@ -258,6 +258,17 @@ if (!function_exists('stringSlug')) {
         $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
         $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
         $string = preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
+        return $string;
+    }
+}
+
+if (!function_exists('stringClear')) {
+    function stringClear($string)
+    {
+        $string = strtolower($string); // Replaces all spaces with hyphens.
+        $string = str_replace(' ', '', $string); // Replaces all spaces with hyphens.
+        $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+        $string = preg_replace('/-+/', '', $string); // Replaces multiple hyphens with single one.
         return $string;
     }
 }

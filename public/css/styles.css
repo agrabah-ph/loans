@@ -987,7 +987,7 @@ body {
   overflow-y: auto;
 }
 .page-register.page-farmers .sign-in .right .steps ul li {
-  width: calc(100%/5);
+  width: calc(100%/3);
 }
 @media (max-width: 992px) {
   .page-register.page-farmers .sign-in .right .steps ul li {

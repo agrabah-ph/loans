@@ -288,7 +288,7 @@
               &:focus {
                 border-color: $black !important;
               }
-              
+
               &[readonly] {
                 &:focus {
                   border-color: $gray-2 !important;
@@ -482,11 +482,11 @@
         .steps {
           ul {
             li {
-              width: calc(100%/5);
+              width: calc(100%/3);
 
               @media (max-width: 992px) {
                 width: 100%;
-                
+
                 &:not(.current) {
                   display: none;
                 }
