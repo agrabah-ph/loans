@@ -344,6 +344,182 @@
 
                         </fieldset>
 
+                        <h1>Employment</h1>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-4">
+
+                                    <div class="form-group">
+                                        <div class="i-checks">
+                                            <label class="check-labels">{{ Form::radio('employment', 'Employed', false, array('class'=>'employment_info', 'data-title'=>'Employment', 'required')) }}<i></i> Employed</label>
+                                        </div>
+                                        <div class="i-checks">
+                                            <label class="check-labels">{{ Form::radio('employment', 'Self Employed', false, array('class'=>'employment_info', 'data-title'=>'Employment', 'required')) }}<i></i> Self Employed</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-8">
+                                    <div id="employment-select-box"></div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <h1>Monthly Income</h1>
+                        <fieldset>
+                            <div class="table-responsive">
+                                <table id="monthly-income">
+                                    <tr>
+                                        <th></th>
+                                        <th>Business</th>
+                                        <th>Employment</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Applicant Monthly Income</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="applicant_business_income" data-title="Applicant Business Income" class="income_asset_info form-control row-input required" id="rowa-a-income" required>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="applicant_employment_income" data-title="Applicant Employment Income" class="income_asset_info form-control row-input required" id="rowa-b-income" required>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group display_peso">
+                                                <input type="number" name="" value="0.00" class="form-control text-success" id="rowa-total" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Spouse's Monthly Income</td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="spouse_business_income" data-title="Spouse Business Income" class="income_asset_info form-control row-input required" id="rowb-a-income" required>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="spouse_employment_income" data-title="Spouse Employment Income" class="income_asset_info form-control row-input required" id="rowb-b-income" required>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group display_peso">
+                                                <input type="number" name="" value="0.00" class="form-control text-success" id="rowb-total" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other Monthly Income</td>
+                                        <td>
+                                            <div class="form-group">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="other_monthly_income" data-title="Other Monthly Income" class="income_asset_info form-control row-input required" id="rowc-income" required>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other Source of Income <small>(Pension, Allowance, Salary, <br> Business Sales, Harvest, Others)</small></td>
+                                        <td>
+                                            <div class="form-group">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="other_source_income" data-title="Other Source Income" class="income_asset_info form-control row-input required" id="rowd-income" required>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Monthly Income</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="form-group display_peso">
+                                                <input type="number" name="" value="0.00" class="form-control text-success" id="rowabcd-total" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Less Monthly Expenses <small>(Living, Utilitites, Rental, <br> Transpo, Food, Tuition)</small></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="monthly_expenses" data-title="Less Monthly Expenses (Living, Utilitites, rental, transpo..)" class="income_asset_info form-control row-input required" id="rowe-expense" required>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Other Expenses</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="other_expenses" data-title="Other Expenses" class="income_asset_info form-control row-input required" id="rowf-expense" required>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Expenses</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="form-group display_peso">
+                                                <input type="number" name="" value="0.00" class="form-control text-success" id="rowef-total" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="grand-total">
+                                        <td>Net Monthly Income</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="form-group display_peso">
+                                                <input name="" type="number" class="form-control text-success" id="total-income" value="0.00" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+
+                            <div class="repeater-container" id="other_payments">
+                                <div class="row header d-none d-lg-flex">
+                                    <div class="col-4"><div class="box">Other assets aside from collateral <small>car, rental, real state</small></div></div>
+                                    <div class="col-4"><div class="box">Location/Description</div></div>
+                                    <div class="col-4"><div class="box">Size(sq.m.) Estimated Value</div></div>
+                                </div>
+                                <div class="income_asset_info repeater-lists" name="assets" data-title="Assets" id="assets-box"></div>
+                                <div class="actions text-right">
+                                    <a href="javascript:;" class="btn-add btn-action" data-action="add-asset">
+                                        <img src="https://img.icons8.com/ios-glyphs/30/38c172/plus-math.png"/>
+                                    </a> &nbsp;
+                                    <a href="javascript:;" class="btn-delete btn-action" data-action="remove-asset">
+                                        <img src="https://img.icons8.com/ios-glyphs/30/38c172/minus-math.png"/>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
                         <h1>Finish</h1>
                         <fieldset>
                             <div class="terms-conditions-content">
