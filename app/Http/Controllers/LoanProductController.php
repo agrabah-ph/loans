@@ -16,7 +16,9 @@ class LoanProductController extends Controller
      */
     public function index()
     {
-        $datas = LoanProduct::where('loan_provider_id', auth()->user()->loan_provider->id)->get();
+        $datas = LoanProduct::where('loan_provider_id', auth()->user()->loan_provider->id)
+            ->where('active', 1)
+            ->get();
 
         return view('loan.product.index', compact('datas'));
     }
@@ -109,9 +111,10 @@ class LoanProductController extends Controller
     public function destroy($id)
     {
         $loanProduct = LoanProduct::find($id);
-        $loanProduct->delete();
+        $loanProduct->active = 0;
+        $loanProduct->save();
 
-        Loan::where('loan_product_id', $id)->delete();
+//        Loan::where('loan_product_id', $id)->delete();
         return redirect()->route('products.index')->with('success','Successfully Deleted!');
     }
 }
