@@ -339,35 +339,8 @@ class FarmerController extends Controller
 
     public function submitLoanApplication(Request $request)
     {
-
-//        $farmer = Farmer::find(Auth::user()->farmer->id);
-//        $profile = $farmer->profile;
-//        $profile->first_name = $request->input('first_name');
-//        $profile->middle_name = $request->input('middle_name');
-//        $profile->last_name = $request->input('last_name');
-//        $profile->mobile = $request->input('mobile');
-//        $profile->address = $request->input('address');
-//        $profile->dob = $request->input('dob');
-//        $profile->pob = $request->input('pob');
-//        $profile->gender = $request->input('gender');
-//        $profile->civil_status = $request->input('civil_status');
-//        $profile->citizenship = $request->input('citizenship');
-//        $profile->gross_monthly_income = $request->input('gross_monthly_income');
-//        $profile->monthly_expenses = $request->input('monthly_expenses');
-//        if($profile->save()){
-//            $user = User::find(Auth::user()->id);
-//            $user->name = ucwords($profile->first_name).' '.ucwords($profile->last_name);
-//            $user->save();
-//        }
-
-//        return response()->json($request->input('inputs'));
-
         $inputs = $request->input('inputs');
-
-//        return response()->json($inputs);
-
         $farmer = Farmer::find(Auth::user()->farmer->id);
-
 
         $loanProduct = LoanProduct::find($inputs[0]);
         $loan = new Loan();
@@ -386,10 +359,14 @@ class FarmerController extends Controller
         if($farmer->loans()->save($loan)){
             $details = new LoanApplicationDetail();
             $details->loan_id = $loan->id;
-            $details->info_loan_detail = serialize($inputs[1]);
-            $details->credit_financial_info = serialize($inputs[2]);
-            $details->trade_reference_info = serialize($inputs[3]);
-            $details->reference_id = serialize($inputs[4]);
+            $details->spouse_comaker_info = serialize($inputs[1]);
+            $details->farming_info = serialize($inputs[2]);
+            $details->employment_info = serialize($inputs[3]);
+            $details->income_asset_info = serialize($inputs[4]);
+            $details->info_loan_detail = serialize($inputs[5]);
+            $details->credit_financial_info = serialize($inputs[6]);
+            $details->trade_reference_info = serialize($inputs[7]);
+            $details->reference_id = serialize($inputs[8]);
             $details->save();
             smsNotification('new-loan-application-admin', $loan->id);
 

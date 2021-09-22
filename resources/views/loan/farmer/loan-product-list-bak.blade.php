@@ -113,7 +113,52 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title"></h4>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col form-group">
+                                    <label class="i-checks"> <input type="radio" name="account_type" value="GCash" checked> GCash </label>
+                                </div>
+                                <div class="col form-group">
+                                    <label class="i-checks"> <input type="radio" name="account_type" value="Konect2"> Konect2 </label>
+                                </div>
+                                <div class="col form-group">
+                                    <label class="i-checks"> <input type="radio" name="account_type" value="Sulit Padala"> Sulit Padala </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Account Name</label>
+                                        <input type="text" name="account_name" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Account Number</label>
+                                        <input type="text" name="account_number" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Reference ID's</h3>
+                            <div class="row info-loan-detail" data-title="Reference ID's">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>ID #1 <span class="text-danger">*</span></label>
+                                        <input type="file" name="reference_id_a" class="form-control required" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>ID #2 <span class="text-danger">*</span></label>
+                                        <input type="file" name="reference_id_b" class="form-control required" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="modal-save-btn">Apply</button>
@@ -398,6 +443,7 @@
         //     $('#loan_submit_id').val($(this).data('id'));
         // });
         $(document).on('change', '#terms_agree', function () {
+
             $('#submit_app_loan').prop('disabled', !this.checked);
         });
 
@@ -422,18 +468,6 @@
             });
 
 
-
-            $(document).on('change', '#spouse_date_of_birth', function(){
-                var dob = moment($(this).val());
-                $('input[name=spouse_age]').val(moment().diff(dob, 'years')).trigger('focus');
-                $(this).trigger('focus');
-            });
-
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
-
             var term_slider = document.getElementById('term_slider');
 
             noUiSlider.create(term_slider, {
@@ -457,9 +491,7 @@
                     }
                 }
             });
-
             $('#term_value').html(term_slider.noUiSlider.get());
-
             term_slider.noUiSlider.on('slide', function () {
                 $('#term_value').html(term_slider.noUiSlider.get())
                 getList($('select[name=type]').val(), term_slider.noUiSlider.get(), range_slider.noUiSlider.get())
@@ -497,82 +529,6 @@
                 getList($('select[name=type]').val(), term_slider.noUiSlider.get(), range_value)
             });
 
-            $(document).on('ifClicked', 'input[name=employment]', function () {
-                console.log("You clicked " + $(this).val());
-                var box = $('#employment-select-box');
-                if($(this).val() === 'Employed'){
-                    box.empty().append('' +
-                        '<div class="form-group">' +
-                        '<label for="employment_employed">Type *</label>' +
-                        '<select name="employment_employed" data-title="Type" id="employment_employed" class="form-control required">' +
-                        '<option value="" readonly></option>' +
-                        '<option value="Private">Private</option>' +
-                        '<option value="Government">Government</option>' +
-                        '</select>' +
-                        '</div>' +
-                        '<div class="row">' +
-                        '<div class="col-lg-7">' +
-                        '<div class="form-group">' +
-                        '<label for="employee_position">Position *</label>' +
-                        '<select name="employed_position" data-title="Position" id="employed_position" class="form-control required">' +
-                        '<option value="" readonly></option>' +
-                        '<option value="Staff">Staff</option>' +
-                        '<option value="Professional">Professional</option>' +
-                        '<option value="Office/Manager">Office/Manager</option>' +
-                        '<option value="OFW">OFW</option>' +
-                        '<option value="Trading/Merchandising">Trading/Merchandising</option>' +
-                        '<option value="Others">Others</option>' +
-                        '</select>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="col-lg-5">' +
-                        '<div class="form-group">' +
-                        '<label for="employer_contact_number">Tel No.</label>' +
-                        '<input name="employer_contact_number" data-title="Tel No." type="text" class="form-control" id="employed_employer_contact_number">' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="employer_business_address">Employer/Business Address *</label>' +
-                        '<textarea name="employer_business_address" data-title="Employer/Business Address" class="form-control no-resize" required id="employer_business_address"></textarea>' +
-                        '</div>' +
-                        '');
-                }
-                if($(this).val() === 'Self Employed'){
-                    box.empty().append('' +
-                        '<div class="form-group">' +
-                        '<label for="self_employed_type">Type *</label>' +
-                        '<select name="self_employed_type" data-title="Type" id="self_employed_type" class="form-control required">' +
-                        '<option value="" readonly></option>' +
-                        '<option value="Service">Service</option>' +
-                        '<option value="Agricultural">Agricultural</option>' +
-                        '<option value="Transportation">Transportation</option>' +
-                        '<option value="Manufacturing/Processing">Manufacturing/Processing</option>' +
-                        '<option value="Trading/Merchandising">Trading/Merchandising</option>' +
-                        '<option value="Others">Others</option>' +
-                        '</select>' +
-                        '</div>' +
-                        '<div class="row">' +
-                        '<div class="col-lg-7">' +
-                        '<div class="form-group">' +
-                        '<label for="self_employed_business_name">Business Name *</label>' +
-                        '<input name="self_employed_business_name" data-title="Business Name" type="text" class="form-control required" id="self_employed_business_name">' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="col-lg-5">' +
-                        '<div class="form-group">' +
-                        '<label for="self_employed_business_number">Tel No.</label>' +
-                        '<input name="self_employed_business_number" data-title="Tel No." type="text" class="form-control" id="self_employed_business_number">' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label for="self_employed_business_address">Business Address *</label>' +
-                        '<textarea name="self_employed_business_address" data-title="Business Address" class="form-control no-resize required" id="self_employed_business_address"></textarea>' +
-                        '</div>' +
-                        '');
-                }
-            });
 
             // var term_slider = document.getElementById("term_slider");
             // var term_value = document.getElementById("term_value");
@@ -580,6 +536,31 @@
             // term_slider.oninput = function() {
             //     term_value.innerHTML = this.value;
             // }
+            {{--$(document).on('click', '', function(){--}}
+            {{--    modal.modal({backdrop: 'static', keyboard: false});--}}
+            {{--    modal.modal('toggle');--}}
+            {{--});--}}
+
+            {{-- var table = $('#table').DataTable({--}}
+            {{--     processing: true,--}}
+            {{--     serverSide: true,--}}
+            {{--     ajax: {--}}
+            {{--         url: '{!! route('') !!}',--}}
+            {{--         data: function (d) {--}}
+            {{--             d.branch_id = '';--}}
+            {{--         }--}}
+            {{--     },--}}
+            {{--     columnDefs: [--}}
+            {{--         { className: "text-right", "targets": [ 0 ] }--}}
+            {{--     ],--}}
+            {{--     columns: [--}}
+            {{--         { data: 'name', name: 'name' },--}}
+            {{--         { data: 'action', name: 'action' }--}}
+            {{--     ]--}}
+            {{-- });--}}
+
+            {{--table.ajax.reload();--}}
+
 
             // $('.money').mask("#,##0.00", {reverse: true});
 
@@ -750,97 +731,6 @@
                         $('.has-error-box').removeClass('has-error-box');
                         var inputs = new Array(), error = 0;
                         inputs.push(modal.data('id'));
-
-                        var spouse_comaker_info = new Array();
-                        $('.spouse_comaker_info').each(function(){
-                            var name = $(this).attr('name');
-                            var title = $(this).data('title');
-                            var value = ($(this).val().length < 1) ? 'N/A': $(this).val();
-                            var values = new Array();
-                            values.push(name);
-                            values.push(title);
-                            values.push(value);
-
-                            spouse_comaker_info.push(values);
-                        });
-                        inputs.push(spouse_comaker_info);
-
-                        var farming_info = new Array();
-                        $('.farming_info').each(function(){
-                            var name = $(this).attr('name');
-                            var title = $(this).data('title');
-                            var value = ($(this).val().length < 1) ? 'N/A': $(this).val();
-                            var values = new Array();
-                            if($(this).is('input[type=checkbox]')){
-                                value = ($(this).is(':checked')) ? 1 : 0;
-                            }
-                            values.push(name);
-                            values.push(title);
-                            values.push(value);
-
-                            farming_info.push(values);
-                        });
-                        inputs.push(farming_info);
-
-                        var employment_info = new Array();
-                        $('.employment_info').each(function(){
-                            var name = $(this).attr('name');
-                            var title = $(this).data('title');
-                            var value = ($(this).val().length < 1) ? 'N/A': $(this).val();
-                            var values = new Array();
-
-                            if($(this).is('input[type=radio]')){
-                                if($(this).is(":not(:checked)")){
-                                    return true;
-                                }else{
-                                    var employment = new Array();
-                                    employment.push($('input[name='+ name +']:checked').val());
-                                    $('#employment-select-box').find('.form-control').each(function(){
-                                        var item = new Array();
-                                        item.push($(this).attr('name'));
-                                        item.push($(this).data('title'));
-                                        item.push($(this).val());
-                                        employment.push(item);
-                                    });
-                                    value = employment;
-                                }
-                            }
-
-                            values.push(name);
-                            values.push(title);
-                            values.push(value);
-
-                            employment_info.push(values);
-                        });
-                        inputs.push(employment_info);
-
-                        var income_asset_info = new Array();
-                        $('.income_asset_info').each(function(){
-                            var name = $(this).attr('name');
-                            var title = $(this).data('title');
-                            var value = $(this).val();
-                            var values = new Array();
-
-                            if(title === 'Assets'){
-                                if($(this).children().length > 0){
-                                    var assets = new Array();
-                                    $(this).find('.repeater-item').each(function(){
-                                        var item = new Array();
-                                        item.push($(this).find('input[name=asset_name]').val());
-                                        item.push($(this).find('input[name=asset_location]').val());
-                                        item.push($(this).find('input[name=asset_size]').val());
-                                        assets.push(item);
-                                    });
-                                    value = assets;
-                                }
-                            }
-                            values.push(name);
-                            values.push(title);
-                            values.push(value);
-                            income_asset_info.push(values);
-                        });
-                        inputs.push(income_asset_info);
-
                         var info_loan_detail = new Array();
                         $('.info-loan-detail').each(function(){
                             var forms = new Array();
@@ -973,9 +863,7 @@
                         }
 
                         if($('#terms_agree').prop('checked')){
-
                             // modal.modal('toggle');
-
                             $.post('{!! route('loan-submit-form') !!}', {
                                 _token: '{!! csrf_token() !!}',
                                 inputs: inputs
@@ -983,7 +871,6 @@
                                 console.log(data);
                                 window.location.replace(data);
                             });
-
                         }else{
                             $('#terms_agree').closest('.form-group').addClass('has-error');
                         }
@@ -1026,7 +913,8 @@
             });
 
             $(document).on('click', '.btn-action', function () {
-                var loanProductID = $(this).data('id'), loanProductDiscolsure = $('#disclosure_'+loanProductID).html(), assetsBox = $('#assets-box');
+                var loanProductID = $(this).data('id');
+                var loanProductDiscolsure = $('#disclosure_'+loanProductID).html();
                 switch ($(this).data('action')) {
                     case 'apply-loan':
                         if(checkDisbursement() > 0){
@@ -1034,395 +922,17 @@
                         }
                         modal.data('type', 'loan-application-detail');
                         modal.data('id', loanProductID);
-                        modal.find('.modal-title').text('Loan Application Details');
-                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
-                        modal.find('#modal-save-btn').removeClass('d-none');
-                        modal.find('#modal-save-btn').text('Submit Application');
 
-                        // ------------------------
                         // modal.find('.modal-title').text('Loan Application Details');
                         // modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
                         // modal.modal({backdrop: 'static', keyboard: false});
                         // return false;
-                        // ------------------------
-
-
+                        modal.find('#modal-save-btn').removeClass('d-none');
+                        modal.find('#modal-save-btn').text('Submit Application');
                         modal.find('.modal-body').empty().append('' +
-                            // first
-                            '<div class="panel panel-default">' +
-                            '<div class="panel-body">' +
-                            '<h2 class="text-success"><strong>Spouse/Co-maker Info</strong></h2>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_first_name">First name</label>' +
-                            '<input name="spouse_first_name" data-title="First name" type="text" class="spouse_comaker_info form-control required" id="spouse_first_name">' +
-                            '</div>' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_middle_name">Middle name</label>' +
-                            '<input name="spouse_middle_name" data-title="Middle name" type="text" class="spouse_comaker_info form-control required" id="spouse_middle_name">' +
-                            '</div>' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_last_name">Last name</label>' +
-                            '<input name="spouse_last_name" data-title="Last name" type="text" class="spouse_comaker_info form-control required" id="spouse_last_name">' +
-                            '</div>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-8">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_date_of_birth">Date of Birth</label>' +
-                            '<input name="spouse_date_of_birth" data-title="Date of Birth" type="text" class="spouse_comaker_info dob-input form-control required" id="spouse_date_of_birth">' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_age">Age</label>' +
-                            '<input name="spouse_age" data-title="Age" type="text" class="form-control" id="spouse_age" readonly>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-6">' +
-                            '<div class="row">' +
-                            '<div class="col">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_civil_status">Civil Status *</label>' +
-                            '<select name="spouse_civil_status" data-title="Civil Status" class="spouse_comaker_info form-control required" id="spouse_civil_status">' +
-                            '<option value="" readonly></option>' +
-                            '<option value="Single">Single</option>' +
-                            '<option value="Married">Married</option>' +
-                            '<option value="Widow/er">Widow/er</option>' +
-                            '<option value="Separated">Separated</option>' +
-                            '</select>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_gender">Gender</label>' +
-                            '<select name="spouse_gender" data-title="Gender" class="spouse_comaker_info form-control required" id="spouse_gender">' +
-                            '<option value="" readonly></option>' +
-                            '<option value="Male">Male</option>' +
-                            '<option value="Female">Female</option>' +
-                            '</select>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_land_line">Land Line</label>' +
-                            '<input name="spouse_land_line" data-title="Land Line" type="text" class="spouse_comaker_info form-control" id="spouse_land-line">' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_mobile">Mobile</label>' +
-                            '<input name="spouse_mobile" data-title="Mobile" type="text" class="spouse_comaker_info form-control" id="spouse_mobile">' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_tin">Tin No.</label>' +
-                            '<input name="spouse_tin" data-title="Tin No." type="text" class="spouse_comaker_info form-control" id="spouse_tin">' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_sss_gsis">SSS / GSIS No.</label>' +
-                            '<input name="spouse_sss_gsis" data-title="SSS / GSIS No." type="text" class="spouse_comaker_info form-control" id="spouse_sss_gsis">' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="form-group">' +
-                            '<label for="spouse_education">Education</label>' +
-                            '<select name="spouse_education" data-title="Education" class="spouse_comaker_info form-control required" id="spouse_education">' +
-                            '<option value="" readonly></option>' +
-                            '<option value="High School">High School</option>' +
-                            '<option value="College">College</option>' +
-                            '<option value="Post Graduate">Post Graduate</option>' +
-                            '<option value="Under Graduate">Under Graduate</option>' +
-                            '<option value="Vocational">Vocational</option>' +
-                            '</select>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-
-
-
-                            // second
-                            '<div class="panel panel-default">' +
-                            '<div class="panel-body">' +
-                            '<div class="row">' +
-                            '<div class="col-12 col-lg-6">' +
-                            '<h2 class="text-success"><strong>Farming Info</strong></h2>' +
-                            '<div class="form-group">' +
-                            '<label for="farming_description">Farming Description *</label>' +
-                            '<textarea name="farming_description" data-title="Farming Description" class="farming_info form-control required" id="farming_description"></textarea>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-12 col-lg-6">' +
-                            '<h2 class="text-success"><strong>Membership / Group</strong></h2>' +
-                            '<div class="form-group">' +
-                            '<label for="organization">Organization</label>' +
-                            '<input name="organization" type="text" data-title="Organization" class="farming_info form-control" id="organization">' +
-                            '</div>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<div class="i-checks">' +
-                            '<label class="check-labels">' +
-                            '<input data-title="4P\'s" name="four_ps" type="checkbox" value="1" class="farming_info"><i></i> 4P\'s' +
-                            '</label>' +
-                            '</div>' +
-                            '<div class="i-checks">' +
-                            '<label class="check-labels">' +
-                            '<input data-title="PWD" name="pwd" type="checkbox" value="1" class="farming_info"><i></i> PWD' +
-                            '</label>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-6">' +
-                            '<div class="form-group">' +
-                            '<div class="i-checks">' +
-                            '<label class="check-labels">' +
-                            '<input data-title="Indigenous" name="indigenous" type="checkbox" value="1" class="farming_info"><i></i> Indigenous' +
-                            '</label>' +
-                            '</div>' +
-                            '<div class="i-checks">' +
-                            '<label class="check-labels">' +
-                            '<input data-title="Livelihood" name="livelihood" type="checkbox" value="1" class="farming_info"><i></i> Livelihood' +
-                            '</label>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-
-
-                            // third
-                            '<div class="panel panel-default">' +
-                            '<div class="panel-body">' +
-                            '<h2 class="text-success"><strong>Employment</strong></h2>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-4">' +
-                            '<div class="form-group">' +
-                            '<div class="i-checks">' +
-                            '<label class="check-labels">' +
-                            '<input data-title="Employment" required="required" name="employment" type="radio" value="Employed" class="employment_info" checked><i></i> Employed' +
-                            '</label>' +
-                            '</div>' +
-                            '<div class="i-checks">' +
-                            '<label class="check-labels">' +
-                            '<input data-title="Employment" required="required" name="employment" type="radio" value="Self Employed" class="employment_info"><i></i> Self Employed' +
-                            '</label>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-8">' +
-                            '<div id="employment-select-box">' +
-                            '<div class="form-group">' +
-                            '<label for="employment_employed">Type *</label>' +
-                            '<select name="employment_employed" data-title="Type" id="employment_employed" class="form-control required">' +
-                            '<option value="" readonly></option>' +
-                            '<option value="Private">Private</option>' +
-                            '<option value="Government">Government</option>' +
-                            '</select>' +
-                            '</div>' +
-                            '<div class="row">' +
-                            '<div class="col-lg-7">' +
-                            '<div class="form-group">' +
-                            '<label for="employee_position">Position *</label>' +
-                            '<select name="employed_position" data-title="Position" id="employed_position" class="form-control required">' +
-                            '<option value="" readonly></option>' +
-                            '<option value="Staff">Staff</option>' +
-                            '<option value="Professional">Professional</option>' +
-                            '<option value="Office/Manager">Office/Manager</option>' +
-                            '<option value="OFW">OFW</option>' +
-                            '<option value="Trading/Merchandising">Trading/Merchandising</option>' +
-                            '<option value="Others">Others</option>' +
-                            '</select>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="col-lg-5">' +
-                            '<div class="form-group">' +
-                            '<label for="employer_contact_number">Tel No.</label>' +
-                            '<input name="employer_contact_number" data-title="Tel No." type="text" class="form-control" id="employed_employer_contact_number">' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '<div class="form-group">' +
-                            '<label for="employer_business_address">Employer/Business Address *</label>' +
-                            '<textarea name="employer_business_address" data-title="Employer/Business Address" class="form-control no-resize" required id="employer_business_address"></textarea>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-
-
-                            // fourth
-                            '<div class="panel panel-default">' +
-                            '<div class="panel-body">' +
-                            '<h2 class="text-success"><strong>Monthly Income</strong></h2>' +
-                            '<div class="table-responsive">' +
-                            '<table id="monthly-income">' +
-                            '<tr>' +
-                            '<th></th>' +
-                            '<th>Business</th>' +
-                            '<th>Employment</th>' +
-                            '<th>Total</th>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Applicant Monthly Income</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="applicant_business_income" data-title="Applicant Business Income" class="income_asset_info form-control row-input required" id="rowa-a-income" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="applicant_employment_income" data-title="Applicant Employment Income" class="income_asset_info form-control row-input required" id="rowa-b-income" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group display_peso">' +
-                            '<input type="number" name="" value="0.00" class="form-control text-success" id="rowa-total" readonly>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Spouse\'s Monthly Income</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="spouse_business_income" data-title="Spouse Business Income" class="income_asset_info form-control row-input required" id="rowb-a-income" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="spouse_employment_income" data-title="Spouse Employment Income" class="income_asset_info form-control row-input required" id="rowb-b-income" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group display_peso">' +
-                            '<input type="number" name="" value="0.00" class="form-control text-success" id="rowb-total" readonly>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Other Monthly Income</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="other_monthly_income" data-title="Other Monthly Income" class="income_asset_info form-control row-input required" id="rowc-income" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Other Source of Income <small>(Pension, Allowance, Salary, <br> Business Sales, Harvest, Others)</small></td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '</div>' +
-                            '</td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="other_source_income" data-title="Other Source Income" class="income_asset_info form-control row-input required" id="rowd-income" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Total Monthly Income</td>' +
-                            '<td></td>' +
-                            '<td></td>' +
-                            '<td>' +
-                            '<div class="form-group display_peso">' +
-                            '<input type="number" name="" value="0.00" class="form-control text-success" id="rowabcd-total" readonly>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Less Monthly Expenses <small>(Living, Utilitites, Rental, <br> Transpo, Food, Tuition)</small></td>' +
-                            '<td></td>' +
-                            '<td></td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="monthly_expenses" data-title="Less Monthly Expenses (Living, Utilitites, rental, transpo..)" class="income_asset_info form-control row-input required" id="rowe-expense" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Other Expenses</td>' +
-                            '<td></td>' +
-                            '<td></td>' +
-                            '<td>' +
-                            '<div class="form-group">' +
-                            '<input type="number" name="other_expenses" data-title="Other Expenses" class="income_asset_info form-control row-input required" id="rowf-expense" required>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr>' +
-                            '<td>Total Expenses</td>' +
-                            '<td></td>' +
-                            '<td></td>' +
-                            '<td>' +
-                            '<div class="form-group display_peso">' +
-                            '<input type="number" name="" value="0.00" class="form-control text-success" id="rowef-total" readonly>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '<tr class="grand-total">' +
-                            '<td>Net Monthly Income</td>' +
-                            '<td></td>' +
-                            '<td></td>' +
-                            '<td>' +
-                            '<div class="form-group display_peso">' +
-                            '<input name="" type="number" class="form-control text-success" id="total-income" value="0.00" readonly>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>' +
-                            '</table>' +
-                            '</div>' +
-                            '<div class="hr-line-dashed"></div>' +
-                            '<div class="repeater-container" id="other_payments">' +
-                            '<div class="row header d-none d-lg-flex">' +
-                            '<div class="col-4"><div class="box">Other assets aside from collateral <small>car, rental, real state</small></div></div>' +
-                            '<div class="col-4"><div class="box">Location/Description</div></div>' +
-                            '<div class="col-4"><div class="box">Size(sq.m.) Estimated Value</div></div>' +
-                            '</div>' +
-                            '<div class="income_asset_info repeater-lists" name="assets" data-title="Assets" id="assets-box"></div>' +
-                            '<div class="actions text-right">' +
-                            '<a href="javascript:;" class="btn-add btn-action" data-action="add-asset">' +
-                            '<img src="https://img.icons8.com/ios-glyphs/30/38c172/plus-math.png"/>' +
-                            '</a> &nbsp;' +
-                            '<a href="javascript:;" class="btn-delete btn-action" data-action="remove-asset">' +
-                            '<img src="https://img.icons8.com/ios-glyphs/30/38c172/minus-math.png"/>' +
-                            '</a>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-
-                            // old
                             '<div class="panel panel-default" id="loan-details">' +
                                 '<div class="panel-body">' +
-                                    '<h2 class="text-success"><strong>LOAN DETAILS</strong></h2>' +
+                                    '<strong><h2 class="text-success">LOAN DETAILS</h2></strong>' +
                                     '<h3>Purpose of Loan</h3>' +
                                     '<div class="row">' +
                                         '<div class="col">' +
@@ -1520,7 +1030,7 @@
 
                             '<div class="panel panel-default" id="credit">' +
                                 '<div class="panel-body">' +
-                                    '<h2 class="text-success"><strong>CREDIT / FINANCIAL INFORMATION</strong></h2>' +
+                                    '<strong><h2 class="text-success">CREDIT / FINANCIAL INFORMATION</h2></strong>' +
                                     '<div class="row">' +
                                         '<div class="col-lg-6 form-repeat-box-parent">' +
                                             '<h3>Bank Accounts</h3>' +
@@ -1582,7 +1092,7 @@
 
                             '<div class="panel panel-default">' +
                                 '<div class="panel-body">' +
-                                    '<h2 class="text-success"><strong>TRADE AND OTHER REFERENCES</strong></h2>' +
+                                    '<strong><h2 class="text-success">TRADE AND OTHER REFERENCES</h2></strong>' +
                                     '<div class="form-repeat-box-parent">' +
                                         '<div class="form-repeat-box trade-reference-info" data-title="Trade and other reference">' +
                                             '<div class="row form-repeater">' +
@@ -1614,7 +1124,7 @@
 
                             '<div class="panel panel-default">' +
                                 '<div class="panel-body reference-ids" data-title="Reference ID\'s / Documents">' +
-                                    '<h2 class="text-success"><strong>REFERENCE ID\'s / DOCUMENTS</strong></h2>' +
+                                    '<strong><h2 class="text-success">REFERENCE ID\'s / DOCUMENTS</h2></strong>' +
                                     '<div class="row">' +
                                         '<div class="col-lg-6 img-box">' +
                                             '<div class="form-group">' +
@@ -1670,12 +1180,21 @@
 
                             '<div class="panel panel-default">' +
                                 '<div class="panel-body">' +
-                                    '<h2 class="text-success"><strong>TERMS</strong></h2>' +
+                                    '<strong><h2 class="text-success">TERMS</h2></strong>' +
                                     '<div class="row">' +
                                         '<div class="col">' +
                                             '<div class="bg-muted p-4">' +
-                                                loanProductDiscolsure +
-                                                '<div class="text-center i-checks"><label><input type="checkbox" class="form-control" id="terms_agree">&nbsp; Naiintindihan</label></div>' +
+                                                    loanProductDiscolsure +
+
+                                                // '<strong>Naiintindihan ng humihiram na eto ay market testing sa pakikipag ugnayan ng Agrabah at CARD BDSFI na kung saan:</strong>' +
+                                                // '<br>' +
+                                                // '<br>' +
+                                                // '<p>1. Eto ay pilot testing/market testing na kung saan maaring one time lang ang pag hiram at ang mga susunod na pag hiram ay sa CARD BANK or ibang insitutition na ng CARD MRI pwedeng gawin</p>' +
+                                                // '<p>2. Ang hinihiram ay babayaran sa loob ng tatlong (3) buwan na may voluntary contribution na 2.5% ng prinsipal kada buwan, Kaugnay nito kung may pambayad na ang humihiram bago sumapit ang ikatlong buwan, maari nila itong bayaran ng buo or "partial"</p>' +
+                                                // '<p>3. Pumapayag at naiintindihan ng humihiram na ang disbursement at collection ay via Konect2 CARD, CARD Sulit Padala or GCASH. Ang ACCOUNT Number ng CARD BDSFI na kung saan maari itong bayaran ay ibibigay sa humhiram matapos "madisburse" and pera."</p>' +
+                                                // '<div class="form-group">' +
+                                                    '<div class="text-center i-checks"><label><input type="checkbox" class="form-control" id="terms_agree">&nbsp; Naiintindihan</label></div>' +
+                                                '</div>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -1684,17 +1203,12 @@
 
                         '');
 
+
                         checkBxInit();
 
-                        $('.dob-input').datepicker({
-                            startView: 2,
-                            todayBtn: false,
-                            keyboardNavigation: false,
-                            forceParse: false,
-                            autoclose: true,
-                            format: "mm/dd/yyyy"
-                        });
 
+                        modal.find('.modal-title').text('Loan Application Details');
+                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
                         modal.modal({backdrop: 'static', keyboard: false});
 
                         {{--swal({--}}
@@ -1790,26 +1304,6 @@
                             repeater.last().remove();
                         }
                         break;
-                    case 'add-asset':
-                        assetsBox.append('' +
-                            '<div class="repeater-item">' +
-                            '<div class="row mb-2">' +
-                            '<div class="col-12 col-lg-4">' +
-                            '<input type="text" name="asset_name" class="form-control required" data-title="Other assets aside from collateral" placeholder="Other assets aside from collateral">' +
-                            '</div>' +
-                            '<div class="col-12 col-lg-4">' +
-                            '<input type="text" name="asset_location" class="form-control required" data-title="Location/Description" placeholder="Location/Description">' +
-                            '</div>' +
-                            '<div class="col-12 col-lg-4">' +
-                            '<input type="text" name="asset_size" class="form-control required" data-title="Size(sq.m.) Estimated Value" placeholder="Size(sq.m.) Estimated Value">' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '');
-                        break;
-                    case 'remove-asset':
-                        assetsBox.find('.repeater-item').last().remove();
-                        break;
                 }
             });
 
@@ -1829,18 +1323,10 @@
                 }
             });
 
-            $(document).on('keyup', '.row-input', function(){
-                computeMonthlyTable();
-            });
-
-            // $('.row-input').keyup(function(){
-            //     computeMonthlyTable();
-            // });
-
             function getList(type, term, amount) {
-                // console.log('type: ' + type);
-                // console.log('term: ' + term);
-                // console.log('amount: ' + numeral(amount).format('0'));
+                console.log('type: ' + type);
+                console.log('term: ' + term);
+                console.log('amount: ' + numeral(amount).format('0'));
                 var list = new Array();
                 jQuery.ajaxSetup({async: false});
                 $.get('{!! route('loan-product-list-get') !!}', {
@@ -1848,9 +1334,9 @@
                     term: term,
                     amount: amount
                 }, function (data) {
-                    // console.log(data);
+                    console.log(data);
                     for (var a = 0; a < data.length; a++) {
-                        // console.log(data[a].provider.profile.image);
+                        console.log(data[a].provider.profile.image);
                         var img = (data[a].provider.profile.image === null) ? '<img alt="image" class="img-fluid" style="width: 200px;" src="/img/blank-profile.jpg">': '<img alt="image" class="img-fluid" style="width: 200px;" src="'+ data[a].provider.profile.image +'">';
                         list.push('' +
                             '<tr>' +
@@ -1945,64 +1431,6 @@
                     }
                 });
                 return status;
-            }
-
-            function computeMonthlyTable() {
-                var rowAAIncome = parseInt($('#rowa-a-income').val() || 0);
-                var rowABIncome = parseInt($('#rowa-b-income').val() || 0);
-                var rowATotal = $('#rowa-total');
-
-                var rowBAIncome = parseInt($('#rowb-a-income').val() || 0);
-                var rowBBIncome = parseInt($('#rowb-b-income').val() || 0);
-                var rowBTotal = $('#rowb-total');
-
-                var rowCIncome = parseInt($('#rowc-income').val() || 0);
-                var rowDIncome = parseInt($('#rowd-income').val() || 0);
-
-                var rowABCDTotal = $('#rowabcd-total');
-
-                var rowEExpense = parseInt($('#rowe-expense').val() || 0);
-                var rowFExpense = parseInt($('#rowf-expense').val() || 0);
-                var rowEFTotal = $('#rowef-total');
-
-                var totalIncome = $('#total-income');
-                var rowASum = 0;
-                var rowBSum = 0;
-                var rowABCDSum = 0;
-                var rowEFSum = 0;
-                var totalIncomeSum = 0;
-
-                rowASum += rowAAIncome;
-                rowASum += rowABIncome;
-                rowATotal.val(rowASum);
-                // rowATotal.val(numeral(rowASum).format('0,0'));
-
-                rowBSum += rowBAIncome;
-                rowBSum += rowBBIncome;
-                rowBTotal.val(rowBSum);
-                // rowBTotal.val(numeral(rowBSum).format('0,0.00'));
-
-                rowABCDSum += rowAAIncome;
-                rowABCDSum += rowABIncome;
-                rowABCDSum += rowBAIncome;
-                rowABCDSum += rowBBIncome;
-                rowABCDSum += rowCIncome;
-                rowABCDSum += rowDIncome;
-
-                rowABCDTotal.val(rowABCDSum);
-                // rowABCTotal.val(numeral(rowABCSum).format('0,0.00'));
-
-                rowEFSum += rowEExpense;
-                rowEFSum += rowFExpense;
-
-                rowEFTotal.val(rowEExpense + rowFExpense);
-                // rowDETotal.val(numeral(rowDExpense + rowEExpense).format('0,0.00'));
-
-                totalIncomeSum += rowABCDSum;
-                totalIncomeSum -= rowEFSum;
-
-                totalIncome.val(totalIncomeSum);
-                // totalIncome.val(numeral(totalIncomeSum).format('0,0.00'));
             }
 
         });

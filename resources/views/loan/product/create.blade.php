@@ -112,7 +112,7 @@
                                         <td id="total_interest_amount" class="text-right">0</td>
                                     </tr>
                                     <tr>
-                                        <td>Service Fee</td>
+                                        <td>Agrabah Ventures Service Fee</td>
                                         <td id="service_fee" class="text-right money">{{ loanServiceFee() }}</td>
                                     </tr>
                                     <tr>
