@@ -75,7 +75,15 @@
                                 </li>
                             @endforeach
                         </ul>
-
+                    @elseif($sInfo[2] == 'Rented')
+                        <ul>
+                            <li> Landlord info:
+                                <ul>
+{{--                                    <li>Address: {{ $sInfo[3][0] }}</li>--}}
+{{--                                    <li>Contact: {{ $sInfo[3][1] }}</li>--}}
+                                </ul>
+                            </li>
+                        </ul>
                     @else
                         {{ $sInfo[2] }}
                     @endif
@@ -91,7 +99,23 @@
                 <td style="vertical-align:top; text-align: center;">{{ $sInfo[2] }}</td>
             @endforeach
             @foreach($data->details->income_asset_info as $sInfo)
-                <td style="vertical-align:top; text-align: center;">&#8369; {{ number_format($sInfo[2], 2) }}</td>
+                <td style="vertical-align:top; text-align: center;">
+                    @if($sInfo[0] == 'assets')
+                        <ul>
+                            @foreach($sInfo[2] as $asset)
+                                <li>
+                                    <ul>
+                                        <li>{{ $asset[0] }}</li>
+                                        <li>{{ $asset[1] }}</li>
+                                        <li>{{ $asset[2] }}</li>
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        &#8369; {{ number_format($sInfo[2], 2) }}
+                    @endif
+                </td>
             @endforeach
         </tr>
         </tbody>
