@@ -337,6 +337,8 @@ class PublicController extends Controller
             ->with('borrower', 'details')
             ->get();
 
+//        return $data;
+
         return Excel::download(new FarmersExport($data), now()->format('(Y-m-d)').' '.$status.' Loan Report.xlsx');
     }
 

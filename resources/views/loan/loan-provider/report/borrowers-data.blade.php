@@ -25,25 +25,25 @@
             <th style="text-align: center; font-weight: bold; background: #b8bdc2;" rowspan="2">SSS/GSIS #</th>
             <th style="text-align: center; font-weight: bold; background: #b8bdc2;" rowspan="2">Educational Attainment</th>
             <th style="text-align: center; font-weight: bold; background: #82878c;" colspan="{{ sizeof($data->borrower->profile->secondary_info) }}">Secondary Information</th>
-            <th style="text-align: center; font-weight: bold; background: #b8bdc2;" colspan="{{ sizeof($data->borrower->profile->spouse_comaker_info) }}">Spouse / Co-Maker Information</th>
-            <th style="text-align: center; font-weight: bold; background: #82878c;" colspan="{{ sizeof($data->borrower->profile->farming_info) }}">Farming Info</th>
-            <th style="text-align: center; font-weight: bold; background: #b8bdc2;" colspan="{{ sizeof($data->borrower->profile->employment_info[0][2]) -1 }}">Employment Info</th>
-            <th style="text-align: center; font-weight: bold; background: #82878c;" colspan="{{ sizeof($data->borrower->profile->income_asset_info) }}">Income / Asset Info</th>
+            <th style="text-align: center; font-weight: bold; background: #b8bdc2;" colspan="{{ sizeof($data->details->spouse_comaker_info) }}">Spouse / Co-Maker Information</th>
+            <th style="text-align: center; font-weight: bold; background: #82878c;" colspan="{{ sizeof($data->details->farming_info) }}">Farming Info</th>
+            <th style="text-align: center; font-weight: bold; background: #b8bdc2;" colspan="{{ sizeof($data->details->employment_info[0][2]) -1 }}">Employment Info</th>
+            <th style="text-align: center; font-weight: bold; background: #82878c;" colspan="{{ sizeof($data->details->income_asset_info) }}">Income / Asset Info</th>
         </tr>
         <tr style="background: #0a0a0a;">
             @foreach($data->borrower->profile->secondary_info as $sInfo)
                 <th style="text-align: center; background: #82878c;">{{ $sInfo[1] }}</th>
             @endforeach
-            @foreach($data->borrower->profile->spouse_comaker_info as $sInfo)
+            @foreach($data->details->spouse_comaker_info as $sInfo)
                 <th style="text-align: center; background: #b8bdc2;">{{ $sInfo[1] }}</th>
             @endforeach
-            @foreach($data->borrower->profile->farming_info as $sInfo)
+            @foreach($data->details->farming_info as $sInfo)
                 <th style="text-align: center; background: #82878c;">{{ $sInfo[1] }}</th>
             @endforeach
-            @foreach(array_slice($data->borrower->profile->employment_info[0][2], 1) as $sInfo)
+            @foreach(array_slice($data->details->employment_info[0][2], 1) as $sInfo)
                 <th style="text-align: center; background: #b8bdc2;">{{ $sInfo[1] }}</th>
             @endforeach
-            @foreach($data->borrower->profile->income_asset_info as $sInfo)
+            @foreach($data->details->income_asset_info as $sInfo)
                 <th style="text-align: center; background: #82878c;">{{ $sInfo[1] }}</th>
             @endforeach
         </tr>
@@ -63,18 +63,34 @@
             <td style="vertical-align:top;">{{ $data->borrower->profile->sss_gsis }}</td>
             <td style="vertical-align:top;">{{ $data->borrower->profile->education }}</td>
             @foreach($data->borrower->profile->secondary_info as $sInfo)
+                <td style="vertical-align:top; text-align: center;">
+                    @if($sInfo[0] == 'dependents')
+                        <ul>
+                            @foreach($sInfo[2] as $dependent)
+                                <li>
+                                    <ul>
+                                        <li>{{ $dependent[0] }}</li>
+                                        <li>{{ $dependent[1] }}</li>
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                    @else
+                        {{ $sInfo[2] }}
+                    @endif
+                </td>
+            @endforeach
+            @foreach($data->details->spouse_comaker_info as $sInfo)
                 <td style="vertical-align:top; text-align: center;">{{ $sInfo[2] }}</td>
             @endforeach
-            @foreach($data->borrower->profile->spouse_comaker_info as $sInfo)
+            @foreach($data->details->farming_info as $sInfo)
                 <td style="vertical-align:top; text-align: center;">{{ $sInfo[2] }}</td>
             @endforeach
-            @foreach($data->borrower->profile->farming_info as $sInfo)
+            @foreach(array_slice($data->details->employment_info[0][2], 1) as $sInfo)
                 <td style="vertical-align:top; text-align: center;">{{ $sInfo[2] }}</td>
             @endforeach
-            @foreach(array_slice($data->borrower->profile->employment_info[0][2], 1) as $sInfo)
-                <td style="vertical-align:top; text-align: center;">{{ $sInfo[2] }}</td>
-            @endforeach
-            @foreach($data->borrower->profile->income_asset_info as $sInfo)
+            @foreach($data->details->income_asset_info as $sInfo)
                 <td style="vertical-align:top; text-align: center;">&#8369; {{ number_format($sInfo[2], 2) }}</td>
             @endforeach
         </tr>
