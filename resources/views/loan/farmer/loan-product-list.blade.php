@@ -459,10 +459,12 @@
             });
 
             $('#term_value').html(term_slider.noUiSlider.get());
-
+            var timer;
             term_slider.noUiSlider.on('slide', function () {
                 $('#term_value').html(term_slider.noUiSlider.get())
-                getList($('select[name=type]').val(), term_slider.noUiSlider.get(), range_slider.noUiSlider.get())
+                timer = setTimeout(function(){
+                    getList($('select[name=type]').val(), term_slider.noUiSlider.get(), range_slider.noUiSlider.get())
+                }, 1000);
             });
 
             var range_slider = document.getElementById('amount_slider');
@@ -494,7 +496,9 @@
             range_slider.noUiSlider.on('slide', function () {
                 var range_value = range_slider.noUiSlider.get();
                 $('#amount_value').html(numberWithCommas(range_value[0]) + " - " + numberWithCommas(range_value[1]));
-                getList($('select[name=type]').val(), term_slider.noUiSlider.get(), range_value)
+                timer = setTimeout(function(){
+                    getList($('select[name=type]').val(), term_slider.noUiSlider.get(), range_value)
+                }, 1000);
             });
 
             $(document).on('ifClicked', 'input[name=employment]', function () {
