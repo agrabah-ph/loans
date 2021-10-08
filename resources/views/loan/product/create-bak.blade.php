@@ -31,167 +31,133 @@
         {{--        {{ Form::open(array('route'=>array('farmer.store'), 'method'=>'post', 'id'=>'form')) }}--}}
 
         {{ Form::open(['route'=>'products.store','id'=>'form']) }}
-        @csrf
         <div class="row">
-            <div class="col-lg-12">
-
+            <div class="col-sm-6">
+                @csrf
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Information
                     </div>
                     <div class="panel-body">
+                        <div class="form-group">
+                            <label>Financial Production Name</label>
+                            {{ Form::text('name', null, array('class'=>'form-control','required')) }}
+                        </div>
+                        <div class="form-group">
+                            <label>Financial Product Type</label>
+                            {{ Form::select('type', $types, null, array('class'=>'form-control')) }}
+                        </div>
+                        <div class="form-group">
+                            <label>Product Description</label>
+                            <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize"
+                                      style="resize: none"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Loanable Amount</label>
+                            <input name="amount" id="amount" type="text" class="form-control money changeSchedule">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Terms</label>
+                            <input name="duration" id="duration" type="text" data-mask="0#" class="form-control changeSchedule">
+                        </div>
+                        <div class="form-group">
+                            <label>Interest Rate (%)</label>
+                            <input name="interest_rate" id="interest_rate" type="text"  class="form-control changeSchedule decimal">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="payment_schedule_input" id="payment_schedule_input">
+            </div>
+
+            <div class="col-sm-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Payment Schedules
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Timing</label>
+                            <select name="timing" id="timing" class="form-control changeSchedule">
+                                <option value="day">Day</option>
+                                <option value="week">Weeks</option>
+                                <option value="monthly" selected>Monthly</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Allowance</label>
+                                    <input name="allowance" id="allowance" type="text" data-mask="0#" value="1" class="form-control changeSchedule">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>1st Payment Allowance</label>
+                                    <input name="first_allowance" id="first_allowance" type="text" data-mask="0#" value="0" class="form-control changeSchedule">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row schedule_inputs">
+                            <div class="col">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td>Assuming Approved Date</td>
+                                        <td class="text-right">{{now()->toFormattedDateString()}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interest</td>
+                                        <td id="total_interest_amount" class="text-right">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Agrabah Ventures Service Fee</td>
+                                        <td id="service_fee" class="text-right money">{{ loanServiceFee() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Payable Amount</td>
+                                        <td id="total_loan_amount" class="text-right">0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Due Date</th>
+                                <th class="text-right">Amount</th>
+{{--                                <th class="text-right">Action</th>--}}
+                            </tr>
+                            </thead>
+                            <tbody id="payment_schedule_review">
+                                <tr>
+                                    <td colspan="99">--</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <div class="row">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Financial Production Name</label>
-                                            {{ Form::text('name', null, array('class'=>'form-control','required')) }}
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Financial Product Type</label>
-                                            {{ Form::select('type', $types, null, array('class'=>'form-control')) }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Product Description</label>
-                                    <div class="summernote"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Product Description</label>
-                                    <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize" style="resize: none"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Product Application Requirements</label>
-                                    <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize" style="resize: none"></textarea>
-                                </div>
-
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label>Disclosure</label>
                                     <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control">LOAN APPLICATION AGREEMENT
 
-                                        The borrower understand that this loan product is specifically made for seaweed farmers.
-                                        Whereas :
-                                        1. (Loan Provider) will lend twenty thousand pesos (P20,000).
-                                        2. The loan will be used in growing the seaweed production.
-                                        3. The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.
-                                        4. Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer, Cebuana Lhuillier, GCash or through Agrabah account.
-                                    </textarea>
+The borrower understand that this loan product is specifically made for seaweed farmers.
+Whereas :
+1. (Loan Provider) will lend twenty thousand pesos (P20,000).
+2. The loan will be used in growing the seaweed production.
+3. The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.
+4. Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer, Cebuana Lhuillier, GCash or through Agrabah account.</textarea>
                                 </div>
-
-
-
-
-                            </div>
-
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Loanable Amount</label>
-                                            <input name="amount" id="amount" type="text" class="form-control money changeSchedule">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Loan Terms</label>
-                                            <input name="duration" id="duration" type="text" data-mask="0#" class="form-control changeSchedule">
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Interest Rate (%)</label>
-                                            <input name="interest_rate" id="interest_rate" type="text"  class="form-control changeSchedule decimal">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <input type="hidden" name="payment_schedule_input" id="payment_schedule_input">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Payment Schedules
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <label>Timing</label>
-                                            <select name="timing" id="timing" class="form-control changeSchedule">
-                                                <option value="day">Day</option>
-                                                <option value="week">Weeks</option>
-                                                <option value="monthly" selected>Monthly</option>
-                                            </select>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Allowance</label>
-                                                    <input name="allowance" id="allowance" type="text" data-mask="0#" value="1" class="form-control changeSchedule">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>1st Payment Allowance</label>
-                                                    <input name="first_allowance" id="first_allowance" type="text" data-mask="0#" value="0" class="form-control changeSchedule">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row schedule_inputs">
-                                            <div class="col">
-                                                <table class="table table-bordered">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>Assuming Approved Date</td>
-                                                        <td class="text-right">{{now()->toFormattedDateString()}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Interest</td>
-                                                        <td id="total_interest_amount" class="text-right">0</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Agrabah Ventures Service Fee</td>
-                                                        <td id="service_fee" class="text-right money">{{ loanServiceFee() }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Total Payable Amount</td>
-                                                        <td id="total_loan_amount" class="text-right">0</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>Due Date</th>
-                                                <th class="text-right">Amount</th>
-                                                {{--                                <th class="text-right">Action</th>--}}
-                                            </tr>
-                                            </thead>
-                                            <tbody id="payment_schedule_review">
-                                            <tr>
-                                                <td colspan="99">--</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-        </div>
 
+        </div>
         {{ Form::close() }}
 
         <div class="modal inmodal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true"
@@ -219,7 +185,6 @@
 
 @section('styles')
     {!! Html::style('/css/template/plugins/iCheck/custom.css') !!}
-    {!! Html::style('/css/template/plugins/summernote/summernote-bs4.css') !!}
     {{--{!! Html::style('') !!}--}}
     {{--    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
     {{--    {!! Html::style('/css/template/plugins/sweetalert/sweetalert.css') !!}--}}
@@ -227,7 +192,6 @@
 
 @section('scripts')
     {!! Html::script('/js/template/plugins/iCheck/icheck.min.js') !!}
-    {!! Html::script('/js/template/plugins/summernote/summernote-bs4.js') !!}
 {{--    {!! Html::script('/js/template/plugins/jqueryMask/jquery.mask.min.js') !!}--}}
     {!! Html::script('https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js') !!}
     {{--    {!! Html::script('') !!}--}}
@@ -312,8 +276,6 @@
         });
 
         $(document).ready(function () {
-            $('.summernote').summernote();
-
             populateSchedule();
             // $('.money').mask("#,##0.00", {reverse: true});
             $(".money").inputmask({
