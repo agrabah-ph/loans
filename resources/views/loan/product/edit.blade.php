@@ -137,8 +137,14 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>Disclosure</label>
-                                        <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control">{{$loanProduct->disclosure}}</textarea>
+                                        <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control summernote">{{$loanProduct->disclosure}}</textarea>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    {!! $loanProduct->disclosure !!}
                                 </div>
                             </div>
                         </div>
@@ -171,6 +177,7 @@
 
 @section('styles')
     {!! Html::style('/css/template/plugins/iCheck/custom.css') !!}
+            {!! Html::style('/css/template/plugins/summernote/summernote-bs4.css') !!}
     {{--{!! Html::style('') !!}--}}
     {{--    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
     {{--    {!! Html::style('/css/template/plugins/sweetalert/sweetalert.css') !!}--}}
@@ -178,6 +185,7 @@
 
 @section('scripts')
     {!! Html::script('/js/template/plugins/iCheck/icheck.min.js') !!}
+            {!! Html::script('/js/template/plugins/summernote/summernote-bs4.js') !!}
 {{--    {!! Html::script('/js/template/plugins/jqueryMask/jquery.mask.min.js') !!}--}}
             {!! Html::script('https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js') !!}
     {{--    {!! Html::script('') !!}--}}
@@ -261,6 +269,16 @@
         });
 
         $(document).ready(function(){
+            $('.summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
 
             populateSchedule();
             // $('.money').mask("#,##0.00", {reverse: true});

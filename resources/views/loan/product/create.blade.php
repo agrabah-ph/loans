@@ -60,29 +60,25 @@
 
                                 <div class="form-group">
                                     <label>Product Description</label>
-                                    <div class="summernote"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Product Description</label>
-                                    <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize" style="resize: none"></textarea>
+                                    <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none"></textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Product Application Requirements</label>
-                                    <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize" style="resize: none"></textarea>
+                                    <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none"></textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Disclosure</label>
-                                    <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control">LOAN APPLICATION AGREEMENT
-
-                                        The borrower understand that this loan product is specifically made for seaweed farmers.
-                                        Whereas :
-                                        1. (Loan Provider) will lend twenty thousand pesos (P20,000).
-                                        2. The loan will be used in growing the seaweed production.
-                                        3. The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.
-                                        4. Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer, Cebuana Lhuillier, GCash or through Agrabah account.
+                                    <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control summernote">
+                                        <p><b>LOAN APPLICATION AGREEMENT
+</b></p><p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The borrower understand that this loan product is specifically made for seaweed farmers. </p><p>Whereas :
+</p><ol><li style="line-height: 1.4;">(Loan Provider) will lend twenty thousand pesos (P20,000).
+</li><li style="line-height: 1.4;">The loan will be used in growing the seaweed production.
+</li><li style="line-height: 1.4;">The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.
+</li><li style="line-height: 1.4;">Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer,&nbsp; Cebuana Lhuillier,&nbsp; GCash or through Agrabah account.
+                                    </li></ol>
                                     </textarea>
                                 </div>
 
@@ -114,7 +110,7 @@
                                 </div>
 
                                 <input type="hidden" name="payment_schedule_input" id="payment_schedule_input">
-                                <div class="panel panel-default">
+                                <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         Payment Schedules
                                     </div>
@@ -312,7 +308,16 @@
         });
 
         $(document).ready(function () {
-            $('.summernote').summernote();
+            $('.summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
 
             populateSchedule();
             // $('.money').mask("#,##0.00", {reverse: true});
