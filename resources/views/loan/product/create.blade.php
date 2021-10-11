@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-lg-12">
 
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         Information
                     </div>
@@ -49,27 +49,44 @@
                                             <label>Financial Production Name</label>
                                             {{ Form::text('name', null, array('class'=>'form-control','required')) }}
                                         </div>
-                                    </div>
-                                    <div class="col">
                                         <div class="form-group">
                                             <label>Financial Product Type</label>
                                             {{ Form::select('type', $types, null, array('class'=>'form-control')) }}
                                         </div>
                                     </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>File Attachment</label>
+                                            {{ Form::file('pdf') }}
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Product Description</label>
-                                    <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none"></textarea>
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Product Description
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none"></textarea>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Product Application Requirements</label>
-                                    <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none"></textarea>
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Product Application Requirements
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none">
+                                            <p><b>LIST OF REQUIREMENTS</b></p><ul><li>2 Valid Government issued ID's</li><li>Proof of Billing</li></ul>
+                                        </textarea>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Disclosure</label>
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Disclosure
+                                    </div>
+                                    <div class="panel-body no-padding">
                                     <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control summernote">
                                         <p><b>LOAN APPLICATION AGREEMENT
 </b></p><p>
@@ -80,10 +97,8 @@
 </li><li style="line-height: 1.4;">Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer,&nbsp; Cebuana Lhuillier,&nbsp; GCash or through Agrabah account.
                                     </li></ol>
                                     </textarea>
+                                    </div>
                                 </div>
-
-
-
 
                             </div>
 
@@ -110,7 +125,7 @@
                                 </div>
 
                                 <input type="hidden" name="payment_schedule_input" id="payment_schedule_input">
-                                <div class="panel panel-primary">
+                                <div class="panel panel-success">
                                     <div class="panel-heading">
                                         Payment Schedules
                                     </div>
@@ -161,7 +176,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered table-success">
                                             <thead>
                                             <tr>
                                                 <th>Due Date</th>

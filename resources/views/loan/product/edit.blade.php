@@ -24,7 +24,7 @@
             {{ Form::open(['route'=>['products.destroy', $loanProduct->id],'id'=>'delete_form','method'=>'delete']) }}
                 <button type="button" class="btn btn-danger btn-action" data-action="delete">Delete</button>
                 <button type="button" class="btn btn-primary btn-action" data-action="store">Update</button>
-                {{ Form::close() }}
+            {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -150,6 +150,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         {{ Form::close() }}
 
     </div>
