@@ -30,7 +30,7 @@
         {{--        {{ Form::open(array('route'=>array('farmer.store'), array('id'=>'form'))) }}--}}
         {{--        {{ Form::open(array('route'=>array('farmer.store'), 'method'=>'post', 'id'=>'form')) }}--}}
 
-        {{ Form::open(['route'=>'products.store','id'=>'form']) }}
+        {{ Form::open(['route'=>'products.store','id'=>'form', 'files'=>true]) }}
         @csrf
         <div class="row">
             <div class="col-lg-12">
@@ -55,10 +55,10 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group">
-                                            <label>File Attachment</label>
-                                            {{ Form::file('pdf') }}
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label>File Attachment</label>--}}
+{{--                                            {{ Form::file('attachment', array('accept'=>'application/pdf')) }}--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
 
