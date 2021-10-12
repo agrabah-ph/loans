@@ -88,14 +88,15 @@
                                     </div>
                                     <div class="panel-body no-padding">
                                     <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control summernote">
-                                        <p><b>LOAN APPLICATION AGREEMENT
-</b></p><p>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The borrower understand that this loan product is specifically made for seaweed farmers. </p><p>Whereas :
-</p><ol><li style="line-height: 1.4;">(Loan Provider) will lend twenty thousand pesos (P20,000).
-</li><li style="line-height: 1.4;">The loan will be used in growing the seaweed production.
-</li><li style="line-height: 1.4;">The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.
-</li><li style="line-height: 1.4;">Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer,&nbsp; Cebuana Lhuillier,&nbsp; GCash or through Agrabah account.
-                                    </li></ol>
+                                        <p><b>LOAN APPLICATION AGREEMENT</b></p>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The borrower understand that this loan product is specifically made for seaweed farmers. </p>
+                                        <p>Whereas :</p>
+                                        <ol>
+                                            <li style="line-height: 1.4;">(Loan Provider) will lend twenty thousand pesos (P20,000).</li>
+                                            <li style="line-height: 1.4;">The loan will be used in growing the seaweed production.</li>
+                                            <li style="line-height: 1.4;">The loan duration is for the period of three (3) months with voluntary contribution of 3% fixed rate interest per month.</li>
+                                            <li style="line-height: 1.4;">Agrees and understand that the Disbursement and Collection of the said amount will be through Bank transfer,&nbsp; Cebuana Lhuillier,&nbsp; GCash or through Agrabah account.</li>
+                                        </ol>
                                     </textarea>
                                     </div>
                                 </div>
