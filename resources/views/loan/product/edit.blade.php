@@ -56,12 +56,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label>File Attachment</label><br>
-{{--                                            <a href="{{ asset($loanProduct->attachment) }}" target="_blank">Attachment Form</a>--}}
-{{--                                            <a href="{{ $loanProduct->attachment }}" target="_blank">Attachment Form</a>--}}
-{{--                                            <embed src="{{ asset('pdf/example.pdf') }}" width="100%" height="1000" alt="pdf" />--}}
-                                            <img src="{{ asset('img/a1.jpg') }}" alt="">
-{{--                                            <embed src="{{ asset('pdf/example.pdf') }}" width="200" alt="pdf" />--}}
-{{--                                            <embed src="{{ asset($data->profile->image) }}" width="100%" height="1000" alt="pdf" />--}}
+                                            <button type="button" class="btn btn-white btn-action" data-action="view-attachment"> <i class="fa fa-file-pdf-o text-danger"></i> PDF Attachment</button>
+{{--                                            <embed src="{{ asset($loanProduct->attachment) }}" width="100%" alt="pdf" />--}}
                                         </div>
                                     </div>
                                 </div>
@@ -361,6 +357,14 @@
                         // console.log($('input[name=pwd]').val());
                         // console.log($('input[name=indigenous]').val());
                         // console.log($('input[name=livelihood]').val());
+                        break;
+                    case 'view-attachment':
+                        modal.find('.modal-title').text('File Attachment');
+                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-dialog-centered modal-lg');
+                        modal.find('.modal-body').empty().append('' +
+                            '<embed src="{!! asset($loanProduct->attachment) !!}" width="100%" height="500" alt="pdf" />' +
+                        '');
+                        modal.modal({backdrop: 'static', keyboard: false});
                         break;
                 }
             });

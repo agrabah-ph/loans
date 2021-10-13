@@ -52,12 +52,6 @@ class LoanProductController extends Controller
 
 
         if ($file = $request->file('attachment')) {
-//            $destinationPath = '/public/loan-product/attachments/';
-//            $pdf = $file->getClientOriginalName();
-//            Storage::put($destinationPath, $pdf.'.pdf');
-//            Storage::putFileAs('avatars', $request->file('avatar'), $request->user()->id);
-//            $array['attachment'] = public_path('storage/'.$destinationPath.''.$pdf);
-
             $destinationPath = '/loan-product/attachments/';
             $fileName = stringSlug($request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
             Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
