@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Financial Production Name</label>
                                             {{ Form::text('name', $loanProduct->name, array('class'=>'form-control','required')) }}
@@ -53,15 +53,19 @@
                                             {{ Form::select('type', $types, $loanProduct->loan_type_id, array('class'=>'form-control')) }}
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>File Attachment</label>
-                                            <input accept="application/pdf" name="attachment" type="file" style="display: none;">
-
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-white btn-action" data-action="view-attachment"> <i class="fa fa-file-pdf-o text-danger"></i> PDF Attachment</button>
-                                                <button type="button" class="btn btn-danger btn-action" data-action="remove-attachment"><i class="fa fa-times"></i></button>
-                                            </div>
+                                            @if($loanProduct->attachment == null)
+                                                <input accept="application/pdf" name="attachment" type="file">
+                                            @else
+                                                <input accept="application/pdf" name="attachment" type="file" style="display: none;">
+{{--                                                <input accept="application/pdf" name="attachment" type="file" class="sr-only">--}}
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-white btn-action" data-action="view-attachment"> <i class="fa fa-file-pdf-o text-danger"></i> PDF Attachment</button>
+                                                    <button type="button" class="btn btn-danger btn-action" data-action="remove-attachment"><i class="fa fa-times"></i></button>
+                                                </div>
+                                            @endif
 {{--                                            <embed src="{{ asset($loanProduct->attachment) }}" width="100%" alt="pdf" />--}}
                                         </div>
                                     </div>
@@ -376,6 +380,8 @@
                         var box = $(this).closest('.form-group');
                         box.find('.btn-group').hide();
                         box.find('input[name=attachment]').show();
+                        // box.find('input[name=attachment]').removeClass('sr-only');
+                        // box.append('<input accept="application/pdf" name="attachment" type="file">');
                         break;
                 }
             });

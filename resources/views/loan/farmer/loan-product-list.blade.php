@@ -113,7 +113,9 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title"></h4>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body">
+                    
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="modal-save-btn">Apply</button>
@@ -420,8 +422,6 @@
                 placement: 'bottom',
                 startView: 2
             });
-
-
 
             $(document).on('change', '#spouse_date_of_birth', function(){
                 var dob = moment($(this).val());
