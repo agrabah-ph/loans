@@ -30,7 +30,7 @@
     </div>
 
     <div id="app" class="wrapper wrapper-content">
-        {{ Form::open(['route'=>['products.update', $loanProduct->id],'id'=>'form','method'=>'put']) }}@csrf
+        {{ Form::open(['route'=>['products.update', $loanProduct->id],'id'=>'form','method'=>'put', 'enctype' => 'multipart/form-data']) }}@csrf
         <div class="row">
             <div class="col-lg-12">
 
@@ -55,8 +55,13 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label>File Attachment</label><br>
-                                            <button type="button" class="btn btn-white btn-action" data-action="view-attachment"> <i class="fa fa-file-pdf-o text-danger"></i> PDF Attachment</button>
+                                            <label>File Attachment</label>
+                                            <input accept="application/pdf" name="attachment" type="file" style="display: none;">
+
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-white btn-action" data-action="view-attachment"> <i class="fa fa-file-pdf-o text-danger"></i> PDF Attachment</button>
+                                                <button type="button" class="btn btn-danger btn-action" data-action="remove-attachment"><i class="fa fa-times"></i></button>
+                                            </div>
 {{--                                            <embed src="{{ asset($loanProduct->attachment) }}" width="100%" alt="pdf" />--}}
                                         </div>
                                     </div>
@@ -252,6 +257,7 @@
                 clearMaskOnLostFocus: false
             }
         });
+
         function numberWithCommas(x) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -320,6 +326,7 @@
             $(".money").inputmask({
                 alias:"money"
             });
+
             $(".decimal").inputmask({
                 alias: 'decimal',
                 integerDigits:3,
@@ -328,7 +335,6 @@
                 digitsOptional: true,
                 placeholder: "0"
             });
-
 
             $(document).on('click', '.btn-action', function(){
                 var modal = $('#modal');
@@ -365,6 +371,11 @@
                             '<embed src="{!! asset($loanProduct->attachment) !!}" width="100%" height="500" alt="pdf" />' +
                         '');
                         modal.modal({backdrop: 'static', keyboard: false});
+                        break;
+                    case 'remove-attachment':
+                        var box = $(this).closest('.form-group');
+                        box.find('.btn-group').hide();
+                        box.find('input[name=attachment]').show();
                         break;
                 }
             });

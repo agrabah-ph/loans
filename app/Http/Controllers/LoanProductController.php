@@ -44,20 +44,17 @@ class LoanProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
 //        dd($request);
         $loanProviderId = auth()->user()->loan_provider->id;
         $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
 
-
         if ($file = $request->file('attachment')) {
             $destinationPath = '/loan-product/attachments/';
-            $fileName = stringSlug($request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
+            $fileName = stringSlug($loanProviderId.' '.$request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
             Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
             $array['attachment'] = '/storage'.$destinationPath.''.$fileName;
         }
-
 
         $array['loan_provider_id'] = $loanProviderId;
         $array['loan_type_id'] = $array['type'];
@@ -102,9 +99,18 @@ class LoanProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request);
         $loanProduct = LoanProduct::find($id);
         $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
+
+        if ($file = $request->file('attachment')) {
+            $destinationPath = '/loan-product/attachments/';
+            $fileName = stringSlug($loanProduct->loan_provider_id.' '.$request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
+            $array['attachment'] = '/storage'.$destinationPath.''.$fileName;
+        }
+
         $array['loan_type_id'] = $array['type'];
         $array['amount'] = floatval(preg_replace('/,/','', $array['amount']));
         unset($array['token']);
