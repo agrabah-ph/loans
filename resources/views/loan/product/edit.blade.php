@@ -54,10 +54,15 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        {{--                                        <div class="form-group">--}}
-                                        {{--                                            <label>File Attachment</label>--}}
-                                        {{--                                            {{ Form::file('attachment', array('accept'=>'application/pdf')) }}--}}
-                                        {{--                                        </div>--}}
+                                        <div class="form-group">
+                                            <label>File Attachment</label><br>
+{{--                                            <a href="{{ asset($loanProduct->attachment) }}" target="_blank">Attachment Form</a>--}}
+{{--                                            <a href="{{ $loanProduct->attachment }}" target="_blank">Attachment Form</a>--}}
+{{--                                            <embed src="{{ asset('pdf/example.pdf') }}" width="100%" height="1000" alt="pdf" />--}}
+                                            <img src="{{ asset('img/a1.jpg') }}" alt="">
+{{--                                            <embed src="{{ asset('pdf/example.pdf') }}" width="200" alt="pdf" />--}}
+{{--                                            <embed src="{{ asset($data->profile->image) }}" width="100%" height="1000" alt="pdf" />--}}
+                                        </div>
                                     </div>
                                 </div>
 

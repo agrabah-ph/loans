@@ -6,6 +6,7 @@ use App\Loan;
 use App\LoanProduct;
 use App\LoanType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LoanProductController extends Controller
 {
@@ -44,9 +45,26 @@ class LoanProductController extends Controller
     public function store(Request $request)
     {
         //
+//        dd($request);
         $loanProviderId = auth()->user()->loan_provider->id;
         $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
+
+
+        if ($file = $request->file('attachment')) {
+//            $destinationPath = '/public/loan-product/attachments/';
+//            $pdf = $file->getClientOriginalName();
+//            Storage::put($destinationPath, $pdf.'.pdf');
+//            Storage::putFileAs('avatars', $request->file('avatar'), $request->user()->id);
+//            $array['attachment'] = public_path('storage/'.$destinationPath.''.$pdf);
+
+            $destinationPath = '/loan-product/attachments/';
+            $fileName = stringSlug($request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
+            $array['attachment'] = '/storage'.$destinationPath.''.$fileName;
+        }
+
+
         $array['loan_provider_id'] = $loanProviderId;
         $array['loan_type_id'] = $array['type'];
         $array['amount'] = floatval(preg_replace('/,/','', $array['amount']));

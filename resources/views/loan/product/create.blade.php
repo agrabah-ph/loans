@@ -30,7 +30,8 @@
         {{--        {{ Form::open(array('route'=>array('farmer.store'), array('id'=>'form'))) }}--}}
         {{--        {{ Form::open(array('route'=>array('farmer.store'), 'method'=>'post', 'id'=>'form')) }}--}}
 
-        {{ Form::open(['route'=>'products.store','id'=>'form', 'files'=>true]) }}
+        {{ Form::open(['route'=>'products.store','id'=>'form', 'method' => 'POST', 'enctype' => 'multipart/form-data']) }}
+{{--        {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}--}}
         @csrf
         <div class="row">
             <div class="col-lg-12">
@@ -55,10 +56,10 @@
                                         </div>
                                     </div>
                                     <div class="col">
-{{--                                        <div class="form-group">--}}
-{{--                                            <label>File Attachment</label>--}}
-{{--                                            {{ Form::file('attachment', array('accept'=>'application/pdf')) }}--}}
-{{--                                        </div>--}}
+                                        <div class="form-group">
+                                            <label>File Attachment</label>
+                                            {{ Form::file('attachment', array('accept'=>'application/pdf')) }}
+                                        </div>
                                     </div>
                                 </div>
 
