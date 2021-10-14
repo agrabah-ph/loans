@@ -114,7 +114,15 @@
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    
+                    <dl class="small m-t-md">
+                        <dt>Description lists</dt>
+                        <dd>A description list is perfect for defining terms.</dd>
+                        <dt>Euismod</dt>
+                        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                        <dt>Malesuada porta</dt>
+                        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                    </dl>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -1814,6 +1822,9 @@
                     case 'remove-asset':
                         assetsBox.find('.repeater-item').last().remove();
                         break;
+                    case 'view-product':
+
+                        break;
                 }
             });
 
@@ -1871,7 +1882,8 @@
                             '<td>' + data[a].duration + ' ' + data[a].timing_name + '</td>' +
                             '<td class="text-right">' + numeral(data[a].amount).format('0,0.00') + '</td>' +
                             '<td class="project-actions">' +
-                            '<a href="#" class="btn btn-white btn-sm show_loan" data-name="' + data[a].name + '" data-provider="' + data[a].provider.profile.bank_name + '" data-amount="' + data[a].amount + '" data-type="' + data[a].type.display_name + '" data-duration="' + data[a].duration + '" data-interest_rate="' + data[a].interest_rate + '"><i class="fa fa-search"></i> View </a>' +
+                            // '<a href="#" class="btn btn-white btn-sm show_loan" data-name="' + data[a].name + '" data-provider="' + data[a].provider.profile.bank_name + '" data-amount="' + data[a].amount + '" data-type="' + data[a].type.display_name + '" data-duration="' + data[a].duration + '" data-interest_rate="' + data[a].interest_rate + '"><i class="fa fa-search"></i> View </a>' +
+                            '<button type="button" class="btn btn-white btn-sm btn-action" data-action="view-product" data-id="' + data[a].id + '"><i class="fa fa-search"></i> View </button>' +
                             '<button type="button" class="btn btn-white btn-sm show_application btn-action" data-action="apply-loan" data-id="' + data[a].id + '"><i class="fa fa-check"></i> Apply </button>' +
                             '<div class="d-none" id="disclosure_' + data[a].id + '"> ' + data[a].disclosure_html + '</div>' +
                             '</td>' +
