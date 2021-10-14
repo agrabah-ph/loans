@@ -114,15 +114,107 @@
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <dl class="small m-t-md">
-                        <dt>Description lists</dt>
-                        <dd>A description list is perfect for defining terms.</dd>
-                        <dt>Euismod</dt>
-                        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                        <dt>Malesuada porta</dt>
-                        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                    </dl>
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="ibox product-detail">
+                                <div class="ibox-content">
+
+                                    <div class="row">
+                                        <div class="col-md-5 ">
+
+                                            <div class="text-center">
+                                                <img src="{{ asset('/images/logo-2.png') }}" alt="" class="img-fluid">
+                                                <div class="m-t-md">
+                                                    <h2 class="font-bold m-b-xs">Agrabah Lending</h2>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+                                            <div class="text-center">
+                                                <div class="m-t-md">
+                                                    <h2 class="font-bold text-success mb-0">20,000.00</h2>
+                                                    <small>Loanable Amount</small>
+                                                </div>
+                                            </div>
+                                            <hr>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <dl class="small m-t-md text-center">
+                                                        <dt>Terms</dt>
+                                                        <dd>3 months</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col">
+                                                    <dl class="small m-t-md text-center">
+                                                        <dt>Interest rate</dt>
+                                                        <dd>7.5%</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col">
+                                                    <dl class="small m-t-md text-center">
+                                                        <dt>Amortization Rate</dt>
+                                                        <dd>7,166.67</dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col">
+                                                    <dl class="small m-t-md text-center">
+                                                        <dt>Amortization Type</dt>
+                                                        <dd>Monthly</dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel panel-primary">
+                                                <div class="panel-body text-center">
+                                                    <div class="m-t-md">
+                                                        <h2 class="font-bold text-info mb-0">20,000.00</h2>
+                                                        <small>Interest</small>
+                                                    </div>
+                                                    <div class="m-t-md">
+                                                        <h2 class="font-bold text-info mb-0">20,000.00</h2>
+                                                        <small>Agrabah Ventures Service Fee</small>
+                                                    </div>
+                                                    <div class="m-t-md">
+                                                        <h2 class="font-bold text-info mb-0">20,000.00</h2>
+                                                        <small>Total Payable Amount</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-7">
+
+                                            <h2 class="font-bold m-b-xs">Seaweed Production Loan</h2>
+                                            <small>Short Loan</small>
+
+                                            <div class="hr-line-solid"></div>
+
+                                            <h4>Description</h4>
+                                            <div class="small text-muted mb-2">
+                                                It is a long established fact that a reader will be distracted by the readable
+                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                            </div>
+
+                                            <h4>Requirements</h4>
+                                            <div class="small text-muted mb-2">
+                                                It is a long established fact that a reader will be distracted by the readable
+                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -1823,7 +1915,14 @@
                         assetsBox.find('.repeater-item').last().remove();
                         break;
                     case 'view-product':
+                        modal.data('type', 'loan-product-detail');
+                        modal.data('id', loanProductID);
+                        modal.find('.modal-title').text('Loan Application Details');
+                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
+                        modal.find('#modal-save-btn').addClass('d-none');
+                        // modal.find('#modal-save-btn').text('Submit Application');
 
+                        modal.modal({backdrop: 'static', keyboard: false});
                         break;
                 }
             });
@@ -1882,7 +1981,7 @@
                             '<td>' + data[a].duration + ' ' + data[a].timing_name + '</td>' +
                             '<td class="text-right">' + numeral(data[a].amount).format('0,0.00') + '</td>' +
                             '<td class="project-actions">' +
-                            // '<a href="#" class="btn btn-white btn-sm show_loan" data-name="' + data[a].name + '" data-provider="' + data[a].provider.profile.bank_name + '" data-amount="' + data[a].amount + '" data-type="' + data[a].type.display_name + '" data-duration="' + data[a].duration + '" data-interest_rate="' + data[a].interest_rate + '"><i class="fa fa-search"></i> View </a>' +
+                            '<a href="#" class="btn btn-white btn-sm show_loan" data-name="' + data[a].name + '" data-provider="' + data[a].provider.profile.bank_name + '" data-amount="' + data[a].amount + '" data-type="' + data[a].type.display_name + '" data-duration="' + data[a].duration + '" data-interest_rate="' + data[a].interest_rate + '"><i class="fa fa-search"></i> View </a>' +
                             '<button type="button" class="btn btn-white btn-sm btn-action" data-action="view-product" data-id="' + data[a].id + '"><i class="fa fa-search"></i> View </button>' +
                             '<button type="button" class="btn btn-white btn-sm show_application btn-action" data-action="apply-loan" data-id="' + data[a].id + '"><i class="fa fa-check"></i> Apply </button>' +
                             '<div class="d-none" id="disclosure_' + data[a].id + '"> ' + data[a].disclosure_html + '</div>' +

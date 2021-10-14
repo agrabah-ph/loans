@@ -324,6 +324,13 @@ class FarmerController extends Controller
         return response()->json($loanProducts);
     }
 
+    public function loanProductInfo(Request $request)
+    {
+        $data = LoanProduct::find($request->input('id'));
+
+        return response()->json($data);
+    }
+
     public function loanApply(Request $request)
     {
         $loanProduct = LoanProduct::find($request->input('id'));
