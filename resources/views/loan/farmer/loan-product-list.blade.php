@@ -114,23 +114,26 @@
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
 
-                            <div class="ibox product-detail">
+                    <div class="ibox product-detail">
                                 <div class="ibox-content">
-
                                     <div class="row">
-                                        <div class="col-md-5 ">
-
+                                        <div class="col-lg-5">
                                             <div class="text-center">
                                                 <img src="{{ asset('/images/logo-2.png') }}" alt="" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 align-self-center">
+                                            <div class="text-center">
                                                 <div class="m-t-md">
                                                     <h2 class="font-bold m-b-xs">Agrabah Lending</h2>
                                                 </div>
                                             </div>
-
-                                            <hr>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-5 ">
                                             <div class="text-center">
                                                 <div class="m-t-md">
                                                     <h2 class="font-bold text-success mb-0">20,000.00</h2>
@@ -206,6 +209,16 @@
                                                 content of a page when looking at its layout. The point of using Lorem Ipsum is
                                             </div>
 
+                                            <hr>
+
+                                            <h4>Payment method</h4>
+                                            <dd class="project-people mb-1">
+                                                <span class="badge badge-primary">Manual</span>
+                                                <span class="badge badge-primary">GCash</span>
+                                                <span class="badge badge-primary">Palawan</span>
+                                                <span class="badge badge-primary">Bank</span>
+                                            </dd>
+
                                         </div>
                                     </div>
 
@@ -213,8 +226,6 @@
 
                             </div>
 
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -223,7 +234,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="application_modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true"
          data-category="" data-variant="" data-bal="">
@@ -1915,6 +1925,97 @@
                         assetsBox.find('.repeater-item').last().remove();
                         break;
                     case 'view-product':
+                        $.get('{!! route('loan-product-info') !!}', {
+                            id: loanProductID
+                        }, function(data){
+                            console.log(data);
+
+                            return false;
+                            modal.find('.modal-body').empty().append('' +
+                                '<div class="ibox product-detail">' +
+                                '<div class="ibox-content">' +
+                                '<div class="row">' +
+                                '<div class="col-md-5 ">' +
+                                '<div class="text-center">' +
+                                '<img src="'+ data.provider.profile.image +'" alt="" class="img-fluid">' +
+                                '<div class="m-t-md">' +
+                                '<h2 class="font-bold m-b-xs">'+ data.provider.profile.bank_name +'</h2>' +
+                                '</div>' +
+                                '</div>' +
+                                '<hr>' +
+                                '<div class="text-center">' +
+                                '<div class="m-t-md">' +
+                                '<h2 class="font-bold text-success mb-0">'+ numberWithCommas(data.amount) +'</h2>' +
+                                '<small>Loanable Amount</small>' +
+                                '</div>' +
+                                '</div>' +
+                                '<hr>' +
+                                '<div class="row">' +
+                                '<div class="col">' +
+                                '<dl class="small m-t-md text-center">' +
+                                '<dt>Terms</dt>' +
+                                '<dd>'+ data.duration +'</dd>' +
+                                '</dl>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<dl class="small m-t-md text-center">' +
+                                '<dt>Interest rate</dt>' +
+                                '<dd>'+ data.interest_rate +'%</dd>' +
+                                '</dl>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="row">' +
+                                '<div class="col">' +
+                                '<dl class="small m-t-md text-center">' +
+                                '<dt>Amortization Rate</dt>' +
+                                '<dd>'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</dd>' +
+                                '</dl>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<dl class="small m-t-md text-center">' +
+                                '<dt>Amortization Type</dt>' +
+                                '<dd>'+ data.timing_name +'</dd>' +
+                                '</dl>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="panel panel-primary">' +
+                                '<div class="panel-body text-center">' +
+                                '<div class="m-t-md">' +
+                                '<h2 class="font-bold text-info mb-0">'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</h2>' +
+                                '<small>Interest</small>' +
+                                '</div>' +
+                                '<div class="m-t-md">' +
+                                '<h2 class="font-bold text-info mb-0">0.00</h2>' +
+                                '<small>Agrabah Ventures Service Fee</small>' +
+                                '</div>' +
+                                '<div class="m-t-md">' +
+                                '<h2 class="font-bold text-info mb-0">'+ numberWithCommas(((data.interest_rate/100) * data.amount) + data.amount) +'</h2>' +
+                                '<small>Total Payable Amount</small>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-md-7">' +
+                                '<h2 class="font-bold m-b-xs">'+ data.name +'</h2>' +
+                                '<small>'+ data.type.display_name +'</small>' +
+                                '<div class="hr-line-solid"></div>' +
+                                data.description +
+                                data.requirements +
+                                '<hr>' +
+                                '<h4>Payment method</h4>' +
+                                '<dd class="project-people mb-1">' +
+                                '<span class="badge badge-primary">Manual</span>' +
+                                '<span class="badge badge-primary">GCash</span>' +
+                                '<span class="badge badge-primary">Palawan</span>' +
+                                '<span class="badge badge-primary">Bank</span>' +
+                                '</dd>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                            '');
+                        });
+
                         modal.data('type', 'loan-product-detail');
                         modal.data('id', loanProductID);
                         modal.find('.modal-title').text('Loan Application Details');

@@ -103,7 +103,7 @@ class LoanProductController extends Controller
         $loanProduct = LoanProduct::find($id);
         $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
-        dd($array);
+//        dd($array);
 
         if($request->has('attachment')){
             if($request->file('attachment') != ''){
