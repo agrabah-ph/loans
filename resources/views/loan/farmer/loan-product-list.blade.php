@@ -126,7 +126,7 @@
                                         <div class="col-lg-7 align-self-center">
                                             <div class="text-center">
                                                 <div class="m-t-md">
-                                                    <h2 class="font-bold m-b-xs">Agrabah Lending</h2>
+                                                    <h1 class="font-bold m-b-xs text-uppercase text-success">Agrabah Lending</h1>
                                                 </div>
                                             </div>
                                         </div>
