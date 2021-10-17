@@ -63,7 +63,7 @@
                                                             class="">{{ $loan->provider->profile->address_line }}</span></small><br/>
                                             </td>
                                             <td class="project-title">
-                                                {{$loan->name}}
+                                                {{$loan->product->name}}
                                             </td>
                                             <td class="text-right">{{currency_format($loan->amount)}}</td>
                                             <td>{{$loan->interest_rate}}%</td>

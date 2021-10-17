@@ -1927,6 +1927,10 @@
                             id: loanProductID
                         }, function(data){
                             console.log(data);
+                            var total_amount = ((data.interest_rate/100) * data.amount) + data.amount;
+                            var service_fee = parseFloat('{!! loanServiceFee() !!}');
+                            total_amount += service_fee;
+                            var loan_amor = ((data.amount + (data.interest_rate/100) * data.amount) + service_fee) / data.duration;
 
                             // return false;
                             modal.find('.modal-body').empty().append('' +
@@ -1968,30 +1972,30 @@
                                                 '<div class="row">' +
                                                     '<div class="col">' +
                                                         '<dl class="small text-center">' +
-                                                            '<dt>Terms</dt>' +
-                                                            '<dd>'+ data.duration +'</dd>' +
+                                                            '<dt>Loan Terms</dt>' +
+                                                            '<dd>'+ data.duration +' '+ data.timing_name +'</dd>' +
                                                         '</dl>' +
                                                     '</div>' +
                                                     '<div class="col">' +
                                                         '<dl class="small text-center">' +
-                                                            '<dt>Interest rate</dt>' +
-                                                            '<dd>'+ data.interest_rate +'%</dd>' +
+                                                            '<dt>Amortization Rate</dt>' +
+                                                            '<dd>'+ numberWithCommas(loan_amor) +'</dd>' +
                                                         '</dl>' +
                                                     '</div>' +
                                                 '</div>' +
                                                 '<div class="row">' +
                                                     '<div class="col">' +
                                                         '<dl class="small text-center">' +
-                                                            '<dt>Amortization Rate</dt>' +
-                                                            '<dd>'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</dd>' +
+                                                            '<dt>Interest rate</dt>' +
+                                                            '<dd>'+ data.interest_rate +'%</dd>' +
                                                         '</dl>' +
                                                     '</div>' +
-                                                    '<div class="col">' +
-                                                        '<dl class="small text-center">' +
-                                                            '<dt>Amortization Type</dt>' +
-                                                            '<dd>'+ data.timing_name +'</dd>' +
-                                                        '</dl>' +
-                                                    '</div>' +
+                                                    // '<div class="col">' +
+                                                    //     '<dl class="small text-center">' +
+                                                    //         '<dt>Amortization Type</dt>' +
+                                                    //         '<dd>'+ data.timing_name +'</dd>' +
+                                                    //     '</dl>' +
+                                                    // '</div>' +
                                                 '</div>' +
                                                 '<div class="panel panel-primary">' +
                                                     '<div class="panel-body text-center">' +
@@ -2000,11 +2004,11 @@
                                                             '<small>Interest</small>' +
                                                         '</div>' +
                                                         '<div class=" ">' +
-                                                            '<h2 class="font-bold text-info mb-0">0.00</h2>' +
+                                                            '<h2 class="font-bold text-info mb-0">{!! number_format(loanServiceFee(), 2) !!}</h2>' +
                                                             '<small>Agrabah Ventures Service Fee</small>' +
                                                         '</div>' +
                                                         '<div class=" ">' +
-                                                            '<h2 class="font-bold text-info mb-0">'+ numberWithCommas(((data.interest_rate/100) * data.amount) + data.amount) +'</h2>' +
+                                                            '<h2 class="font-bold text-info mb-0">'+ numberWithCommas(total_amount) +'</h2>' +
                                                             '<small>Total Payable Amount</small>' +
                                                         '</div>' +
                                                     '</div>' +
@@ -2097,7 +2101,7 @@
                             '<td>' + data[a].duration + ' ' + data[a].timing_name + '</td>' +
                             '<td class="text-right">' + numeral(data[a].amount).format('0,0.00') + '</td>' +
                             '<td class="project-actions">' +
-                            '<a href="#" class="btn btn-white btn-sm show_loan" data-name="' + data[a].name + '" data-provider="' + data[a].provider.profile.bank_name + '" data-amount="' + data[a].amount + '" data-type="' + data[a].type.display_name + '" data-duration="' + data[a].duration + '" data-interest_rate="' + data[a].interest_rate + '"><i class="fa fa-search"></i> View </a>' +
+                            // '<a href="#" class="btn btn-white btn-sm show_loan" data-name="' + data[a].name + '" data-provider="' + data[a].provider.profile.bank_name + '" data-amount="' + data[a].amount + '" data-type="' + data[a].type.display_name + '" data-duration="' + data[a].duration + '" data-interest_rate="' + data[a].interest_rate + '"><i class="fa fa-search"></i> View </a>' +
                             '<button type="button" class="btn btn-white btn-sm btn-action" data-action="view-product" data-id="' + data[a].id + '"><i class="fa fa-search"></i> View </button>' +
                             '<button type="button" class="btn btn-white btn-sm show_application btn-action" data-action="apply-loan" data-id="' + data[a].id + '"><i class="fa fa-check"></i> Apply </button>' +
                             '<div class="d-none" id="disclosure_' + data[a].id + '"> ' + data[a].disclosure_html + '</div>' +

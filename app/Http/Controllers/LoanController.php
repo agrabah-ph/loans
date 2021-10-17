@@ -33,7 +33,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans = Loan::where('borrower_type', 'App\Farmer')
+        $loans = Loan::with('product')
+            ->where('borrower_type', 'App\Farmer')
             ->where('borrower_id', Auth::user()->farmer->id)
             ->get();
 //        return $loans;

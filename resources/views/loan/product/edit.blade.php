@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>File Attachment</label>
+                                            <label>File Attachment</label><br>
                                             @if($loanProduct->attachment == null)
                                                 <input accept="application/pdf" name="attachment" type="file">
                                             @else
@@ -189,6 +189,12 @@
 
                             </div>
                         </div>
+
+{{--                        <div class="row">--}}
+{{--                            <div class="col">--}}
+{{--                                <embed src="{{ asset($loanProduct->attachment) }}" width="100%" height="500" alt="pdf" />--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                     </div>
                 </div>
