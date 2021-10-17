@@ -227,6 +227,8 @@ class LoanProviderController extends Controller
                 $data->save();
                 DB::commit();
                 break;
+            case 'send-attachment':
+                break;
         }
     }
 
