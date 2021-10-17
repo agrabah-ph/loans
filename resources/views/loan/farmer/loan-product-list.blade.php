@@ -116,115 +116,113 @@
                 <div class="modal-body">
 
                     <div class="ibox product-detail">
-                                <div class="ibox-content">
-                                    <div class="row">
-                                        <div class="col-lg-5">
-                                            <div class="text-center">
-                                                <img src="{{ asset('/images/logo-2.png') }}" alt="" class="img-fluid">
-                                            </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="text-center">
+                                        <img src="{{ asset('/images/logo-2.png') }}" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 align-self-center">
+                                    <div class="text-center">
+                                        <div class="m-t-md">
+                                            <h1 class="font-bold m-b-xs text-uppercase text-success">Agrabah Lending</h1>
                                         </div>
-                                        <div class="col-lg-7 align-self-center">
-                                            <div class="text-center">
-                                                <div class="m-t-md">
-                                                    <h1 class="font-bold m-b-xs text-uppercase text-success">Agrabah Lending</h1>
-                                                </div>
-                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-5 ">
+                                    <div class="text-center">
+                                        <div class="m-t-md">
+                                            <h2 class="font-bold text-success mb-0">20,000.00</h2>
+                                            <small>Loanable Amount</small>
                                         </div>
                                     </div>
                                     <hr>
+
                                     <div class="row">
-                                        <div class="col-md-5 ">
-                                            <div class="text-center">
-                                                <div class="m-t-md">
-                                                    <h2 class="font-bold text-success mb-0">20,000.00</h2>
-                                                    <small>Loanable Amount</small>
-                                                </div>
-                                            </div>
-                                            <hr>
-
-                                            <div class="row">
-                                                <div class="col">
-                                                    <dl class="small m-t-md text-center">
-                                                        <dt>Terms</dt>
-                                                        <dd>3 months</dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col">
-                                                    <dl class="small m-t-md text-center">
-                                                        <dt>Interest rate</dt>
-                                                        <dd>7.5%</dd>
-                                                    </dl>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col">
-                                                    <dl class="small m-t-md text-center">
-                                                        <dt>Amortization Rate</dt>
-                                                        <dd>7,166.67</dd>
-                                                    </dl>
-                                                </div>
-                                                <div class="col">
-                                                    <dl class="small m-t-md text-center">
-                                                        <dt>Amortization Type</dt>
-                                                        <dd>Monthly</dd>
-                                                    </dl>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel panel-primary">
-                                                <div class="panel-body text-center">
-                                                    <div class="m-t-md">
-                                                        <h2 class="font-bold text-info mb-0">20,000.00</h2>
-                                                        <small>Interest</small>
-                                                    </div>
-                                                    <div class="m-t-md">
-                                                        <h2 class="font-bold text-info mb-0">20,000.00</h2>
-                                                        <small>Agrabah Ventures Service Fee</small>
-                                                    </div>
-                                                    <div class="m-t-md">
-                                                        <h2 class="font-bold text-info mb-0">20,000.00</h2>
-                                                        <small>Total Payable Amount</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                        <div class="col">
+                                            <dl class="small m-t-md text-center">
+                                                <dt>Terms</dt>
+                                                <dd>3 months</dd>
+                                            </dl>
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col">
+                                            <dl class="small m-t-md text-center">
+                                                <dt>Interest rate</dt>
+                                                <dd>7.5%</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
 
-                                            <h2 class="font-bold m-b-xs">Seaweed Production Loan</h2>
-                                            <small>Short Loan</small>
+                                    <div class="row">
+                                        <div class="col">
+                                            <dl class="small m-t-md text-center">
+                                                <dt>Amortization Rate</dt>
+                                                <dd>7,166.67</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="col">
+                                            <dl class="small m-t-md text-center">
+                                                <dt>Amortization Type</dt>
+                                                <dd>Monthly</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
 
-                                            <div class="hr-line-solid"></div>
-
-                                            <h4>Description</h4>
-                                            <div class="small text-muted mb-2">
-                                                It is a long established fact that a reader will be distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                    <div class="panel panel-primary">
+                                        <div class="panel-body text-center">
+                                            <div class="m-t-md">
+                                                <h2 class="font-bold text-info mb-0">20,000.00</h2>
+                                                <small>Interest</small>
                                             </div>
-
-                                            <h4>Requirements</h4>
-                                            <div class="small text-muted mb-2">
-                                                It is a long established fact that a reader will be distracted by the readable
-                                                content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                            <div class="m-t-md">
+                                                <h2 class="font-bold text-info mb-0">20,000.00</h2>
+                                                <small>Agrabah Ventures Service Fee</small>
                                             </div>
-
-                                            <hr>
-
-                                            <h4>Payment method</h4>
-                                            <dd class="project-people mb-1">
-                                                <span class="badge badge-primary">Manual</span>
-                                                <span class="badge badge-primary">GCash</span>
-                                                <span class="badge badge-primary">Palawan</span>
-                                                <span class="badge badge-primary">Bank</span>
-                                            </dd>
-
+                                            <div class="m-t-md">
+                                                <h2 class="font-bold text-info mb-0">20,000.00</h2>
+                                                <small>Total Payable Amount</small>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
+                                <div class="col-md-7">
 
+                                    <h2 class="font-bold m-b-xs">Seaweed Production Loan</h2>
+                                    <small>Short Loan</small>
+
+                                    <div class="hr-line-solid"></div>
+
+                                    <h4>Description</h4>
+                                    <div class="small text-muted mb-2">
+                                        It is a long established fact that a reader will be distracted by the readable
+                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                    </div>
+
+                                    <h4>Requirements</h4>
+                                    <div class="small text-muted mb-2">
+                                        It is a long established fact that a reader will be distracted by the readable
+                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
+                                    </div>
+
+                                    <hr>
+
+                                    <h4>Payment method</h4>
+                                    <dd class="project-people mb-1">
+                                        <span class="badge badge-primary">Manual</span>
+                                        <span class="badge badge-primary">GCash</span>
+                                        <span class="badge badge-primary">Palawan</span>
+                                        <span class="badge badge-primary">Bank</span>
+                                    </dd>
+
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -1930,88 +1928,105 @@
                         }, function(data){
                             console.log(data);
 
-                            return false;
+                            // return false;
                             modal.find('.modal-body').empty().append('' +
                                 '<div class="ibox product-detail">' +
-                                '<div class="ibox-content">' +
-                                '<div class="row">' +
-                                '<div class="col-md-5 ">' +
-                                '<div class="text-center">' +
-                                '<img src="'+ data.provider.profile.image +'" alt="" class="img-fluid">' +
-                                '<div class="m-t-md">' +
-                                '<h2 class="font-bold m-b-xs">'+ data.provider.profile.bank_name +'</h2>' +
-                                '</div>' +
-                                '</div>' +
-                                '<hr>' +
-                                '<div class="text-center">' +
-                                '<div class="m-t-md">' +
-                                '<h2 class="font-bold text-success mb-0">'+ numberWithCommas(data.amount) +'</h2>' +
-                                '<small>Loanable Amount</small>' +
-                                '</div>' +
-                                '</div>' +
-                                '<hr>' +
-                                '<div class="row">' +
-                                '<div class="col">' +
-                                '<dl class="small m-t-md text-center">' +
-                                '<dt>Terms</dt>' +
-                                '<dd>'+ data.duration +'</dd>' +
-                                '</dl>' +
-                                '</div>' +
-                                '<div class="col">' +
-                                '<dl class="small m-t-md text-center">' +
-                                '<dt>Interest rate</dt>' +
-                                '<dd>'+ data.interest_rate +'%</dd>' +
-                                '</dl>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="row">' +
-                                '<div class="col">' +
-                                '<dl class="small m-t-md text-center">' +
-                                '<dt>Amortization Rate</dt>' +
-                                '<dd>'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</dd>' +
-                                '</dl>' +
-                                '</div>' +
-                                '<div class="col">' +
-                                '<dl class="small m-t-md text-center">' +
-                                '<dt>Amortization Type</dt>' +
-                                '<dd>'+ data.timing_name +'</dd>' +
-                                '</dl>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="panel panel-primary">' +
-                                '<div class="panel-body text-center">' +
-                                '<div class="m-t-md">' +
-                                '<h2 class="font-bold text-info mb-0">'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</h2>' +
-                                '<small>Interest</small>' +
-                                '</div>' +
-                                '<div class="m-t-md">' +
-                                '<h2 class="font-bold text-info mb-0">0.00</h2>' +
-                                '<small>Agrabah Ventures Service Fee</small>' +
-                                '</div>' +
-                                '<div class="m-t-md">' +
-                                '<h2 class="font-bold text-info mb-0">'+ numberWithCommas(((data.interest_rate/100) * data.amount) + data.amount) +'</h2>' +
-                                '<small>Total Payable Amount</small>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="col-md-7">' +
-                                '<h2 class="font-bold m-b-xs">'+ data.name +'</h2>' +
-                                '<small>'+ data.type.display_name +'</small>' +
-                                '<div class="hr-line-solid"></div>' +
-                                data.description +
-                                data.requirements +
-                                '<hr>' +
-                                '<h4>Payment method</h4>' +
-                                '<dd class="project-people mb-1">' +
-                                '<span class="badge badge-primary">Manual</span>' +
-                                '<span class="badge badge-primary">GCash</span>' +
-                                '<span class="badge badge-primary">Palawan</span>' +
-                                '<span class="badge badge-primary">Bank</span>' +
-                                '</dd>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
+                                    '<div class="ibox-content">' +
+
+                                        '<div class="row">' +
+                                            '<div class="col-lg-5">' +
+                                                '<div class="text-center">' +
+                                                    '<img src="'+ data.provider.profile.image +'" alt="" class="img-fluid">' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<div class="col-lg-7 align-self-center">' +
+                                                '<div class="text-center">' +
+                                                    '<div class="m-t-md">' +
+                                                        '<h1 class="font-bold m-b-xs text-uppercase text-success">'+ data.provider.profile.bank_name +'</h1>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<hr>' +
+
+                                        '<div class="row">' +
+                                            '<div class="col-md-5 ">' +
+                                                // '<div class="text-center">' +
+                                                //     '<img src="'+ data.provider.profile.image +'" alt="" class="img-fluid">' +
+                                                //     '<div class="m-t-md">' +
+                                                //         '<h2 class="font-bold m-b-xs">'+ data.provider.profile.bank_name +'</h2>' +
+                                                //     '</div>' +
+                                                // '</div>' +
+                                                // '<hr>' +
+                                                '<div class="text-center">' +
+                                                    '<div class="m-t-md">' +
+                                                        '<h2 class="font-bold text-success mb-0">'+ numberWithCommas(data.amount) +'</h2>' +
+                                                        '<small>Loanable Amount</small>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<hr>' +
+                                                '<div class="row">' +
+                                                    '<div class="col">' +
+                                                        '<dl class="small text-center">' +
+                                                            '<dt>Terms</dt>' +
+                                                            '<dd>'+ data.duration +'</dd>' +
+                                                        '</dl>' +
+                                                    '</div>' +
+                                                    '<div class="col">' +
+                                                        '<dl class="small text-center">' +
+                                                            '<dt>Interest rate</dt>' +
+                                                            '<dd>'+ data.interest_rate +'%</dd>' +
+                                                        '</dl>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="row">' +
+                                                    '<div class="col">' +
+                                                        '<dl class="small text-center">' +
+                                                            '<dt>Amortization Rate</dt>' +
+                                                            '<dd>'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</dd>' +
+                                                        '</dl>' +
+                                                    '</div>' +
+                                                    '<div class="col">' +
+                                                        '<dl class="small text-center">' +
+                                                            '<dt>Amortization Type</dt>' +
+                                                            '<dd>'+ data.timing_name +'</dd>' +
+                                                        '</dl>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="panel panel-primary">' +
+                                                    '<div class="panel-body text-center">' +
+                                                        '<div class=" ">' +
+                                                            '<h2 class="font-bold text-info mb-0">'+ numberWithCommas((data.interest_rate/100) * data.amount) +'</h2>' +
+                                                            '<small>Interest</small>' +
+                                                        '</div>' +
+                                                        '<div class=" ">' +
+                                                            '<h2 class="font-bold text-info mb-0">0.00</h2>' +
+                                                            '<small>Agrabah Ventures Service Fee</small>' +
+                                                        '</div>' +
+                                                        '<div class=" ">' +
+                                                            '<h2 class="font-bold text-info mb-0">'+ numberWithCommas(((data.interest_rate/100) * data.amount) + data.amount) +'</h2>' +
+                                                            '<small>Total Payable Amount</small>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<div class="col-md-7">' +
+                                                '<h2 class="font-bold m-b-xs">'+ data.name +'</h2>' +
+                                                '<small>'+ data.type.display_name +'</small>' +
+                                                '<div class="hr-line-solid"></div>' +
+                                                data.description +
+                                                data.requirements +
+                                                '<hr>' +
+                                                '<h4>Payment method</h4>' +
+                                                '<dd class="project-people mb-1">' +
+                                                    '<span class="badge badge-primary">Manual</span>&nbsp;' +
+                                                    '<span class="badge badge-primary">GCash</span>&nbsp;' +
+                                                    '<span class="badge badge-primary">Palawan</span>&nbsp;' +
+                                                    '<span class="badge badge-primary">Bank</span>' +
+                                                '</dd>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</div>' +
                                 '</div>' +
                             '');
                         });
