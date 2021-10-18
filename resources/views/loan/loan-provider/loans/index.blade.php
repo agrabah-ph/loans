@@ -88,7 +88,7 @@
                                                                 data-action="decline"><i
                                                                     class="fa fa-times text-danger"></i> Decline
                                                         </button>
-                                                        @if($loan->sttachment != null)
+                                                        @if($loan->details->attachment != null)
                                                         <button type="button" class="btn btn-white btn-sm btn-action"
                                                                 data-action="pre-approve"><i
                                                                     class="fa fa-thumbs-up text-success"></i> Approve
@@ -234,6 +234,8 @@
             </div>
         </div>
     </div>
+
+
 
     @include('loan.farmer.loans.modals.payment_history')
 @endsection
@@ -476,7 +478,11 @@
                             modal.find('#modal-size').removeClass().addClass('modal-dialog modal-xl');
                             modal.find('#modal-save-btn').hide();
                             modal.find('.modal-body').empty().append(viewProfile(data.borrower.profile, data.details));
-                            modal.find('.modal-footer').append('<button type="button" class="btn btn-success" data-action="send-attachment" data-id="'+ data.id +'">Accept / Send Attachment</button>');
+                            if(data.attachment_active === 0){
+                                modal.find('.modal-footer').find('button[data-action="send-attachment"]').remove();
+                                modal.find('.modal-footer').append('<button type="button" class="btn btn-success btn-action" data-action="send-attachment" data-id="'+ data.id +'">Accept / Send Attachment FORM</button>');
+                            }
+
                             modal.modal({backdrop: 'static', keyboard: false});
                         });
                         break;
@@ -586,6 +592,27 @@
 
                         break;
                     case 'send-attachment':
+                        $.get('{!! route('loan-update-status') !!}', {
+                            id: $(this).data('id'),
+                            action: action
+                        }, function(data){
+                            // console.log(data);
+                            swal({
+                                title: "Success!",
+                                text: "Loan application attachment sent!",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Done!",
+                                closeOnConfirm: true
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    modal.find('.modal-footer').empty().append('<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>');
+                                    modal.modal('toggle');
+                                }
+                            });
+
+                        });
                         break;
                 }
             });

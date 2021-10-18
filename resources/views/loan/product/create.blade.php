@@ -68,7 +68,14 @@
                                         Product Description
                                     </div>
                                     <div class="panel-body no-padding">
-                                        <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none"></textarea>
+                                        <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none">
+                                            <p style="font-size: 17.6px;">
+                                                <span style="font-weight: bolder; font-size: 14px;">DISCRIPTION</span>
+                                            </p>
+                                            <p style="font-size: 17.6px;">
+                                                <span style="font-size: 14px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ang productong ito ay ginawa upang makatulong sa mga Seaweed Farmers na maparami ang kanilang produksyon. Ito ay market testing sa pakikipag ugnayan ng Agrabah Ventures at ng CARD BDSFI.</span>
+                                            </p>
+                                        </textarea>
                                     </div>
                                 </div>
 
@@ -78,7 +85,14 @@
                                     </div>
                                     <div class="panel-body no-padding">
                                         <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none">
-                                            <p><b>LIST OF REQUIREMENTS</b></p><ul><li>2 Valid Government issued ID's</li><li>Proof of Billing</li></ul>
+                                            <p>
+                                                <span style="font-size: 14px;">&#xFEFF;</span><b>
+                                                <span style="font-size: 14px;">LIST OF REQUIREMENTS</span></b>
+                                            </p>
+                                            <ul>
+                                                <li><span style="font-size: 14px;">2 Valid Government issued ID's</span></li>
+                                                <li><span style="font-size: 14px;">Proof of Billing</span></li>
+                                            </ul>
                                         </textarea>
                                     </div>
                                 </div>

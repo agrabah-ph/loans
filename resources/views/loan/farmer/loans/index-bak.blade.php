@@ -32,18 +32,17 @@
 
                         <div class="table-responsive">
                             <div class="loan-product-list project-list">
-                                <table class="table table-hover shoping-cart-table">
+                                <table class="table table-hover">
                                     <thead>
                                     <tr>
-                                        <th>Loan Product Information</th>
-{{--                                        <th>Bank</th>--}}
-{{--                                        <th>Loan Name</th>--}}
-{{--                                        <th class="text-right">Amount</th>--}}
-{{--                                        <th>Interest</th>--}}
-{{--                                        <th>Term</th>--}}
-{{--                                        <th class="text-right">Total Loan Amount</th>--}}
-{{--                                        <th class="text-right">Amortization</th>--}}
-{{--                                        <th class="text-center">Status</th>--}}
+                                        <th>Bank</th>
+                                        <th>Loan Name</th>
+                                        <th class="text-right">Amount</th>
+                                        <th>Interest</th>
+                                        <th>Term</th>
+                                        <th class="text-right">Total Loan Amount</th>
+                                        <th class="text-right">Amortization</th>
+                                        <th class="text-center">Status</th>
                                         <th class="text-right">Action</th>
                                     </tr>
                                     </thead>
@@ -54,81 +53,32 @@
                                                 <pre>{{json_encode($loan,128)}}</pre>
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td class="desc">
-                                                <div class="panel panel-warning mb-0">
-                                                    <div class="panel-body">
-                                                        <div class="row">
-                                                            <div class="col-lg-4 text-center">
-                                                                <img src="{{ $loan->provider->profile->image }}" alt="" class="img-fluid" style="max-width: 150px">
-                                                                <h3><strong>{{ $loan->provider->profile->bank_name }}</strong></h3>
-                                                            </div>
-                                                            <div class="col align-self-center">
-                                                                <h3><span class="text-navy">{{ $loan->product->name }}</span> <small>[{{ $loan->product->type->display_name }}]</small></h3>
-                                                                <h2 class="mb-0"><strong class="text-success">{{currency_format($loan->amount)}}</strong></h2><small>Loanable amount</small>
-                                                            </div>
-                                                            <div class="col-lg-3 align-self-center text-right">
-                                                                <dl class="small m-b-none">
-                                                                    <dt class="text-danger">Loan Status</dt>
-                                                                    <dd>{{$loan->status}}</dd>
-                                                                </dl>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="panel panel-info mb-0 small">
-                                                                    <div class="panel-body">
-                                                                        <dl class="small m-b-none">
-                                                                            <dt>Loan Terms</dt>
-                                                                            <dd>{{$loan->duration}} {!! $loan->product->timing_name !!}</dd>
-                                                                        </dl>
-                                                                        <dl class="small m-b-none">
-                                                                            <dt>Amortization Rate</dt>
-                                                                            <dd>{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2))}}</dd>
-                                                                        </dl>
-                                                                        <dl class="small m-b-none">
-                                                                            <dt>Interest rate</dt>
-                                                                            <dd>{{$loan->interest_rate}}%</dd>
-                                                                        </dl>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <div class="panel panel-success mb-0 small">
-                                                                    <div class="panel-body">
-                                                                        <dl class="small m-b-none">
-                                                                            <dt>Interest</dt>
-                                                                            <dd>{{ currency_format((computeTotalLoan($loan->amount, $loan->duration, $loan->interest_rate, 2) - $loan->amount) - loanServiceFee()) }}</dd>
-                                                                        </dl>
-                                                                        <dl class="small m-b-none">
-                                                                            <dt>Agrabah Ventures Service Fee</dt>
-                                                                            <dd>{{ number_format(loanServiceFee(), 2) }}</dd>
-                                                                        </dl>
-                                                                        <dl class="small m-b-none">
-                                                                            <dt>Total Payable Amount</dt>
-                                                                            <dd>{{ currency_format(computeTotalLoan($loan->amount, $loan->duration, $loan->interest_rate, 2)) }}</dd>
-                                                                        </dl>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        @if($loan->attachment_active == 1)
-                                                            <hr>
-                                                            <div class="m-t-sm">
-                                                                <a href="{!! URL($loan->product->attachment) !!}" class="btn btn-sm btn-white" download="" data-toggle="tooltip" data-placement="top" title="Download PDF File">
-                                                                    <i class="fa fa-file-pdf-o text-danger"></i> Download File Attachment</a>
-                                                                |
-                                                                <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{ $loan->id }}"><i class="fa fa-upload text-success"></i> Upload File Attachment</button>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
+                                            <td>
+                                                {{$loan->provider->profile->bank_name}}
+                                                <br/>
+                                                <small>Branch:
+                                                    <strong>{{ $loan->provider->profile->branch_name }}</strong></small><br/>
+                                                <small>Address: <span
+                                                            class="">{{ $loan->provider->profile->address_line }}</span></small><br/>
                                             </td>
-                                            <td style="width: 307px;" class=" align-self-center">
+                                            <td class="project-title">
+                                                {{$loan->product->name}}
+                                            </td>
+                                            <td class="text-right">{{currency_format($loan->amount)}}</td>
+                                            <td>{{$loan->interest_rate}}%</td>
+                                            <td>{{$loan->duration}} Months</td>
+                                            <td class="text-right">{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2) * $loan->duration)}}</td>
+
+                                            <td class="text-right">{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2))}}</td>
+                                            @if($loan->status == 'Active')
+                                                <td class=" text-center text-green">{{$loan->status}}</td>
+                                            @elseif($loan->status == 'Pending')
+                                                <td class="text-center text-warning">{{$loan->status}}</td>
+                                            @else
+                                                <td class="text-center text-danger">{{$loan->status}}</td>
+                                            @endif
+                                            <td class="project-actions">
                                                 <div class="btn-group">
                                                     @if($loan->status != 'Declined')
                                                     <a href="#" class="btn btn-success btn-sm sched_modal_trigger"
@@ -147,63 +97,13 @@
                                                     @endif
                                                     @if( ($loan->status == 'Pending') && ($loan->attachment_active == 0) )
                                                         <button type="button" class="btn btn-sm btn-danger">Cancel</button>
+                                                    @else
+                                                        <a href="{!! URL($loan->product->attachment) !!}" class="btn btn-sm btn-white" download="" data-toggle="tooltip" data-placement="top" title="Download PDF File"><i class="fa fa-download text-success"></i> <i class="fa fa-file-pdf-o text-danger"></i></a>
+                                                        <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{$loan->id}}"><i class="fa fa-upload text-success"></i> </button>
                                                     @endif
                                                 </div>
                                             </td>
                                         </tr>
-
-
-{{--                                        <tr>--}}
-{{--                                            <td>--}}
-{{--                                                {{$loan->provider->profile->bank_name}}--}}
-{{--                                                <br/>--}}
-{{--                                                <small>Branch:--}}
-{{--                                                    <strong>{{ $loan->provider->profile->branch_name }}</strong></small><br/>--}}
-{{--                                                <small>Address: <span--}}
-{{--                                                            class="">{{ $loan->provider->profile->address_line }}</span></small><br/>--}}
-{{--                                            </td>--}}
-{{--                                            <td class="project-title">--}}
-{{--                                                {{$loan->product->name}}--}}
-{{--                                            </td>--}}
-{{--                                            <td class="text-right">{{currency_format($loan->amount)}}</td>--}}
-{{--                                            <td>{{$loan->interest_rate}}%</td>--}}
-{{--                                            <td>{{$loan->duration}} Months</td>--}}
-{{--                                            <td class="text-right">{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2) * $loan->duration)}}</td>--}}
-
-{{--                                            <td class="text-right">{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2))}}</td>--}}
-{{--                                            @if($loan->status == 'Active')--}}
-{{--                                                <td class=" text-center text-green">{{$loan->status}}</td>--}}
-{{--                                            @elseif($loan->status == 'Pending')--}}
-{{--                                                <td class="text-center text-warning">{{$loan->status}}</td>--}}
-{{--                                            @else--}}
-{{--                                                <td class="text-center text-danger">{{$loan->status}}</td>--}}
-{{--                                            @endif--}}
-{{--                                            <td class="project-actions">--}}
-{{--                                                <div class="btn-group">--}}
-{{--                                                    @if($loan->status != 'Declined')--}}
-{{--                                                    <a href="#" class="btn btn-success btn-sm sched_modal_trigger"--}}
-{{--                                                       data-schedule="{{$loan->payment_schedules}}"><i--}}
-{{--                                                                class="fa fa-calendar"></i> Schedules </a>--}}
-{{--                                                    <a href="#" class="btn btn-primary btn-sm payment_modal_trigger"--}}
-{{--                                                       data-amount_monthly="{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2))}}"--}}
-{{--                                                       data-amount_max="{{currency_format(computeAmortization($loan->amount, $loan->duration, $loan->interest_rate, 2) * $loan->duration)}}"--}}
-{{--                                                       data-id="{{$loan->id}}"--}}
-{{--                                                       data-status="{{$loan->status}}"--}}
-{{--                                                    ><i class="fa fa-money"></i> Pay </a>--}}
-{{--                                                    <a href="#" class="btn btn-warning btn-sm payment_history_modal_trigger"--}}
-{{--                                                       data-payments="{{$loan->payments}}"--}}
-{{--                                                       data-status="{{$loan->status}}"--}}
-{{--                                                    ><i class="fa fa-list"></i> Payments </a>--}}
-{{--                                                    @endif--}}
-{{--                                                    @if( ($loan->status == 'Pending') && ($loan->attachment_active == 0) )--}}
-{{--                                                        <button type="button" class="btn btn-sm btn-danger">Cancel</button>--}}
-{{--                                                    @else--}}
-{{--                                                        <a href="{!! URL($loan->product->attachment) !!}" class="btn btn-sm btn-white" download="" data-toggle="tooltip" data-placement="top" title="Download PDF File"><i class="fa fa-download text-success"></i> <i class="fa fa-file-pdf-o text-danger"></i></a>--}}
-{{--                                                        <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{$loan->id}}"><i class="fa fa-upload text-success"></i> </button>--}}
-{{--                                                    @endif--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
                                     @empty
                                         <tr class="empty_row">
                                             <td colspan="99" class="text-center">No Loans Yet</td>
@@ -220,11 +120,13 @@
         </div>
     </div>
 
-    <div class="modal inmodal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true" data-category="" data-variant="" data-bal="">
+    <div class="modal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true" data-category=""
+         data-variant="" data-bal="">
         <div id="modal-size">
             <div class="modal-content">
                 <div class="modal-header" style="padding: 15px;">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
@@ -237,7 +139,6 @@
             </div>
         </div>
     </div>
-
     @include('loan.farmer.loans.modals.payment_schedules')
     @include('loan.farmer.loans.modals.payment_verification')
     @include('loan.farmer.loans.modals.payment_history')
@@ -274,7 +175,6 @@
     {{--    {!! Html::script('/js/template/plugins/sweetalert/sweetalert.min.js') !!}--}}
     {{--    {!! Html::script('/js/template/moment.js') !!}--}}
     <script>
-
 
         function numberWithCommas(x) {
             return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -426,10 +326,7 @@
                 $('#verify_payment').hide();
                 $('#verify_payment_show').show();
             });
-
-
-            var modal = $('#modal');
-
+            // var modal = $('#modal');
             {{--$(document).on('click', '', function(){--}}
             {{--    modal.modal({backdrop: 'static', keyboard: false});--}}
             {{--    modal.modal('toggle');--}}
@@ -456,27 +353,6 @@
             {{--table.ajax.reload();--}}
 
 
-            $(document).on('click', '.btn-action', function(){
-                var action = $(this).data('action');
-                switch(action){
-                    case 'upload-file':
-                        // // modal.data('type', 'loan-product-detail');
-                        // modal.data('id', $(this).data('id'));
-                        modal.find('.modal-title').text('Form Upload');
-                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
-                        // // modal.find('#modal-save-btn').addClass('d-none');
-                        // modal.find('#modal-save-btn').text('Submit Application Form');
-
-                        modal.modal({backdrop: 'static', keyboard: false});
-                        break;
-                    case '':
-                        break;
-                    case '':
-                        break;
-                    case '':
-                        break;
-                }
-            });
         });
 
         function verifyDisbursement(loanID, verify_payment_modal, data_monthly, data_max, data_status){

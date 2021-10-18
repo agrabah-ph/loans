@@ -141,6 +141,7 @@ class LoanProviderController extends Controller
             $loans = Loan::with('product', 'provider')
                 ->where('accept', 1)
                 ->where('loan_provider_id', Auth::user()->loan_provider->id)
+                ->with('details')
                 ->get();
 //        return $loans;
 
@@ -228,6 +229,14 @@ class LoanProviderController extends Controller
                 DB::commit();
                 break;
             case 'send-attachment':
+                $data = Loan::with('borrower', 'details')
+                    ->find($request->input('id'));
+                $data->attachment_active = 1;
+                if($data->save()){
+                    smsNotification($action, $data->id);
+                    return response()->json($data);
+                }
+
                 break;
         }
     }

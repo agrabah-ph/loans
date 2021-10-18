@@ -91,6 +91,17 @@ if (!function_exists('smsNotification')) {
                 array_push($recipients, mobileNumber('agrabah', null));
                 smsNotifMessage($type, $arr, $recipients);
                 break;
+            case 'send-attachment':
+                $arr = array();
+                $recipient = array();
+                $data = Loan::find($id);
+                $borrower = $data->borrower->profile->first_name.' '.$data->borrower->profile->last_name;
+                $url = route('loan-applicant');
+                array_push($arr, $borrower);
+//                array_push($arr, $url);
+                array_push($recipient, $data->borrower->profile->mobile);
+                smsNotifMessage($type, $arr, $recipient);
+                break;
         }
     }
 }
@@ -113,6 +124,9 @@ if (!function_exists('smsNotifMessage')) {
                 break;
             case 'loan-payment-posted':
                 $message = 'Agrabah Loan: loan payment posted, PHP '.$arr[0].' made on '.$arr[1];
+                break;
+            case 'send-attachment':
+                $message = 'Agrabah Loan: Your loan application is now being processed. Please login and download the attachment form, fill all infos and send it back';
                 break;
         }
 
