@@ -12,6 +12,8 @@ class LoanProduct extends Model
         "name",
         "loan_type_id",
         "description",
+        "requirements",
+        "attachment",
         "amount",
         "duration",
         "interest_rate",

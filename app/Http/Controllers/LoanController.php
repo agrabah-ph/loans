@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\LoanCollection;
 use App\Loan;
+use App\LoanApplicationDetail;
 use App\LoanPayment;
 use App\LoanPaymentSchedule;
 use App\Services\LoanService;
@@ -33,7 +34,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loans = Loan::where('borrower_type', 'App\Farmer')
+        $loans = Loan::with('product', 'details')
+            ->where('borrower_type', 'App\Farmer')
             ->where('borrower_id', Auth::user()->farmer->id)
             ->get();
 //        return $loans;
@@ -230,5 +232,26 @@ class LoanController extends Controller
         }
 
         return $error;
+    }
+
+    public function uploadAttachment(Request $request)
+    {
+        $data = LoanApplicationDetail::where('loan_id', $request->input('id'))->first();
+//        dd($request);
+//        return response()->json($request);
+
+        if ($file = $request->file('attachment')) {
+            $destinationPath = '/loan/attachments/';
+            $fileName = stringSlug($data->id.' '.$data->loan_id.' attachment').'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
+            $data->attachment = '/storage'.$destinationPath.''.$fileName;
+            $data->save();
+
+            smsNotification('attachment-uploaded', $data->loan_id);
+
+            return response()->json($data);
+        }
+
+
     }
 }

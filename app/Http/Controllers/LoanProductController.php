@@ -6,6 +6,7 @@ use App\Loan;
 use App\LoanProduct;
 use App\LoanType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LoanProductController extends Controller
 {
@@ -43,10 +44,18 @@ class LoanProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
         $loanProviderId = auth()->user()->loan_provider->id;
         $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
+
+        if ($file = $request->file('attachment')) {
+            $destinationPath = '/loan-product/attachments/';
+            $fileName = stringSlug($loanProviderId.' '.$request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
+            Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
+            $array['attachment'] = '/storage'.$destinationPath.''.$fileName;
+        }
+
         $array['loan_provider_id'] = $loanProviderId;
         $array['loan_type_id'] = $array['type'];
         $array['amount'] = floatval(preg_replace('/,/','', $array['amount']));
@@ -90,9 +99,28 @@ class LoanProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request);
         $loanProduct = LoanProduct::find($id);
         $request->request->add(['service_fee' => loanServiceFee()]);
         $array = $request->all();
+//        dd($array);
+
+        if($request->has('attachment')){
+            if($request->file('attachment') != ''){
+                if ($file = $request->file('attachment')) {
+                    $destinationPath = '/loan-product/attachments/';
+                    $fileName = stringSlug($loanProduct->loan_provider_id.' '.$request->input('name').' attachment').'.'.$file->getClientOriginalExtension();
+                    Storage::putFileAs('public/'.$destinationPath, $file, $fileName);
+                    $array['attachment'] = '/storage'.$destinationPath.''.$fileName;
+                }
+            }else{
+                $array['attachment'] = null;
+            }
+        }
+
+
+
+
         $array['loan_type_id'] = $array['type'];
         $array['amount'] = floatval(preg_replace('/,/','', $array['amount']));
         unset($array['token']);

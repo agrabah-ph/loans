@@ -24,128 +24,184 @@
             {{ Form::open(['route'=>['products.destroy', $loanProduct->id],'id'=>'delete_form','method'=>'delete']) }}
                 <button type="button" class="btn btn-danger btn-action" data-action="delete">Delete</button>
                 <button type="button" class="btn btn-primary btn-action" data-action="store">Update</button>
-                {{ Form::close() }}
+            {{ Form::close() }}
             </div>
         </div>
     </div>
 
     <div id="app" class="wrapper wrapper-content">
-        {{ Form::open(['route'=>['products.update', $loanProduct->id],'id'=>'form','method'=>'put']) }}
-            <div class="row">
-                @csrf
-                <div class="col-sm-6">
+        {{ Form::open(['route'=>['products.update', $loanProduct->id],'id'=>'form','method'=>'put', 'enctype' => 'multipart/form-data']) }}@csrf
+        <div class="row">
+            <div class="col-lg-12">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Information
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label>Financial Production Name</label>
-                                {{ Form::text('name', $loanProduct->name, array('class'=>'form-control','required')) }}
-                            </div>
-                            <div class="form-group">
-                                <label>Financial Product Type</label>
-                                {{ Form::select('type', $types, $loanProduct->loan_type_id, array('class'=>'form-control')) }}
-                            </div>
-                            <div class="form-group">
-                                <label>Product Description</label>
-                                <textarea name="description" id="" cols="30" rows="5" class="form-control" style="resize: none">{{$loanProduct->description}}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Loanable Amount</label>
-                                <input name="amount" id="amount" type="text" class="form-control money changeSchedule" value="{{currency_format($loanProduct->amount)}}">
-                            </div>
-                            <div class="form-group">
-                                <label>Loan Duration (Months)</label>
-                                <input name="duration" id="duration" type="text" data-mask="0#" class="form-control changeSchedule" value="{{$loanProduct->duration}}">
-                            </div>
-                            <div class="form-group">
-                                <label>Interest Rate (%)</label>
-                                <input name="interest_rate" id="interest_rate" type="text" class="form-control changeSchedule decimal"  value="{{$loanProduct->interest_rate}}">
-                            </div>
-                        </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Information
                     </div>
+                    <div class="panel-body">
 
-                </div>
-                <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Financial Production Name</label>
+                                            {{ Form::text('name', $loanProduct->name, array('class'=>'form-control','required')) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Financial Product Type</label>
+                                            {{ Form::select('type', $types, $loanProduct->loan_type_id, array('class'=>'form-control')) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>File Attachment</label><br>
+                                            @if($loanProduct->attachment == null)
+                                                <input accept="application/pdf" name="attachment" type="file">
+                                            @else
+                                                <input accept="application/pdf" name="attachment" type="file" style="display: none;">
+{{--                                                <input accept="application/pdf" name="attachment" type="file" class="sr-only">--}}
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-white btn-action" data-action="view-attachment"> <i class="fa fa-file-pdf-o text-danger"></i> PDF Attachment</button>
+                                                    <button type="button" class="btn btn-danger btn-action" data-action="remove-attachment"><i class="fa fa-times"></i></button>
+                                                </div>
+                                            @endif
+{{--                                            <embed src="{{ asset($loanProduct->attachment) }}" width="100%" alt="pdf" />--}}
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Payment Schedules
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Product Description
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <textarea name="description" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none">{{$loanProduct->description}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Product Application Requirements
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <textarea name="requirements" id="" cols="30" rows="5" class="form-control no-resize summernote" style="resize: none">{{$loanProduct->requirements}}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Disclosure
+                                    </div>
+                                    <div class="panel-body no-padding">
+                                        <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control summernote">{{$loanProduct->disclosure}}</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Loanable Amount</label>
+                                            <input name="amount" id="amount" type="text" class="form-control money changeSchedule" value="{{currency_format($loanProduct->amount)}}">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Loan Terms</label>
+                                            <input name="duration" id="duration" type="text" data-mask="0#" class="form-control changeSchedule" value="{{$loanProduct->duration}}">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Interest Rate (%)</label>
+                                            <input name="interest_rate" id="interest_rate" type="text"  class="form-control changeSchedule decimal" value="{{$loanProduct->interest_rate}}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="payment_schedule_input" id="payment_schedule_input">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Payment Schedules
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label>Timing</label>{{ Form::select('timing', ['day' => 'Day', 'monthly' => 'Monthly'], $loanProduct->timing, array('class'=>'form-control', 'id'=>'timing')) }}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Allowance</label>
+                                                    <input name="allowance" id="allowance" type="text" data-mask="0#" class="form-control changeSchedule" value="{{$loanProduct->allowance}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>1st Payment Allowance</label>
+                                                    <input name="first_allowance" id="first_allowance" type="text" data-mask="0#" class="form-control changeSchedule" value="{{$loanProduct->first_allowance}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row schedule_inputs">
+                                            <div class="col">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Assuming Approved Date</td>
+                                                        <td class="text-right">{{now()->toFormattedDateString()}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest</td>
+                                                        <td id="total_interest_amount" class="text-right">0</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Agrabah Ventures Service Fee</td>
+                                                        <td id="service_fee" class="text-right money">{{ loanServiceFee() }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Payable Amount</td>
+                                                        <td id="total_loan_amount" class="text-right">0</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <table class="table table-bordered table-success">
+                                            <thead>
+                                            <tr>
+                                                <th>Due Date</th>
+                                                <th class="text-right">Amount</th>
+                                                {{--                                <th class="text-right">Action</th>--}}
+                                            </tr>
+                                            </thead>
+                                            <tbody id="payment_schedule_review">
+                                            <tr>
+                                                <td colspan="99">--</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label>Timing</label>
-                                {{ Form::select('timing', ['day' => 'Day', 'monthly' => 'Monthly'], $loanProduct->timing, array('class'=>'form-control', 'id'=>'timing')) }}
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Allowance</label>
-                                        <input name="allowance" id="allowance" type="text" data-mask="0#" value="{{$loanProduct->allowance}}" class="form-control changeSchedule">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>1st Payment Allowance</label>
-                                        <input name="first_allowance" id="first_allowance" type="text" data-mask="0#" value="{{$loanProduct->first_allowance}}" class="form-control changeSchedule">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row schedule_inputs">
-                                <div class="col">
-                                    <table class="table table-bordered">
-                                        <tbody>
-                                        <tr>
-                                            <td>Assuming Approved Date</td>
-                                            <td class="text-right">{{now()->toFormattedDateString()}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Interest</td>
-                                            <td id="total_interest_amount" class="text-right">0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Agrabah Ventures Service Fee</td>
-                                            <td id="service_fee" class="text-right">{{ number_format(loanServiceFee(), 2) }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total Payable Amount</td>
-                                            <td id="total_loan_amount" class="text-right">0</td>
-                                        </tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>Due Date</th>
-                                    <th class="text-right">Amount</th>
-                                    {{--                                <th class="text-right">Action</th>--}}
-                                </tr>
-                                </thead>
-                                <tbody id="payment_schedule_review">
-                                <tr>
-                                    <td colspan="99">--</td>
-                                </tr>
-                                </tbody>
-                            </table>
+{{--                        <div class="row">--}}
+{{--                            <div class="col">--}}
+{{--                                <embed src="{{ asset($loanProduct->attachment) }}" width="100%" height="500" alt="pdf" />--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Disclosure</label>
-                                        <textarea name="disclosure" id="disclosure" cols="30" rows="10"  class="form-control">{{$loanProduct->disclosure}}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
         {{ Form::close() }}
-
     </div>
 
     <div class="modal inmodal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true" data-category="" data-variant="" data-bal="">
@@ -171,6 +227,7 @@
 
 @section('styles')
     {!! Html::style('/css/template/plugins/iCheck/custom.css') !!}
+            {!! Html::style('/css/template/plugins/summernote/summernote-bs4.css') !!}
     {{--{!! Html::style('') !!}--}}
     {{--    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
     {{--    {!! Html::style('/css/template/plugins/sweetalert/sweetalert.css') !!}--}}
@@ -178,6 +235,7 @@
 
 @section('scripts')
     {!! Html::script('/js/template/plugins/iCheck/icheck.min.js') !!}
+            {!! Html::script('/js/template/plugins/summernote/summernote-bs4.js') !!}
 {{--    {!! Html::script('/js/template/plugins/jqueryMask/jquery.mask.min.js') !!}--}}
             {!! Html::script('https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js') !!}
     {{--    {!! Html::script('') !!}--}}
@@ -209,6 +267,7 @@
                 clearMaskOnLostFocus: false
             }
         });
+
         function numberWithCommas(x) {
             return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
@@ -261,12 +320,23 @@
         });
 
         $(document).ready(function(){
+            $('.summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
 
             populateSchedule();
             // $('.money').mask("#,##0.00", {reverse: true});
             $(".money").inputmask({
                 alias:"money"
             });
+
             $(".decimal").inputmask({
                 alias: 'decimal',
                 integerDigits:3,
@@ -275,7 +345,6 @@
                 digitsOptional: true,
                 placeholder: "0"
             });
-
 
             $(document).on('click', '.btn-action', function(){
                 var modal = $('#modal');
@@ -304,6 +373,21 @@
                         // console.log($('input[name=pwd]').val());
                         // console.log($('input[name=indigenous]').val());
                         // console.log($('input[name=livelihood]').val());
+                        break;
+                    case 'view-attachment':
+                        modal.find('.modal-title').text('File Attachment');
+                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-dialog-centered modal-lg');
+                        modal.find('.modal-body').empty().append('' +
+                            '<embed src="{!! asset($loanProduct->attachment) !!}" width="100%" height="500" alt="pdf" />' +
+                        '');
+                        modal.modal({backdrop: 'static', keyboard: false});
+                        break;
+                    case 'remove-attachment':
+                        var box = $(this).closest('.form-group');
+                        box.find('.btn-group').hide();
+                        box.find('input[name=attachment]').show();
+                        // box.find('input[name=attachment]').removeClass('sr-only');
+                        // box.append('<input accept="application/pdf" name="attachment" type="file">');
                         break;
                 }
             });

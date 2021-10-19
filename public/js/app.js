@@ -79909,6 +79909,15 @@ $(document).ready(function () {
         menus.push('<li><a class="nav-link" data-toggle="tab" href="#tab-6">Loan Information</a></li>');
         views.push('' + '<div role="tabpanel" id="tab-6" class="tab-pane">' + '<div class="panel-body">' + '<h2 class="text-success"><strong>Loan Details</strong></h2>' + '<div class="row">' + '<div class="col">' + '<dl>' + '<dt>Purpose of Loan</dt>' + '<dd>' + '<ul class="list-inline-item">' + loanPurpose + '</ul>' + '</dd>' + '</dl>' + '</div>' + '</div>' + '<div class="row">' + '<div class="col">' + '<dl>' + '<dt>Place of use</dt>' + '<dd>' + '<ul class="list-inline-item">' + placeUse + '</ul>' + '</dd>' + '</dl>' + '</div>' + '<div class="col">' + '<dl>' + '<dt>Collateral</dt>' + '<dd>' + collateral + '</dd>' + '</dl>' + '</div>' + '</div>' + '<h2 class="text-success"><strong>Credit / Financial Information</strong></h2>' + '<div class="row">' + '<div class="col">' + '<dl>' + '<dt>Bank Accounts</dt>' + '<dd>' + '<table class="table table-borderless">' + '<thead>' + '<tr>' + '<th><small>Account Type</small></th>' + '<th><small>Account No.</small></th>' + '</tr>' + '</thead>' + '<tbody>' + bankAccount + '</tbody>' + '</table>' + '</dd>' + '</dl>' + '</div>' + '<div class="col">' + '<dl>' + '<dt>Credit References</dt>' + '<dd>' + '<table class="table table-borderless">' + '<thead>' + '<tr>' + '<th><small>Bank / Financing</small></th>' + '<th><small>Monthly Amortization</small></th>' + '</tr>' + '</thead>' + '<tbody>' + creditRef + '</tbody>' + '</table>' + '</dd>' + '</dl>' + '</div>' + '</div>' + '<h2 class="text-success"><strong>Trade and other Reference</strong></h2>' + '<div class="row">' + '<div class="col">' + '<table class="table table-borderless">' + '<thead>' + '<tr>' + '<th><small>Customer name / Co maker</small></th>' + '<th><small>Address</small></th>' + '<th><small>Contact No.</small></th>' + '</tr>' + '</thead>' + '<tbody>' + tradeRef + '</tbody>' + '</table>' + '</div>' + '</div>' + '<h2 class="text-success"><strong>Reference ID\'s / Documents</strong></h2>' + '<div class="row">' + refAttachment + '</div>' + '</div>' + '</div>' + '');
       }
+
+      menus.push('<li><a class="nav-link" data-toggle="tab" href="#tab-7">Form Attachment</a></li>');
+      var attachment = '<h2>None</h2>';
+
+      if (loanDetail.attachment !== null) {
+        attachment = '<embed src="' + loanDetail.attachment + '" width="100%" height="500" alt="pdf" />';
+      }
+
+      views.push('' + '<div role="tabpanel" id="tab-7" class="tab-pane">' + '<div class="panel-body">' + '<div class="row">' + '<div class="col text-center">' + attachment + '</div>' + '</div>' + '</div>' + '</div>' + '');
     }
 
     menus = menus.join('');
@@ -79938,9 +79947,9 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Files\Documents\Projects\finance\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! D:\Files\Documents\Projects\finance\resources\js\script.js */"./resources/js/script.js");
-module.exports = __webpack_require__(/*! D:\Files\Documents\Projects\finance\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Files\jhazFiles\Work\MamsLTG\Projects\finance\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! D:\Files\jhazFiles\Work\MamsLTG\Projects\finance\resources\js\script.js */"./resources/js/script.js");
+module.exports = __webpack_require__(/*! D:\Files\jhazFiles\Work\MamsLTG\Projects\finance\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

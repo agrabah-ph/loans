@@ -127,11 +127,13 @@ Route::middleware(['auth', 'verified', 'has_profile'])->group(function () {
 //        Route::get('loan/product/show', 'FarmerController@loanProductShow')->name('loan-product-show');
     Route::get('loan/product/list', 'FarmerController@loanProductList')->name('loan-product-list');
     Route::get('loan-product-list-get', 'FarmerController@loanProductListGet')->name('loan-product-list-get');
+    Route::get('loan-product-info', 'FarmerController@loanProductInfo')->name('loan-product-info');
     Route::get('loan-apply', 'FarmerController@loanApply')->name('loan-apply');
     Route::post('loan-submit-form', 'FarmerController@submitLoanApplication')->name('loan-submit-form');
 
     Route::get('my-loans/', 'LoanController@index')->name('my-loans');
     Route::post('verify-loan', 'LoanController@verify')->name('verify-loan');
+    Route::post('upload-attachment', 'LoanController@uploadAttachment')->name('upload-attachment');
     Route::get('generateSchedule', 'LoanController@getPaymentSchedule')->name('generate-schedule');
 
 //        Route::get('loan/applicants', 'LoanProviderController@loanApplicant')->name('loan-applicant');

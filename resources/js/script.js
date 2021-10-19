@@ -1570,6 +1570,25 @@ $(document).ready(function(){
                     '');
             }
 
+            menus.push('<li><a class="nav-link" data-toggle="tab" href="#tab-7">Form Attachment</a></li>');
+            var attachment = '<h2>None</h2>';
+            if(loanDetail.attachment !== null){
+                attachment = '<embed src="'+ loanDetail.attachment +'" width="100%" height="500" alt="pdf" />';
+            }
+            views.push('' +
+                '<div role="tabpanel" id="tab-7" class="tab-pane">' +
+                    '<div class="panel-body">' +
+
+                        '<div class="row">' +
+                            '<div class="col text-center">' +
+                                attachment +
+                            '</div>' +
+                        '</div>' +
+
+                    '</div>' +
+                '</div>' +
+            '');
+
         }
 
         menus = menus.join('');

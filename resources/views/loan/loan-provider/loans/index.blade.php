@@ -88,10 +88,12 @@
                                                                 data-action="decline"><i
                                                                     class="fa fa-times text-danger"></i> Decline
                                                         </button>
+                                                        @if($loan->details->attachment != null)
                                                         <button type="button" class="btn btn-white btn-sm btn-action"
                                                                 data-action="pre-approve"><i
                                                                     class="fa fa-thumbs-up text-success"></i> Approve
                                                         </button>
+                                                        @endif
                                                     @endif
                                                     @if($loan->status == 'Active')
                                                         <button type="button"
@@ -121,13 +123,11 @@
 
     </div>
 
-    <div class="modal inmodal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true"
-         data-category="" data-variant="" data-bal="">
+    <div class="modal inmodal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true" data-category="" data-variant="" data-bal="">
         <div id="modal-size">
             <div class="modal-content">
                 <div class="modal-header" style="padding: 15px;">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
@@ -235,6 +235,8 @@
         </div>
     </div>
 
+
+
     @include('loan.farmer.loans.modals.payment_history')
 @endsection
 
@@ -242,7 +244,7 @@
 @section('styles')
     {{--{!! Html::style('') !!}--}}
     {{--    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">--}}
-    {{--    {!! Html::style('/css/template/plugins/sweetalert/sweetalert.css') !!}--}}
+        {!! Html::style('/css/template/plugins/sweetalert/sweetalert.css') !!}
     {!! Html::style('/css/template/plugins/datapicker/datepicker3.css') !!}
     <style>
         #payment_schedule_review .datepicker{
@@ -258,7 +260,7 @@
     {{--    {!! Html::script('/js/template/plugins/jqueryMask/jquery.mask.min.js') !!}--}}
     {{--    {!! Html::script(asset('vendor/datatables/buttons.server-side.js')) !!}--}}
     {{--    {!! $dataTable->scripts() !!}--}}
-    {{--    {!! Html::script('/js/template/plugins/sweetalert/sweetalert.min.js') !!}--}}
+        {!! Html::script('/js/template/plugins/sweetalert/sweetalert.min.js') !!}
     {!! Html::script('/js/template/plugins/datapicker/bootstrap-datepicker.js') !!}
     {!! Html::script('/js/template/moment.js') !!}
     <script>
@@ -357,6 +359,7 @@
         $(document).on('change, input', '.changeSchedule', function () {
             populateSchedule();
         });
+
         $(document).on('change', '#timing', function () {
             console.log(this.value)
             $('.hide_on_custom').hide();
@@ -425,12 +428,44 @@
                 console.log('ID: '+ id);
                 switch (action) {
                     case 'decline':
-                        $.get('{!! route('loan-update-status') !!}', {
-                            id: id,
-                            action: action
-                        }, function (data) {
-                            location.reload();
+
+                        swal({
+                            title: "Are you sure?",
+                            text: "Your will not be able to recover this loan application!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Decline!",
+                            cancelButtonText: "Cancel!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $.get('{!! route('loan-update-status') !!}', {
+                                    id: id,
+                                    action: action
+                                }, function (data) {
+                                    swal({
+                                        title: "Declined!",
+                                        text: "Loan application has been declined.",
+                                        type: "success",
+                                        showCancelButton: false,
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Done!",
+                                        closeOnConfirm: true
+                                    }, function () {
+                                        location.reload();
+                                    });
+                                });
+
+                                // swal("Declined!", "Loan application has been declined.", "success");
+                            } else {
+                                swal("Cancelled", "Loan application is safe :)", "error");
+                            }
                         });
+
+
+
                         break;
                     case 'show':
                         $.get('{!! route('loan-update-status') !!}', {
@@ -441,8 +476,13 @@
                             modal.data('type', 'show-loan-details');
                             modal.find('.modal-title').text('Loan Application Details');
                             modal.find('#modal-size').removeClass().addClass('modal-dialog modal-xl');
-                            modal.find('.modal-body').empty().append(viewProfile(data.borrower.profile, data.details));
                             modal.find('#modal-save-btn').hide();
+                            modal.find('.modal-body').empty().append(viewProfile(data.borrower.profile, data.details));
+                            if(data.attachment_active === 0){
+                                modal.find('.modal-footer').find('button[data-action="send-attachment"]').remove();
+                                modal.find('.modal-footer').append('<button type="button" class="btn btn-success btn-action" data-action="send-attachment" data-id="'+ data.id +'">Accept / Send Attachment FORM</button>');
+                            }
+
                             modal.modal({backdrop: 'static', keyboard: false});
                         });
                         break;
@@ -550,6 +590,29 @@
                         populateSchedule();
                         modal.modal({backdrop: 'static', keyboard: false});
 
+                        break;
+                    case 'send-attachment':
+                        $.get('{!! route('loan-update-status') !!}', {
+                            id: $(this).data('id'),
+                            action: action
+                        }, function(data){
+                            // console.log(data);
+                            swal({
+                                title: "Success!",
+                                text: "Loan application attachment sent!",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "Done!",
+                                closeOnConfirm: true
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    modal.find('.modal-footer').empty().append('<button type="button" class="btn btn-white" data-dismiss="modal">Close</button>');
+                                    modal.modal('toggle');
+                                }
+                            });
+
+                        });
                         break;
                 }
             });
