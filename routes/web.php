@@ -130,6 +130,7 @@ Route::middleware(['auth', 'verified', 'has_profile'])->group(function () {
 
     Route::get('my-loans/', 'LoanController@index')->name('my-loans');
     Route::post('verify-loan', 'LoanController@verify')->name('verify-loan');
+    Route::post('upload-attachment', 'LoanController@uploadAttachment')->name('upload-attachment');
     Route::get('generateSchedule', 'LoanController@getPaymentSchedule')->name('generate-schedule');
 
 //        Route::get('loan/applicants', 'LoanProviderController@loanApplicant')->name('loan-applicant');

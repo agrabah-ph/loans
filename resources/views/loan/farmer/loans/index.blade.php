@@ -116,13 +116,17 @@
                                                         </div>
 
                                                         @if($loan->attachment_active == 1)
-                                                            <hr>
-                                                            <div class="m-t-sm">
-                                                                <a href="{!! URL($loan->product->attachment) !!}" class="btn btn-sm btn-white" download="" data-toggle="tooltip" data-placement="top" title="Download PDF File">
-                                                                    <i class="fa fa-file-pdf-o text-danger"></i> Download File Attachment</a>
-                                                                |
-                                                                <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{ $loan->id }}"><i class="fa fa-upload text-success"></i> Upload File Attachment</button>
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="col" id="{{ $loan->details->id }}-{{ $loan->id }}-attachment">
+                                                                @if($loan->details->attachment == null)
+                                                                <a href="{!! URL($loan->product->attachment) !!}" class="btn btn-sm btn-white"><i class="fa fa-file-pdf-o text-danger"></i> Download File Attachment</a>
+                                                                | <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{ $loan->id }}"><i class="fa fa-upload text-success"></i> Upload File Attachment</button>
+                                                                @else
+                                                                    <a href="{!! URL($loan->details->attachment) !!}" target="_blank" class="btn btn-sm btn-white"><i class="fa fa-search text-danger"></i> View File Attachment</a>
+                                                                @endif
                                                             </div>
+                                                        </div>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -406,7 +410,6 @@
                 placement: 'bottom'
             });
 
-
             var myInput = document.getElementById('myFileInput');
 
             function sendPic() {
@@ -422,11 +425,11 @@
             $('.money').mask("#,##0.00", {reverse: true});
 
             var verify_payment_modal = $('#verify_payment_modal');
+
             verify_payment_modal.on('hidden.bs.modal', function () {
                 $('#verify_payment').hide();
                 $('#verify_payment_show').show();
             });
-
 
             var modal = $('#modal');
 
@@ -460,14 +463,51 @@
                 var action = $(this).data('action');
                 switch(action){
                     case 'upload-file':
-                        // // modal.data('type', 'loan-product-detail');
-                        // modal.data('id', $(this).data('id'));
-                        modal.find('.modal-title').text('Form Upload');
-                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-lg');
-                        // // modal.find('#modal-save-btn').addClass('d-none');
-                        // modal.find('#modal-save-btn').text('Submit Application Form');
+                        modal.data('type', action);
+                        modal.data('id', $(this).data('id'));
+                        modal.find('.modal-title').text('File Upload');
+                        modal.find('#modal-size').removeClass().addClass('modal-dialog modal-sm');
+                        modal.find('.modal-body').empty().append('' +
+                            '<div class="form-group">' +
+                                '<label>File Attachment</label>' +
+                                '<input type="file" id="attachment" class="small">' +
+                            '</div>' +
+                        '');
 
                         modal.modal({backdrop: 'static', keyboard: false});
+                        break;
+                    case '':
+                        break;
+                    case '':
+                        break;
+                    case '':
+                        break;
+                }
+            });
+
+            $(document).on('click', '#modal-save-btn', function(){
+                var type = modal.data('type');
+                switch(type){
+                    case 'upload-file':
+                        var formData = new FormData();
+                        formData.append('attachment', modal.find('#attachment')[0].files[0]);
+                        formData.append('_token', '{!! csrf_token() !!}');
+                        formData.append('id', modal.data('id'));
+
+                        $.ajax({
+                            url : '{!! route('upload-attachment') !!}',
+                            type : 'POST',
+                            data : formData,
+                            processData: false,  // tell jQuery not to process the data
+                            contentType: false,  // tell jQuery not to set contentType
+                            success : function(data) {
+                                var elem = '#'+ data.id +'-'+ data.loan_id +'-attachment';
+                                console.log(elem);
+                                $(elem).empty().append('<a href="{!! URL('') !!}'+ data.attachment +'" target="_blank" class="btn btn-sm btn-white"><i class="fa fa-search text-danger"></i> View File Attachment</a>');
+                                modal.modal('toggle');
+                            }
+                        });
+
                         break;
                     case '':
                         break;
