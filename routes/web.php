@@ -27,6 +27,9 @@ Route::get('/terms-condition', 'LandingController@page_terms')->name('page_terms
 Route::get('/contacts', 'LandingController@page_contacts')->name('page_contacts');
 Route::post('post_mail','LandingController@post_mail')->name('post_mail');
 
+Route::get('/php_info', function () {
+    phpinfo();
+});
 
 
 //----------------------------------------------
