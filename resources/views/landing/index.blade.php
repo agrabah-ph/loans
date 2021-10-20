@@ -4,7 +4,7 @@
 @section ('content')
 
 <main>
-    <section class="banner-section" style="background-image: url('{{ asset('images/landing/featured-1.jpg') }}')">
+    <section class="banner-section here" style="background-image: url('{{ asset('images/landing/featured-1.jpg') }}')">
         <div class="max-width">
             <div class="inside">
                 <h1 class="banner-title">Financing for agriculture at its finest.</h1>
