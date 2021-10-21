@@ -448,6 +448,8 @@ header .btn-register {
 }
 header .btn-register:hover {
   background-color: #99CE5B;
+  -webkit-box-shadow: 1px 1px 10px rgba(153, 206, 91, 0.8);
+          box-shadow: 1px 1px 10px rgba(153, 206, 91, 0.8);
 }
 header.scrolled {
   -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
