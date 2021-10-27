@@ -1421,7 +1421,9 @@ body {
 .template-loan .page-dashboard .repeat-container .repeat-item ul li .text.payment-label img {
   margin-right: 10px;
 }
-.template-loan table td {
-  white-space: nowrap; 
-  min-width: 150px;
+@media (max-width: 500px) {
+  .template-loan table td {
+    white-space: nowrap;
+    min-width: 150px;
+  }
 }

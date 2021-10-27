@@ -205,10 +205,10 @@
 
   table {
     td {
-      //@media (max-width: 500px) {
+      @media (max-width: 500px) {
         white-space: nowrap;
         min-width: 150px;
-      //}
+      }
     }
   }
 
