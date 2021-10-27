@@ -607,6 +607,12 @@ body {
   font-size: 1rem;
   color: #948b96;
 }
+.page-register .sign-in .right small.note {
+  font-size: 0.9rem;
+  text-align: left;
+  font-style: italic;
+  color: #9ed35a;
+}
 .page-register .sign-in .right .steps ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -680,7 +686,7 @@ body {
           transform: translateY(-50%);
 }
 .page-register .sign-in .right .steps ul li.current:after, .page-register .sign-in .right .steps ul li.done:after {
-  width: 100%;
+  width: 100% !important;
 }
 .page-register .sign-in .right .steps ul li.current.first:after, .page-register .sign-in .right .steps ul li.current.last:after, .page-register .sign-in .right .steps ul li.done.first:after, .page-register .sign-in .right .steps ul li.done.last:after {
   width: 60% !important;

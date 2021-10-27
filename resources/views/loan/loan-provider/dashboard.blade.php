@@ -7,7 +7,7 @@
 
     <div class="wrapper wrapper-content">
         <div class="page-dashboard">
-            <div class="row list-count space-1">
+            <div class="row list-count">
 {{--                <div class="col-12 col-lg-3 col-md-6 space-1">--}}
 {{--                    <a href="">--}}
 {{--                        <div class="box">--}}
@@ -43,7 +43,7 @@
 {{--                        </div>--}}
 {{--                    </a>--}}
 {{--                </div>--}}
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-lg-3 col-md-6 space-1">
                     <a href="{!! route('loan-report') !!}">
                         <div class="box" id="new-loan-application">
                             <div class="item counter-label">
@@ -60,7 +60,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-lg-3 col-md-6 space-1">
                     <a href="{!! route('loan-report') !!}">
                         <div class="box" id="approve-loans">
                             <div class="item counter-label">
@@ -77,7 +77,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-lg-3 col-md-6 space-1">
                     <a href="{!! route('loan-report') !!}">
                         <div class="box">
                             <div class="item counter-label">

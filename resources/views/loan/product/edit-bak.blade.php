@@ -45,7 +45,7 @@
                                 {{ Form::text('name', $loanProduct->name, array('class'=>'form-control','required')) }}
                             </div>
                             <div class="form-group">
-                                <label>Financial Product Type</label>
+                                <label>Product Type</label>
                                 {{ Form::select('type', $types, $loanProduct->loan_type_id, array('class'=>'form-control')) }}
                             </div>
                             <div class="form-group">

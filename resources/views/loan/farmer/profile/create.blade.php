@@ -136,14 +136,14 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="land-line" type="text" data-title="Land Line" class="profile_info form-control" id="land-line">
-                                                <label for="land-line">Land Line</label>
+                                                <input name="mobile" type="text" data-title="Mobile" class="profile_info form-control" id="mobile" required>
+                                                <label for="mobile">Mobile *</label>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input name="mobile" type="text" data-title="Mobile" class="profile_info form-control" id="mobile">
-                                                <label for="mobile">Mobile</label>
+                                                <input name="land-line" type="text" data-title="Land Line" class="profile_info form-control" id="land-line">
+                                                <label for="land-line">Alternate Mobile</label>
                                             </div>
                                         </div>
                                     </div>

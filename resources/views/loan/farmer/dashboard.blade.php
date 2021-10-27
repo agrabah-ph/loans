@@ -7,8 +7,8 @@
 
     <div class="wrapper wrapper-content">
         <div class="page-dashboard">
-            <div class="row list-count space-1">
-                <div class="col-12 col-lg-3 col-md-6">
+            <div class="row list-count">
+                <div class="col-12 col-lg-3 col-md-6 space-1">
                     <a href="{!! route('my-loans') !!}">
                         <div class="box" id="">
                             <div class="item counter-label">
@@ -24,7 +24,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-12 col-lg-3 col-md-6">
+                <div class="col-12 col-lg-3 col-md-6 space-1">
                     <a href="#">
                         <div class="box" id="">
                             <div class="item counter-label">
@@ -66,14 +66,14 @@
                                     @foreach($payment as $pay)
                                     <li>
                                         <div class="row">
-                                            <div class="col-6 col-lg-6">
+                                            <div class="col-12 col-lg-6">
                                                 <div class="text payment-label">
                                                     <img src="https://img.icons8.com/ios/20/909090/bank-card-back-side.png" alt="icon" class="img-fluid"/>
                                                     {{ ucfirst($pay->payment_method) }} &nbsp;<small> [ {{ $pay->reference_number }} ]</small>
                                                 </div>
                                                 <small>{{ $pay->loan_detail->product->name }}</small>
                                             </div>
-                                            <div class="col-6 col-lg-6 text-right">
+                                            <div class="col-12 col-lg-6 text-right">
                                                 <div class="text text-right">+ {{ number_format($pay->paid_amount, 2) }} <b>PHP</b></div>
                                                 <small>{{ \Carbon\Carbon::parse($pay->paid_date)->toFormattedDateString() }}</small>
                                             </div>

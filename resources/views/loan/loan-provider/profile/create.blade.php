@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input name="landline" type="text" class="form-control required" id="landline">
-                                        <label for="landline">Landline no. *</label>
+                                        <label for="landline">Alternate Mobile no. *</label>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,8 @@
 
                         <h1>Additional</h1>
                         <fieldset>
-                            <h2>Additional Information</h2>
+                            <h2>Additional Information <small class="note">Note:  Representative for Additional Assistance</small></h2>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
