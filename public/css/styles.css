@@ -1093,7 +1093,7 @@ body {
 }
 
 body {
-  margin: 0 !important; 
+  margin: 0 !important;
 }
 
 .page-welcome {
@@ -1421,9 +1421,7 @@ body {
 .template-loan .page-dashboard .repeat-container .repeat-item ul li .text.payment-label img {
   margin-right: 10px;
 }
-@media (max-width: 500px) {
-  .template-loan .product-list-container table#monthly-income td {
-    white-space: nowrap;
-    min-width: 150px;
-  }
+.template-loan table td {
+  white-space: nowrap;
+  min-width: 150px;
 }
