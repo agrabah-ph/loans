@@ -2,6 +2,19 @@
 
 @section('title', 'Loan Products')
 
+@section('styles')
+
+    <style>
+        @media (max-width: 500px) {
+            .template-loan table td {
+                white-space: nowrap;
+                min-width: 150px;
+            }
+        }
+    </style>
+
+@endsection
+
 @section('content')
 
     <div class="row wrapper border-bottom white-bg page-heading">
