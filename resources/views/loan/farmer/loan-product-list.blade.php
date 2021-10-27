@@ -65,8 +65,7 @@
 
                         <div class="table-responsive">
                             <div class="loan-product-list project-list">
-                                <div class="table-responsive">
-                                    <table class="table table-hover" id="monthly-income">
+                                <table class="table table-hover">
                                         <thead>
                                         <tr>
                                             {{--                                        <th></th>--}}
@@ -96,9 +95,7 @@
                                             </td>
                                         </tr>
                                         </tbody>
-                                    </table>
-                                </div>
-
+                            </table>
                             </div>
                         </div>
 
