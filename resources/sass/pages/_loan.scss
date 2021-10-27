@@ -201,4 +201,17 @@
     }
 
   }
+
+  .product-list-container {
+    table#monthly-income {
+      td {
+        @media (max-width: 500px) {
+          white-space: nowrap;
+          min-width: 150px;
+        }
+      }
+    }
+  }
+
+
 }

@@ -23,11 +23,11 @@
         </div>
     </div>
 
-    <div id="app" class="wrapper wrapper-content">
+    <div id="app" class="wrapper wrapper-content product-list-container">
 
         <div class="ibox-content m-b-sm border-bottom">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-12 col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label" for="status">Loan Type</label>
                         <select name="type" class="form-control loan_input">
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg-3">
                     <div class="form-group">
                         <span id="term_value" class="float-right mt-2"></span>
                         <label class="col-form-label" for="product_name">Loan Term</label>
@@ -46,7 +46,7 @@
                         {{--                        <input type="range" name="term" min="4" max="60" value="4" placeholder="How many months?" class="form-control loan_input">--}}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-lg-3">
                     <div class="form-group">
                         <span id="amount_value" class="float-right mt-2"></span>
                         <label class="col-form-label" for="price">Loanable Amount</label>
@@ -65,37 +65,40 @@
 
                         <div class="table-responsive">
                             <div class="loan-product-list project-list">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-{{--                                        <th></th>--}}
-                                        <th>Loan Product Name</th>
-                                        <th>Lending Partner</th>
-                                        <th>Interest</th>
-                                        <th>Term</th>
-                                        <th class="text-right">Max Loan Amount</th>
-                                        <th class="text-right">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="project-title">
-                                            <a href="project_detail.html">Contract with Zender Company</a>
-                                            <br/>
-                                            <small>Created 14.08.2014</small>
-                                        </td>
-                                        <td>Interest</td>
-                                        <td>Terms</td>
-                                        <td>Amount</td>
-                                        <td class="project-actions">
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View
-                                            </a>
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="monthly-income">
+                                        <thead>
+                                        <tr>
+                                            {{--                                        <th></th>--}}
+                                            <th>Loan Product Name</th>
+                                            <th>Lending Partner</th>
+                                            <th>Interest</th>
+                                            <th>Term</th>
+                                            <th class="text-right">Max Loan Amount</th>
+                                            <th class="text-right">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="project-title">
+                                                <a href="project_detail.html">Contract with Zender Company</a>
+                                                <br/>
+                                                <small>Created 14.08.2014</small>
+                                            </td>
+                                            <td>Interest</td>
+                                            <td>Terms</td>
+                                            <td>Amount</td>
+                                            <td class="project-actions">
+                                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View
+                                                </a>
+                                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
 
@@ -106,7 +109,7 @@
 
     </div>
 
-    <div class="modal inmodal fade" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true" data-category="" data-variant="" data-bal="">
+    <div class="modal inmodal fade product-list-container" id="modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true" data-category="" data-variant="" data-bal="">
         <div id="modal-size">
             <div class="modal-content">
                 <div class="modal-header" style="padding: 15px;">
@@ -233,7 +236,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="application_modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true"
+    <div class="modal fade product-list-container" id="application_modal" data-type="" tabindex="-1" role="dialog" aria-hidden="true"
          data-category="" data-variant="" data-bal="">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -1539,22 +1542,22 @@
                                     '<div class="row">' +
                                         '<div class="col">' +
                                             '<div class="form-group row info-loan-detail" data-title="Purpose of Loan">' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4 col-md-6">' +
                                                     '<div class="i-checks">' +
                                                         '<label class="check-labels"><input type="checkbox" value="Auto Financing"><i></i> Auto Financing</label>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4 col-md-6">' +
                                                     '<div class="i-checks">' +
                                                         '<label class="check-labels"><input type="checkbox" value="Housing"><i></i> Housing</label>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4 col-md-6">' +
                                                     '<div class="i-checks">' +
                                                         '<label class="check-labels"><input type="checkbox" value="Working Capital"><i></i> Working Capital</label>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4 col-md-6">' +
                                                     '<div class="i-checks">' +
                                                         '<label class="check-labels"><input type="checkbox" value="Other"><i></i> Other</label>' +
                                                     '</div>' +
@@ -1578,7 +1581,7 @@
                                     // '</div>' +
                                     '<h3>Place of use</h3>' +
                                     '<div class="row info-loan-detail" data-title="Place of use">' +
-                                        '<div class="col">' +
+                                        '<div class="col-12 col-lg-4">' +
                                             '<div class="form-group">' +
                                                 '<div class="i-checks">' +
                                                     '<label class="check-labels"><input type="checkbox" value="Residential"><i></i> Residential</label>' +
@@ -1590,7 +1593,7 @@
                                                 '</div>' +
                                             '</div>' +
                                         '</div>' +
-                                        '<div class="col">' +
+                                        '<div class="col-12 col-lg-4">' +
                                             '<div class="form-group">' +
                                                 '<div class="i-checks">' +
                                                     '<label class="check-labels"><input type="checkbox" value="Residential / Commercial"><i></i> Residential / Commercial</label>' +
@@ -1602,7 +1605,7 @@
                                                 '</div>' +
                                             '</div>' +
                                         '</div>' +
-                                        '<div class="col">' +
+                                        '<div class="col-12 col-lg-4">' +
                                             '<div class="form-group">' +
                                                 '<div class="i-checks">' +
                                                     '<label class="check-labels"><input type="checkbox" value="Commercial"><i></i> Commercial</label>' +
@@ -1638,7 +1641,7 @@
                                             '<h3>Bank Accounts</h3>' +
                                             '<div class="form-repeat-box credit-financial-info" data-title="Bank Accounts">' +
                                                 '<div class="row form-repeater">' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<div class="form-group">' +
                                                             '<input type="text" name="bank-name" class="form-control" data-title="Bank name" placeholder="Bank name">' +
                                                             // '<select name="" class="form-control" data-title="Account type">' +
@@ -1649,7 +1652,7 @@
                                                             // '</select>' +
                                                         '</div>' +
                                                     '</div>' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<div class="form-group">' +
                                                             '<input type="text" name="" class="form-control" data-title="Account No." placeholder="Account No.">' +
                                                         '</div>' +
@@ -1665,12 +1668,12 @@
                                             '<h3>Credit References</h3>' +
                                             '<div class="form-repeat-box credit-financial-info" data-title="Credit References">' +
                                                 '<div class="row form-repeater">' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<div class="form-group">' +
                                                             '<input type="text" name="asdf" class="form-control" placeholder="Bank / Financing" data-title="Bank / Financing">' +
                                                         '</div>' +
                                                     '</div>' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<div class="form-group">' +
                                                             '<input type="text" name="sdfg" class="form-control" placeholder="Monthly Amortization" data-title="Monthly Amortization">' +
                                                         '</div>' +
@@ -1698,17 +1701,17 @@
                                     '<div class="form-repeat-box-parent">' +
                                         '<div class="form-repeat-box trade-reference-info" data-title="Trade and other reference">' +
                                             '<div class="row form-repeater">' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4">' +
                                                     '<div class="form-group">' +
                                                         '<input type="text" name="" class="form-control" placeholder="Customer name / Co-maker" data-title="Customer name / Co-maker">' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4">' +
                                                     '<div class="form-group">' +
                                                         '<input type="text" name="" class="form-control" placeholder="Address" data-title="Address">' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="col">' +
+                                                '<div class="col-12 col-lg-4">' +
                                                     '<div class="form-group">' +
                                                         '<input type="text" name="" class="form-control" placeholder="Contact No." data-title="Contact No.">' +
                                                     '</div>' +
@@ -1970,13 +1973,13 @@
                                                 '</div>' +
                                                 '<hr>' +
                                                 '<div class="row">' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<dl class="small text-center">' +
                                                             '<dt>Loan Terms</dt>' +
                                                             '<dd>'+ data.duration +' '+ data.timing_name +'</dd>' +
                                                         '</dl>' +
                                                     '</div>' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<dl class="small text-center">' +
                                                             '<dt>Amortization Rate</dt>' +
                                                             '<dd>'+ numberWithCommas(loan_amor) +'</dd>' +
@@ -1984,7 +1987,7 @@
                                                     '</div>' +
                                                 '</div>' +
                                                 '<div class="row">' +
-                                                    '<div class="col">' +
+                                                    '<div class="col-12 col-lg-6">' +
                                                         '<dl class="small text-center">' +
                                                             '<dt>Interest rate</dt>' +
                                                             '<dd>'+ data.interest_rate +'%</dd>' +
@@ -2143,18 +2146,18 @@
                                     '<div class="panel panel-default">' +
                                         '<div class="panel-body">' +
                                             '<div class="row">' +
-                                                '<div class="col form-group">' +
+                                                '<div class="col-12 col-lg-4 col-md-6 form-group">' +
                                                     '<label class="i-checks"> <input type="radio" name="account_type" class="disbursement_type" value="GCash" checked> GCash </label>' +
                                                 '</div>' +
-                                                '<div class="col form-group">' +
+                                                '<div class="col-12 col-lg-4 col-md-6 form-group">' +
                                                     '<label class="i-checks"> <input type="radio" name="account_type" class="disbursement_type" value="Konect2" readonly> Konect2 </label>' +
                                                 '</div>' +
-                                                '<div class="col form-group">' +
+                                                '<div class="col-12 col-lg-4 col-md-6 form-group">' +
                                                     '<label class="i-checks"> <input type="radio" name="account_type" class="disbursement_type" value="Sulit Padala" readonly> Sulit Padala </label>' +
                                                 '</div>' +
                                             '</div>' +
                                             '<div class="row">' +
-                                                '<div class="col" id="disbursement_info_box">' +
+                                                '<div class="col-12 col-lg-4 col-md-6" id="disbursement_info_box">' +
                                                     '<div class="form-group">' +
                                                         '<label>Account Name</label>' +
                                                         '<input type="text" name="account_name" class="form-control">' +
