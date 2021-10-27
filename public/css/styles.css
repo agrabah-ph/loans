@@ -1093,7 +1093,7 @@ body {
 }
 
 body {
-  margin: 0 !important; 
+  margin: 0 !important;
 }
 
 .page-welcome {
@@ -1422,6 +1422,6 @@ body {
   margin-right: 10px;
 }
 .template-loan table td {
-  white-space: nowrap;
+  white-space: nowrap; 
   min-width: 150px;
 }
