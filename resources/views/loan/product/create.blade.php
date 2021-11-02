@@ -51,7 +51,7 @@
                                             {{ Form::text('name', null, array('class'=>'form-control','required')) }}
                                         </div>
                                         <div class="form-group">
-                                            <label>Product Type</label>
+                                            <label>Financial Product</label>
                                             {{ Form::select('type', $types, null, array('class'=>'form-control')) }}
                                         </div>
                                     </div>
