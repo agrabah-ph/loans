@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label class="col-form-label" for="status">Loan Type</label>
+                        <label class="col-form-label" for="status">Financial products</label>
                         <select name="type" class="form-control loan_input">
                             <option value="" selected>Select type</option>
                             @foreach($loanTypes as $type)

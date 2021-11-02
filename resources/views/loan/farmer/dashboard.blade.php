@@ -201,7 +201,7 @@
                                 {{--<thead>--}}
                                 {{--<tr>--}}
                                     {{--<th>Loan Provider</th>--}}
-                                    {{--<th>Loan Type</th>--}}
+                                    {{--<th>Financial products</th>--}}
                                     {{--<th>Loan Amount</th>--}}
                                     {{--<th>Amount Paid</th>--}}
                                     {{--<th>Payment Completion</th>--}}

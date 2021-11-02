@@ -110,7 +110,7 @@
                         <div class="header-label">
                             <div class="row">
                                 <div class="col-6 col-lg-6">
-                                    <label>Loan Type</label>
+                                    <label>Financial products</label>
                                 </div>
                                 <div class="col-6 col-lg-6">
                                     <label>Total Product</label>
@@ -134,7 +134,7 @@
                             {{--                            <li>--}}
                             {{--                                <div class="row">--}}
                             {{--                                    <div class="col-6 col-lg-6">--}}
-                            {{--                                        <div class="text">Loan Type 2</div>--}}
+                            {{--                                        <div class="text">Financial products 2</div>--}}
                             {{--                                    </div>--}}
                             {{--                                    <div class="col-6 col-lg-6">--}}
                             {{--                                        <div class="text">50</div>--}}
@@ -144,7 +144,7 @@
                             {{--                            <li>--}}
                             {{--                                <div class="row">--}}
                             {{--                                    <div class="col-6 col-lg-6">--}}
-                            {{--                                        <div class="text">Loan Type 3</div>--}}
+                            {{--                                        <div class="text">Financial products 3</div>--}}
                             {{--                                    </div>--}}
                             {{--                                    <div class="col-6 col-lg-6">--}}
                             {{--                                        <div class="text">100</div>--}}
