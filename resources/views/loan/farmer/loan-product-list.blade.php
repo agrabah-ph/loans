@@ -2,18 +2,6 @@
 
 @section('title', 'Loan Products')
 
-@section('styles')
-
-    <style>
-        @media (max-width: 500px) {
-            .template-loan table td {
-                white-space: nowrap;
-                min-width: 150px;
-            }
-        }
-    </style>
-
-@endsection
 
 @section('content')
 
@@ -40,7 +28,7 @@
 
         <div class="ibox-content m-b-sm border-bottom">
             <div class="row">
-                <div class="col-12 col-lg-3">
+                <div class="col-12 col-lg-4">
                     <div class="form-group">
                         <label class="col-form-label" for="status">Financial products</label>
                         <select name="type" class="form-control loan_input">
@@ -51,7 +39,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-lg-3">
+                <div class="col-12 col-lg-4">
                     <div class="form-group">
                         <span id="term_value" class="float-right mt-2"></span>
                         <label class="col-form-label" for="product_name">Loan Term</label>
@@ -59,7 +47,7 @@
                         {{--                        <input type="range" name="term" min="4" max="60" value="4" placeholder="How many months?" class="form-control loan_input">--}}
                     </div>
                 </div>
-                <div class="col-12 col-lg-3">
+                <div class="col-12 col-lg-4">
                     <div class="form-group">
                         <span id="amount_value" class="float-right mt-2"></span>
                         <label class="col-form-label" for="price">Loanable Amount</label>
@@ -79,36 +67,36 @@
                         <div class="table-responsive">
                             <div class="loan-product-list project-list">
                                 <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            {{--                                        <th></th>--}}
-                                            <th>Loan Product Name</th>
-                                            <th>Lending Partner</th>
-                                            <th>Interest</th>
-                                            <th>Term</th>
-                                            <th class="text-right">Max Loan Amount</th>
-                                            <th class="text-right">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td class="project-title">
-                                                <a href="project_detail.html">Contract with Zender Company</a>
-                                                <br/>
-                                                <small>Created 14.08.2014</small>
-                                            </td>
-                                            <td>Interest</td>
-                                            <td>Terms</td>
-                                            <td>Amount</td>
-                                            <td class="project-actions">
-                                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View
-                                                </a>
-                                                <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                            </table>
+                                    <thead>
+                                    <tr>
+                                        {{--                                        <th></th>--}}
+                                        <th>Loan Product Name</th>
+                                        <th>Lending Partner</th>
+                                        <th>Interest</th>
+                                        <th>Term</th>
+                                        <th class="text-right">Max Loan Amount</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="project-title">
+                                            <a href="project_detail.html">Contract with Zender Company</a>
+                                            <br/>
+                                            <small>Created 14.08.2014</small>
+                                        </td>
+                                        <td>Interest</td>
+                                        <td>Terms</td>
+                                        <td>Amount</td>
+                                        <td class="project-actions">
+                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View
+                                            </a>
+                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
@@ -251,126 +239,126 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form action="{{route('loan-submit-form')}}" method="post">
-                <input type="hidden" name="id" id="loan_submit_id">
-                @csrf
-                <div class="modal-header" style="padding: 15px;">
-                    <h4 class="modal-title">Loan Application Form</h4>
-                    <button type="button" class="close" data-dismiss="modal"><span
-                                aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                </div>
-                <div class="modal-body">
-                    <pre class="d-none">{{json_encode($farmer, 128)}}</pre>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>First name</label>
-                                {{ Form::text('first_name', $farmer->profile->first_name, array('class'=>'form-control')) }}
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Middle name</label>
-                                {{ Form::text('middle_name', $farmer->profile->middle_name, array('class'=>'form-control')) }}
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Last name</label>
-                                {{ Form::text('last_name', $farmer->profile->last_name, array('class'=>'form-control')) }}
-                            </div>
-                        </div>
+                    <input type="hidden" name="id" id="loan_submit_id">
+                    @csrf
+                    <div class="modal-header" style="padding: 15px;">
+                        <h4 class="modal-title">Loan Application Form</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span
+                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Date of Birth</label>
-                                {{ Form::text('dob', $farmer->profile->dob, array('class'=>'form-control datepicker')) }}
+                    <div class="modal-body">
+                        <pre class="d-none">{{json_encode($farmer, 128)}}</pre>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>First name</label>
+                                    {{ Form::text('first_name', $farmer->profile->first_name, array('class'=>'form-control')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Middle name</label>
+                                    {{ Form::text('middle_name', $farmer->profile->middle_name, array('class'=>'form-control')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Last name</label>
+                                    {{ Form::text('last_name', $farmer->profile->last_name, array('class'=>'form-control')) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Place of Birth</label>
-                                {{ Form::text('pob', $farmer->profile->pob, array('class'=>'form-control')) }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    {{ Form::text('dob', $farmer->profile->dob, array('class'=>'form-control datepicker')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Place of Birth</label>
+                                    {{ Form::text('pob', $farmer->profile->pob, array('class'=>'form-control')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    {{ Form::select('gender',  ['M'=>'Male','F'=>'Female'], $farmer->profile->gender, array('class'=>'form-control')) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Gender</label>
-                                {{ Form::select('gender',  ['M'=>'Male','F'=>'Female'], $farmer->profile->gender, array('class'=>'form-control')) }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Civil Status</label>
+                                    {{ Form::select('civil_status',  ['single'=>'Single','married'=>'Married','separated'=>'Separated','annulled_divorced'=>'Annulled/Divorced','widower'=>'Window/er'], $farmer->profile->civil_status, array('class'=>'form-control')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Citizenship</label>
+                                    {{ Form::text('citizenship', $farmer->profile->citizenship, array('class'=>'form-control')) }}
+                                </div>
+                            </div>
+                            <div class="col">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Civil Status</label>
-                                {{ Form::select('civil_status',  ['single'=>'Single','married'=>'Married','separated'=>'Separated','annulled_divorced'=>'Annulled/Divorced','widower'=>'Window/er'], $farmer->profile->civil_status, array('class'=>'form-control')) }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    {{ Form::textarea('address', $farmer->profile->address, array('class'=>'form-control','rows'=>3,'style'=>'resize:none')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Mobile</label>
+                                    {{ Form::text('mobile', $farmer->profile->mobile, array('class'=>'form-control')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    {{ Form::text('email', $farmer->user->email, array('class'=>'form-control','disabled')) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Citizenship</label>
-                                {{ Form::text('citizenship', $farmer->profile->citizenship, array('class'=>'form-control')) }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Gross Monthly Income</label>
+                                    {{ Form::text('gross_monthly_income', $farmer->profile->gross_monthly_income, array('class'=>'form-control ')) }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Estimate Monthly Expenses</label>
+                                    {{ Form::text('monthly_expenses', $farmer->profile->monthly_expenses, array('class'=>'form-control ')) }}
+                                </div>
+                            </div>
+                            <div class="col">
                             </div>
                         </div>
-                        <div class="col">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Address</label>
-                                {{ Form::textarea('address', $farmer->profile->address, array('class'=>'form-control','rows'=>3,'style'=>'resize:none')) }}
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Mobile</label>
-                                {{ Form::text('mobile', $farmer->profile->mobile, array('class'=>'form-control')) }}
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Email</label>
-                                {{ Form::text('email', $farmer->user->email, array('class'=>'form-control','disabled')) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Gross Monthly Income</label>
-                                {{ Form::text('gross_monthly_income', $farmer->profile->gross_monthly_income, array('class'=>'form-control ')) }}
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Estimate Monthly Expenses</label>
-                                {{ Form::text('monthly_expenses', $farmer->profile->monthly_expenses, array('class'=>'form-control ')) }}
-                            </div>
-                        </div>
-                        <div class="col">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="bg-muted p-4">
-                                <strong>Naiintindihan ng humihiram na eto ay market testing sa pakikipag ugnayan ng Agrabah at CARD BDSFI na kung saan:</strong>
-                                <br>
-                                <br>
-                                <p>1. Eto ay pilot testing/market testing na kung saan maaring one time lang ang pag hiram at ang mga susunod na pag hiram ay sa CARD BANK or ibang insitutition na ng CARD MRI pwedeng gawin</p>
-                                <p>2. Ang hinihiram ay babayaran sa loob ng tatlong (3) buwan na may voluntary contribution na 2.5% ng prinsipal kada buwan, Kaugnay nito kung may pambayad na ang humihiram bago sumapit ang ikatlong buwan, maari nila itong bayaran ng buo or "partial"</p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="bg-muted p-4">
+                                    <strong>Naiintindihan ng humihiram na eto ay market testing sa pakikipag ugnayan ng Agrabah at CARD BDSFI na kung saan:</strong>
+                                    <br>
+                                    <br>
+                                    <p>1. Eto ay pilot testing/market testing na kung saan maaring one time lang ang pag hiram at ang mga susunod na pag hiram ay sa CARD BANK or ibang insitutition na ng CARD MRI pwedeng gawin</p>
+                                    <p>2. Ang hinihiram ay babayaran sa loob ng tatlong (3) buwan na may voluntary contribution na 2.5% ng prinsipal kada buwan, Kaugnay nito kung may pambayad na ang humihiram bago sumapit ang ikatlong buwan, maari nila itong bayaran ng buo or "partial"</p>
 
-                                <p>3. Pumapayag at naiintindihan ng humihiram na ang disbursement at collection ay via Konect2 CARD, CARD Sulit Padala or GCASH. Ang ACCOUNT Number ng CARD BDSFI na kung saan maari itong bayaran ay ibibigay sa humhiram matapos "madisburse" and pera."</p>
-                                <div class="text-center"><label><input type="checkbox" class="" id="terms_agree"> Naiintindihan</label></div>
+                                    <p>3. Pumapayag at naiintindihan ng humihiram na ang disbursement at collection ay via Konect2 CARD, CARD Sulit Padala or GCASH. Ang ACCOUNT Number ng CARD BDSFI na kung saan maari itong bayaran ay ibibigay sa humhiram matapos "madisburse" and pera."</p>
+                                    <div class="text-center"><label><input type="checkbox" class="" id="terms_agree"> Naiintindihan</label></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <button  class="btn btn-primary" disabled id="submit_app_loan">Apply</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button  class="btn btn-primary" disabled id="submit_app_loan">Apply</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -498,6 +486,15 @@
     {!! Html::style('/css/template/plugins/nouslider/jquery.nouislider.css') !!}
     {!! Html::style('/css/template/plugins/datapicker/datepicker3.css') !!}
     {!! Html::style('/css/template/plugins/iCheck/custom.css') !!}
+
+    <style>
+        @media (max-width: 500px) {
+            .template-loan table td {
+                white-space: nowrap;
+                min-width: 150px;
+            }
+        }
+    </style>
 
 @endsection
 
