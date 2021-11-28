@@ -120,10 +120,9 @@
                                                         <div class="row">
                                                             <div class="col" id="{{ $loan->details->id }}-{{ $loan->id }}-attachment">
                                                                 @if($loan->details->attachment == null)
-                                                                <a href="{!! URL($loan->product->attachment) !!}" class="btn btn-sm btn-white"><i class="fa fa-file-pdf-o text-danger"></i> Download File Attachment</a>
-                                                                | <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{ $loan->id }}"><i class="fa fa-upload text-success"></i> Upload File Attachment</button>
+                                                                 <button type="button" class="btn btn-sm btn-white btn-action" data-toggle="tooltip" data-placement="top" title="Upload PDF File" data-action="upload-file" data-id="{{ $loan->id }}"><i class="fa fa-upload text-success"></i> Upload File Attachment</button>
                                                                 @else
-                                                                    <a href="{!! URL($loan->details->attachment) !!}" target="_blank" class="btn btn-sm btn-white"><i class="fa fa-search text-danger"></i> View File Attachment</a>
+                                                                    <a href="{!! url($loan->details->attachment) !!}" target="_blank" class="btn btn-sm btn-white"><i class="fa fa-search text-danger"></i> View File Attachment</a>
                                                                 @endif
                                                             </div>
                                                         </div>
