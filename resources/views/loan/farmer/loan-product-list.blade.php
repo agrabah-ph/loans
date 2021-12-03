@@ -227,6 +227,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <span class="text-danger mr-2">Please check the required fields</span>
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="modal-save-btn">Apply</button>
                 </div>
@@ -870,7 +871,7 @@
                 switch(type){
                     case 'loan-application-detail':
                         $('.has-error-box').removeClass('has-error-box');
-                        var inputs = new Array(), error = 0;
+                        var inputs = new Array(), error = 0, errorMsg = "";
                         inputs.push(modal.data('id'));
 
                         var spouse_comaker_info = new Array();
@@ -975,6 +976,7 @@
                                     });
                                     if($(this).find('input[type=checkbox]:checked').length < 1){
                                         $(this).closest('.form-group').addClass('has-error-box');
+                                        $(this).closest('.form-group').focus();
                                         error += 1;
                                     }
                                     break;
@@ -990,6 +992,7 @@
                                     });
                                     if($(this).find('input[type=checkbox]:checked').length < 1){
                                         $(this).addClass('has-error-box');
+                                        $(this).focus();
                                         error += 1;
                                     }
                                     break;
@@ -1007,7 +1010,7 @@
                                         // innerValue.push(box.find('input[type=text]').val());
                                         innerValue.push((box.find('input[type=text]').val().length < 1) ? 'N/A': box.find('input[type=text]').val());
                                         if(box.find('input[type=text]').val().length < 1){
-                                            box.find('input[type=text]').closest('.form-group').addClass('has-error');
+                                            box.find('input[type=text]').closest('.form-group').addClass('has-error').focus();
                                             error += 1;
                                         }
                                     }
@@ -1133,6 +1136,7 @@
                             return false;
                         }
 
+                        console.log('datas');
                         console.log(datas);
 
                         $.post('{!! route('store-disbursement') !!}', {
@@ -1545,7 +1549,7 @@
                             '<div class="panel panel-default" id="loan-details">' +
                                 '<div class="panel-body">' +
                                     '<h2 class="text-success"><strong>LOAN DETAILS</strong></h2>' +
-                                    '<h3>Purpose of Loan</h3>' +
+                                    '<h3>Purpose of Loan <small class="text-danger">*</small></h3>' +
                                     '<div class="row">' +
                                         '<div class="col">' +
                                             '<div class="form-group row info-loan-detail" data-title="Purpose of Loan">' +
@@ -1586,7 +1590,7 @@
                                     //         '</div>' +
                                     //     '</div>' +
                                     // '</div>' +
-                                    '<h3>Place of use</h3>' +
+                                    '<h3>Place of use <small class="text-danger">*</small></h3>' +
                                     '<div class="row info-loan-detail" data-title="Place of use">' +
                                         '<div class="col-12 col-lg-4">' +
                                             '<div class="form-group">' +
