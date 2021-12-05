@@ -51,15 +51,15 @@
                             </thead>
                             <tbody>
                             @foreach($datas as $data)
-                                <tr>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->display_name }}</td>
-                                    <td class="text-right">
-                                        <div class="btn-group text-right">
-                                            <a href="" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> Show</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->display_name }}</td>
+                                <td class="text-right">
+                                    <div class="btn-group text-right">
+                                        <a href="#" class="action btn-white btn btn-xs"><i class="fa fa-search text-success"></i> Show</a>
+                                    </div>
+                                </td>
+                            </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
