@@ -66,14 +66,16 @@
                 <td style="vertical-align:top; text-align: center;">
                     @if($sInfo[0] == 'dependents')
                         <ul>
-                            @foreach($sInfo[2] as $dependent)
-                                <li>
-                                    <ul>
-                                        <li>{{ $dependent[0] }}</li>
-                                        <li>{{ $dependent[1] }}</li>
-                                    </ul>
-                                </li>
-                            @endforeach
+                            @if($sInfo[2] !== null)
+                                @foreach($sInfo[2] as $dependent)
+                                    <li>
+                                        <ul>
+                                            <li>{{ $dependent[0] }}</li>
+                                            <li>{{ $dependent[1] }}</li>
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            @endif
                         </ul>
                     @elseif($sInfo[2] == 'Rented')
                         <ul>
@@ -102,15 +104,17 @@
                 <td style="vertical-align:top; text-align: center;">
                     @if($sInfo[0] == 'assets')
                         <ul>
-                            @foreach($sInfo[2] as $asset)
-                                <li>
-                                    <ul>
-                                        <li>{{ $asset[0] }}</li>
-                                        <li>{{ $asset[1] }}</li>
-                                        <li>{{ $asset[2] }}</li>
-                                    </ul>
-                                </li>
-                            @endforeach
+                            @if($sInfo[2] !== null)
+                                @foreach($sInfo[2] as $asset)
+                                    <li>
+                                        <ul>
+                                            <li>{{ $asset[0] }}</li>
+                                            <li>{{ $asset[1] }}</li>
+                                            <li>{{ $asset[2] }}</li>
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            @endif
                         </ul>
                     @else
                         &#8369; {{ number_format($sInfo[2], 2) }}
