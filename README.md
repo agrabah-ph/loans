@@ -10,33 +10,75 @@ Agrabah knows that with a better marketplace, we can help our Filipino farmers a
 
 # Getting Started - Local Development
 
-**INSTALL THE FOLLOWING GLOBAL DEPENDENCIES**
 
-* **laradock
+## Installation
 
-## Laradock usage
-1. in the agrabah parent folder, run ```git clone https://github.com/Laradock/laradock.git```
-1. add ```127.0.0.1 agrabah-trace.test``` in hosts
-1. update agrabah-trace/.env
-    ```
-    DB_HOST=mysql
-    DB_PASSWORD=root
-    ```
-1. create agrabah-trace.conf in laradock/apache2
-    ```
-      ServerName agrabah-trace.test
-      DocumentRoot /var/www/agrabah/public/
-    ```
-1. change to PHP v7.3 rename laradock/.env.example to .env and update laradock/.env
-    ```
-    PHP_VERSION=7.3
-    ```
-    run ```docker-compose build php-fpm``` 
-1. run ```docker-compose build workspace```
-1. go to laradock folder and run ```docker-compose up -d apache2 mysql```
-1. run ```docker-compose exec workspace bash```
-1. go to /var/www/agrabah-trace
-1. install dependencies with ```composer install```    
-1. if database is empty, install migration with ```artisan migrate:install```
-1. run migration ```artisan migrate```
-1. browse to http://agrabah-trace.test
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
+
+Clone the repository
+
+    git clone git@github.com:agrabah-ph/loans.git
+
+Switch to the repo folder
+
+    cd loans.git
+
+Install all the dependencies using composer
+
+    composer install
+
+Copy the example env file and make the required configuration changes in the .env file
+
+    cp .env.example .env
+
+Generate a new application key
+
+    php artisan key:generate
+
+Run the database migrations (**Set the database connection in .env before migrating**)
+
+    php artisan migrate
+
+Start the local development server
+
+    php artisan serve
+
+You can now access the server at http://localhost:8000
+
+
+**TL;DR command list**
+
+    git clone git@github.com:gothinkster/laravel-realworld-example-app.git
+    cd laravel-realworld-example-app
+    composer install
+    cp .env.example .env
+    php artisan key:generate
+    php artisan jwt:generate 
+    
+**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
+
+    php artisan migrate
+    php artisan serve
+
+## Database seeding
+
+**Populate the database with seed data with relationships which includes users, articles, comments, tags, favorites and follows. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
+
+Open the DummyDataSeeder and set the property values as per your requirement
+
+    database/seeds/DummyDataSeeder.php
+
+Run the database seeder and you're done
+
+    php artisan db:seed
+
+***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
+
+    php artisan migrate:refresh
+
+
+## Environment variables
+
+- `.env` - Environment variables can be set in this file
+
+***Note*** : You can quickly set the database information and other variables in this file and have the application fully working.
