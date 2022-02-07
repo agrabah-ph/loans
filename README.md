@@ -53,7 +53,6 @@ You can now access the server at http://localhost:8000
     composer install
     cp .env.example .env
     php artisan key:generate
-    php artisan jwt:generate 
     
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
@@ -62,11 +61,8 @@ You can now access the server at http://localhost:8000
 
 ## Database seeding
 
-**Populate the database with seed data with relationships which includes users, articles, comments, tags, favorites and follows. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
+**Populate the database with seed data with relationships which includes users, products, loan type, loan provider, loan product and farmer. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
 
-Open the DummyDataSeeder and set the property values as per your requirement
-
-    database/seeds/DummyDataSeeder.php
 
 Run the database seeder and you're done
 
