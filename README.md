@@ -42,8 +42,8 @@ You can now access the server at http://localhost:8000
 
 **TL;DR command list**
 
-    git clone git@github.com:gothinkster/laravel-realworld-example-app.git
-    cd laravel-realworld-example-app
+    git clone git@github.com:agrabah-ph/loans.git
+    cd loans
     composer install
     cp .env.example .env
     php artisan key:generate
@@ -55,7 +55,7 @@ You can now access the server at http://localhost:8000
 
 ## Database seeding
 
-**Populate the database with seed data with relationships which includes users, products, loan type, loan provider, loan product and farmer. This can help you to quickly start testing the api or couple a frontend and start using it with ready content.**
+**Populate the database with seed data with relationships which includes users, products, loan type, loan provider, loan product and farmer. This can help you to quickly start testing the application or couple a frontend and start using it with ready content.**
 
 
 Run the database seeder and you're done
