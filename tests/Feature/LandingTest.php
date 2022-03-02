@@ -46,4 +46,6 @@ class LandingTest extends TestCase
         $response = $this->get('/contacts');
         $response->assertStatus(200);
     }
+
+
 }
