@@ -93,6 +93,7 @@ class ProfileController extends Controller
     public function profileStore(Request $request)
     {
         $inputs = $request->input('forms');
+
 //        $type = getRoleName('name');
         $type = 'farmer';
 //        if($type === 'farmer'){
