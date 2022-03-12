@@ -22,22 +22,45 @@ class LoanProviderTest extends TestCase
      */
     use WithoutMiddleware;
 
-    public function testExample()
+    public function test_loan_provider_dashboard_can_be_rendered()
     {
-        $response = $this->get('/');
+        $this->test_save_loan_provider();
+        $response = $this->get('/loan-provider-dashboard');
+        $response->assertStatus(200);
+    }
 
+    public function test_loan_provider_applicants_can_be_rendered()
+    {
+        $this->test_save_loan_provider();
+        $response = $this->get('/loan/applicants');
+        $response->assertStatus(200);
+    }
+
+    public function test_loan_provider_reports_can_be_rendered()
+    {
+        $this->test_save_loan_provider();
+        $response = $this->get('/reports/loan');
+        $response->assertStatus(200);
+    }
+
+    public function test_loan_provider_products_can_be_rendered()
+    {
+        $this->test_save_loan_provider();
+        $response = $this->get('/products');
         $response->assertStatus(200);
     }
 
 
-    public function test_save_loan_provider(){
+
+    public function test_save_loan_provider()
+    {
         $faker = Factory::create();
 
-        $request = Request::create('/store', 'POST',[
-            'type'     =>  'loan-provider',
-            'email'  =>  $faker->email,
-            'password'  =>  "changeme",
-            'repeat-password'  =>  "changeme",
+        $request = Request::create('/store', 'POST', [
+            'type' => 'loan-provider',
+            'email' => $faker->email,
+            'password' => "changeme",
+            'repeat-password' => "changeme",
         ]);
 
         $user = new PublicController();
