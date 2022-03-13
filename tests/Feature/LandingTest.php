@@ -13,7 +13,7 @@ class LandingTest extends TestCase
      *
      * @return void
      */
-    use RefreshDatabase;
+//    use RefreshDatabase;
 
     public function test_landing_screen_can_be_rendered()
     {

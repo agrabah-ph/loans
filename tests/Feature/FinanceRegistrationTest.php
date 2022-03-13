@@ -15,7 +15,7 @@ class FinanceRegistrationTest extends TestCase
      *
      * @return void
      */
-    use RefreshDatabase;
+//    use RefreshDatabase;
 
     public function test_farmer_registration()
     {

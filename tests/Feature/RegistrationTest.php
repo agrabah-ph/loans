@@ -14,7 +14,7 @@ class RegistrationTest extends TestCase
      *
      * @return void
      */
-    use RefreshDatabase;
+//    use RefreshDatabase;
 
     public function test_registration_screen_can_be_rendered()
     {
