@@ -102,7 +102,6 @@ class LoanProviderTest extends TestCase
         $user = new PublicController();
         $user->loanUserRegistrationStore($request);
 
-
         $this->withoutExceptionHandling();
         $response = $this->post('loan-provider/profile/store', [
             "first_name" => $loanProviderFname = $faker->firstName,
@@ -120,5 +119,6 @@ class LoanProviderTest extends TestCase
             "acceptTerms" => "on",
         ]);
         $response->assertStatus(302);
+        $response->assertRedirect('/home');
     }
 }

@@ -119,6 +119,7 @@ class ProfileController extends Controller
         $profile->first_name = $inputs[0][1][2];
         $profile->middle_name = $inputs[0][2][2];
         $profile->last_name = $inputs[0][3][2];
+
         $profile->dob = Carbon::parse($inputs[0][4][2]);
         $profile->civil_status = $inputs[0][5][2];
         $profile->gender = $inputs[0][6][2];
