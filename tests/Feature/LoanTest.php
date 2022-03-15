@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Farmer;
+use App\Loan;
 use App\LoanProduct;
 use App\LoanProvider;
 use App\User;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -25,7 +27,6 @@ class LoanTest extends TestCase
 //    use WithoutMiddleware;
     public function test_loan_process()
     {
-        DB::beginTransaction();
         $faker = Factory::create();
         //register loan provider
         $createLoanProvider = [
@@ -111,7 +112,7 @@ class LoanTest extends TestCase
         $response->assertStatus(302);
 
         $userFarmer = factory(User::class)->create([
-            'password' => bcrypt($password = 'i-love-laravels'),
+            'password' => bcrypt($password1 = 'i-love-laravels'),
         ]);
         $userFarmer->assignRole(stringSlug('farmer'));
         $userFarmer->markEmailAsVerified();
@@ -126,7 +127,7 @@ class LoanTest extends TestCase
         $this->withoutExceptionHandling();
         $response = $this->post('/login', [
             'email' => $userFarmer->email,
-            'password' => $password,
+            'password' => $password1,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect('/home');
@@ -493,8 +494,68 @@ class LoanTest extends TestCase
         $response = $this->post('/loan-submit-form', $applyLoan);
         $response->assertStatus(200);
 
+        $application = $farmer->loans->first();
+        //Test Admin decline
+        $response = $this->get('/loan-update-status?id=' . $application->id . '&action=decline');
+        $response->assertStatus(200);
+        //Test Admin Accept
+        $response = $this->get('/loan-update-status?id=' . $application->id . '&action=accept');
+        $response->assertStatus(200);
 
-        DB::rollBack();
+        $this->assertEquals($application->status, 'Pending');
+
+        $this->get('logout');
+        $this->refreshApplication();
+
+        //login as loan provider again
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => $password,
+        ]);
+        $response->assertStatus(302);
+        $response->assertRedirect('/home');
+        $this->assertAuthenticatedAs($user);
+
+        $response = $this->get('/loan-update-status?id=' . $application->id . '&action=approve&amount=70%2C000.00&duration=7&interest_rate=91&timing=day&allowance=1&first_allowance=0&schedules%5B%5D=Jul%2029%2C%202021&schedules%5B%5D=Jul%2030%2C%202021&schedules%5B%5D=Jul%2031%2C%202021&schedules%5B%5D=Aug%201%2C%202021&schedules%5B%5D=Aug%202%2C%202021&schedules%5B%5D=Aug%203%2C%202021&schedules%5B%5D=Aug%204%2C%202021');
+        $response->assertStatus(200);
+
+        $application = Loan::find($application->id);
+        $this->assertEquals($application->status, 'Active');
+        $this->get('logout');
+
+
+        //login as farmer again
+
+        $response = $this->post('/login', [
+            'email' => $userFarmer->email,
+            'password' => $password1,
+        ]);
+        $response->assertRedirect('/home');
+        $this->assertAuthenticatedAs($userFarmer);
+
+        $schedules = $application->payment_schedules;
+
+        foreach($schedules as $schedule){
+            $payment = [
+                "loan_id" => $application->id,
+                "payment_method" => "gcash",
+                "paid_amount" => $schedule->payable_amount,
+                "paid_date" => $faker->date(),
+                "reference_number" => $faker->sentence,
+                "proof_of_payment" => UploadedFile::fake()->image('avatar.jpg')
+            ];
+            $this->post('/verify-loan', $payment);
+        }
+
+        dd($application->payments);
+        $this->withoutExceptionHandling();
+        $this->assertGreaterThan(0, count($application->payments));
+
+        $application = Loan::find($application->id);
+        $this->assertEquals($application->status, 'Completed');
+
+        dd("was");
+
 
     }
 
