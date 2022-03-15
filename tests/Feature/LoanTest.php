@@ -524,6 +524,9 @@ class LoanTest extends TestCase
         $this->get('logout');
 
 
+        $this->get('logout');
+        $this->refreshApplication();
+
         //login as farmer again
 
         $response = $this->post('/login', [
@@ -546,17 +549,10 @@ class LoanTest extends TestCase
             ];
             $this->post('/verify-loan', $payment);
         }
-
-        dd($application->payments);
         $this->withoutExceptionHandling();
         $this->assertGreaterThan(0, count($application->payments));
 
         $application = Loan::find($application->id);
         $this->assertEquals($application->status, 'Completed');
-
-        dd("was");
-
-
     }
-
 }
