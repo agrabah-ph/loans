@@ -24,7 +24,6 @@ class LoanTest extends TestCase
      *
      * @return void
      */
-//    use WithoutMiddleware;
     public function test_loan_process()
     {
         $faker = Factory::create();
