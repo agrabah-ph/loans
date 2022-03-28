@@ -22,7 +22,6 @@ Agrabah can do the following things:
 ## Important details:
 
 - It is completely self-hosted and isolated, and will never contact external servers until you explicitly tell it to.
-- There are many translations available.
 
 ## A list of features
 

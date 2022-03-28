@@ -16,20 +16,11 @@ For your quick reference here is a list of pages you really want to visit:
 
 ## How can I use it or run it?
 
-!!! info
-The preferred way of running Firefly III is using Docker. It's easy to upgrade and easy to secure.
-
 * [Install it on your own server](installation/self_hosted.md)
-* [Run it using Docker](installation/docker.md)
-* [Find hosting for Firefly III](installation/third_parties.md)
 
-## What can I import into Firefly III, and how?
-
-* [Importing data into Firefly III](importing-data/introduction.md)
 
 ## Where can I find more info?
 
 * This website!
-* [Gitter](https://gitter.im/firefly-iii/firefly-iii)
-* [GitHub](https://github.com/firefly-iii/firefly-iii/)
-* [My personal mailbox](mailto:james@firefly-iii.org)
+* [GitHub](https://github.com/agrabah-ph/)
+* [Our personal mailbox](mailto:agrabah@aim.edu)
