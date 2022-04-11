@@ -14,11 +14,11 @@ The `mail` driver will try to use the sendmail / postfix email system included i
 
 This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. You'll need a secret key, as well as the domain and region from your mailgun configuration.
 
-To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Agrabah Loan install's root directory.
 
 ### Log
 
-The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
+The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `AGRABAH_LOAN_ROOT_DIRECTORY/storage/logs`.
 
 ## Testing Email
 
